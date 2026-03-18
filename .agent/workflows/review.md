@@ -12,7 +12,7 @@ Una volta che gli step di esecuzione (`[Execution](./execution.md)`) sono comple
    - Assicurati che il codice aderisca rigorosamente a `docs/rules/security.md`.
    - Controlla vulnerabilità comuni (OWASP), validazione input e gestione segreti.
 
-2. **Verifica della Solidità**:
+3. **Verifica della Solidità**:
    - Accertati che i test passino correttamente (TDD workflow confermato).
    - Se ci sono istruzioni sistematiche per il controllo (`pre_commit_instructions`), consultale e verifica i passi obbligatori prima del commit.
 

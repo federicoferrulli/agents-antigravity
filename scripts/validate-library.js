@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const ROOT_DIR = path.join(__dirname, '..');
+const ROOT_DIR = path.resolve(__dirname, '..');
 
 const DIRECTORIES_TO_CHECK = [
   'docs/rules',
@@ -9,6 +9,11 @@ const DIRECTORIES_TO_CHECK = [
   'agents',
   '.agent/workflows'
 ];
+
+// [SEC-1] Ensures that a resolved path does not escape the repository root
+function isWithinRoot(resolvedPath) {
+  return resolvedPath.startsWith(ROOT_DIR + path.sep) || resolvedPath === ROOT_DIR;
+}
 
 let errors = 0;
 
@@ -32,22 +37,43 @@ function validateFile(filePath) {
     errors++;
   }
 
-  // 3. Very basic broken internal link check (relative links)
-  const linkRegex = /\]\(\.\/?([^\)]+\.md)\)/g;
+  // 3. Internal link check with path traversal protection [SEC-1]
+  const linkRegex = /\]\.\/?([^)]+\.md)\)/g;
   let match;
   while ((match = linkRegex.exec(textContent)) !== null) {
       const linkPath = match[1];
-      // Normalize link relative to the file's directory
-      const absoluteLink = path.join(path.dirname(filePath), linkPath);
-      // But wait: most of our links might be relative to repo root (like in README or workflows).
-      // Se il link inizia con ./ e siamo nella root, controlliamo.
-      // Eseguiamo un controllo raw assoluto rispetto alla root se inizia con docs/ o skills/
-      let possiblePath1 = path.join(path.dirname(filePath), linkPath);
-      let possiblePath2 = path.join(ROOT_DIR, linkPath);
-      
+      const possiblePath1 = path.resolve(path.dirname(filePath), linkPath);
+      const possiblePath2 = path.resolve(ROOT_DIR, linkPath);
+
+      // [SEC-1] Bail out immediately if the resolved path escapes the repo root
+      if (!isWithinRoot(possiblePath1) && !isWithinRoot(possiblePath2)) {
+        console.error(`❌ [Security] Path traversal rilevato in ${filePath}: "${linkPath}" punta fuori dalla root.`);
+        errors++;
+        continue;
+      }
+
       if (!fs.existsSync(possiblePath1) && !fs.existsSync(possiblePath2)) {
          console.warn(`⚠️ [Warning Link] Link interno sospetto in ${filePath}: ${linkPath}`);
       }
+  }
+
+  // 4. Warn on insecure http:// links
+  const httpRegex = /\]\(http:\/\//g;
+  if (httpRegex.test(textContent)) {
+    console.warn(`⚠️ [Warning Security] ${filePath} contiene link http:// non sicuri. Usa https://.`);
+  }
+
+  // 5. Check for empty file
+  if (textContent.trim().length === 0) {
+    console.error(`❌ [Style Error] ${filePath} è vuoto.`);
+    errors++;
+  }
+
+  // 6. Check kebab-case naming (only for skills/ and docs/rules/)
+  const fileName = path.basename(filePath, '.md');
+  const isKebab = /^[a-z0-9]+(-[a-z0-9]+)*$/.test(fileName);
+  if (!isKebab && !['README', 'GEMINI', 'base_agent'].includes(fileName)) {
+    console.warn(`⚠️ [Warning Naming] ${filePath}: il nome file "${fileName}" non è in kebab-case.`);
   }
 }
 

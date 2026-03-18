@@ -23,20 +23,34 @@ Aggiungi nuove regole in `docs/rules/` o nuove competenze in `skills/` seguendo 
 *Questo catalogo è generato automaticamente dallo script `scripts/generate-catalog.js`*
 
 ### Regole e Standard (docs/rules)
-- [**Common Rules**](./docs/rules/common.md)
+- [**Common Rules**](./docs/rules/common.md) - *Queste regole si applicano a **tutto il codice generato**, indipendentemente dal linguaggio o framew...*
 - [**Continuous Learning Rule (Knowledge Harvesting)**](./docs/rules/continuous-learning.md) - *Questa regola definisce come l'agente (tu) deve comportarsi come un manutentore attivo di questa ste...*
-- [**Security Standards (OWASP)**](./docs/rules/security.md) - *Queste regole si applicano a tutto il codice generato per garantire un base level di sicurezza:*
-- [**TypeScript Rules**](./docs/rules/typescript.md)
+- [**Database Rules**](./docs/rules/database.md) - *Queste regole si applicano a **ogni interazione con un database**, SQL o NoSQL. L'obiettivo è garant...*
+- [**Frontend Rules**](./docs/rules/frontend.md) - *Queste regole si applicano allo sviluppo di **qualsiasi interfaccia utente** (Web, Mobile, Desktop)....*
+- [**Python Rules**](./docs/rules/python.md) - *Queste regole si applicano a **ogni file Python generato o modificato**. L'obiettivo è codice leggib...*
+- [**Security Standards (OWASP)**](./docs/rules/security.md) - *Queste regole si applicano a **tutto il codice generato** per garantire sicurezza by design. Non son...*
+- [**TypeScript Rules**](./docs/rules/typescript.md) - *Queste regole si applicano a **ogni file TypeScript prodotto o modificato**. L'obiettivo è type-safe...*
 
 ### Competenze e Flussi (skills)
+- [**AI Prompting Skill**](./skills/ai-prompting.md) - *Questa skill definisce come scrivere **prompt efficaci** per agenti AI (Gemini, GPT, Claude) all'int...*
 - [**API Design Standards**](./skills/api-design.md) - *Queste istruzioni si applicano ogni volta che generi router, controller o specchi OpenAPI.*
+- [**API Versioning Skill**](./skills/api-versioning.md) - *Questa skill definisce i pattern per gestire il **versionamento delle API** in modo da evolvere il c...*
+- [**Auth Patterns Skill**](./skills/auth-patterns.md) - *Questa skill definisce i pattern canonici per implementare **Autenticazione e Autorizzazione** sicur...*
+- [**Context Management Skill (Context Hygiene)**](./skills/context-management.md) - *Questa skill definisce come gestire e pulire il contesto della chat per mantenere l'AI (Antigravity)...*
 - [**Systematic Debugging Pro**](./skills/debugging-pro.md) - *Il debugging non consiste nel tirare a indovinare. È un processo scientifico di osservazione, formul...*
+- [**DevOps Pipeline Skill**](./skills/devops-pipeline.md) - *Questa skill definisce i pattern per configurare **CI/CD, containerizzazione e monitoring** di un'ap...*
 - [**Documentation Standards**](./skills/documentation-standards.md) - *Aderisci sempre agli standard di documentazione per assicurare che altri agenti, bot LLM o ingegneri...*
+- [**Error Monitoring Skill**](./skills/error-monitoring.md) - *Questa skill definisce i pattern per implementare **observability** completa: error tracking, tracin...*
+- [**Performance Optimization Skill**](./skills/performance-optimization.md) - *Questa skill definisce i pattern sistematici per identificare e risolvere i problemi di performance....*
 - [**Refactoring Guide**](./skills/refactoring-guide.md) - *Il Refactoring è il processo di miglioramento della struttura interna del codice senza alterarne il ...*
 - [**TDD Workflow Skill**](./skills/tdd-workflow.md) - *Il Test-Driven Development (TDD) serve non solo a prevenire i bug, ma soprattutto a **disegnare** le...*
+- [**Testing Strategy Skill**](./skills/testing-strategy.md) - *Questa skill definisce una strategia di test completa e pratica per applicazioni moderne. Applicala ...*
 
 ### Personas (agents)
-- [**Base Agent Persona**](./agents/base_agent.md) - *Sei un Ingegnere del Software Senior con oltre 10 anni di esperienza in Clean Architecture, System D...*
+- [**Architect Agent**](./agents/architect.md) - *Sei un **Software Architect** con specializzazione in System Design, Clean Architecture e decisioni ...*
+- [**Base Agent Persona**](./agents/base_agent.md) - *Sei un **Ingegnere del Software Senior con oltre 10 anni di esperienza** in Clean Architecture, Syst...*
+- [**Code Reviewer Agent**](./agents/code-reviewer.md) - *Sei un **Senior Code Reviewer** con 10+ anni di esperienza in code quality, refactoring e design pat...*
+- [**Security Auditor Agent**](./agents/security-auditor.md) - *Sei un **Security Engineer** specializzato in Application Security (AppSec) con mindset da penetrati...*
 
 ### Workflows (.agent/workflows)
 - [**Execution Workflow**](./.agent/workflows/execution.md) - *Una volta che il piano è stato approvato (`[Planning](./planning.md)` completato), l'agente deve pro...*
