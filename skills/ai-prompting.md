@@ -1,3 +1,11 @@
+---
+title: "AI Prompting Skill"
+description: "Pattern e framework per scrivere prompt agentici efficaci."
+category: "AI"
+effort: "S"
+tags: ["prompting", "llm", "framework", "rctf"]
+---
+
 # AI Prompting Skill
 
 Questa skill definisce come scrivere **prompt efficaci** per agenti AI (Gemini, GPT, Claude) all'interno del workflow Antigravity. Applicala ogni volta che devi creare o ottimizzare un file in `agents/`, `docs/rules/` o `.agent/workflows/`.

@@ -23,42 +23,46 @@ Aggiungi nuove regole in `docs/rules/` o nuove competenze in `skills/` seguendo 
 *Questo catalogo è generato automaticamente dallo script `scripts/generate-catalog.js`*
 
 ### Regole e Standard (docs/rules)
-- [**Common Rules**](./docs/rules/common.md) - *Queste regole si applicano a **tutto il codice generato**, indipendentemente dal linguaggio o framew...*
-- [**Continuous Learning Rule (Knowledge Harvesting)**](./docs/rules/continuous-learning.md) - *Questa regola definisce come l'agente (tu) deve comportarsi come un manutentore attivo di questa ste...*
-- [**Database Rules**](./docs/rules/database.md) - *Queste regole si applicano a **ogni interazione con un database**, SQL o NoSQL. L'obiettivo è garant...*
-- [**Frontend Rules**](./docs/rules/frontend.md) - *Queste regole si applicano allo sviluppo di **qualsiasi interfaccia utente** (Web, Mobile, Desktop)....*
-- [**Python Rules**](./docs/rules/python.md) - *Queste regole si applicano a **ogni file Python generato o modificato**. L'obiettivo è codice leggib...*
-- [**Security Standards (OWASP)**](./docs/rules/security.md) - *Queste regole si applicano a **tutto il codice generato** per garantire sicurezza by design. Non son...*
-- [**TypeScript Rules**](./docs/rules/typescript.md) - *Queste regole si applicano a **ogni file TypeScript prodotto o modificato**. L'obiettivo è type-safe...*
+- [**Common Rules**](./docs/rules/common.md) - *Regole universali applicabili a ogni riga di codice generata.*
+- [**Continuous Learning Rule**](./docs/rules/continuous-learning.md) - *Mandato per l'auto-miglioramento proattivo della libreria.*
+- [**Database Rules**](./docs/rules/database.md) - *Standard per design schema, ORM e sicurezza dei dati.*
+- [**Frontend Rules**](./docs/rules/frontend.md) - *Standard per UI/UX, accessibilità e testing frontend.*
+- [**Python Rules**](./docs/rules/python.md) - *Standard per sviluppo Python moderno con focus su sicurezza e tipi.*
+- [**Security Standards (OWASP)**](./docs/rules/security.md) - *Standard di sicurezza obbligatori basati su OWASP Top 10.*
+- [**TypeScript Rules**](./docs/rules/typescript.md) - *Standard per TypeScript type-safe e professionale.*
+
+### Decisioni Architetturali (docs/adr)
+- [**ADR-0001: Adopting Architecture Decision Records**](./docs/adr/0001-adopting-adr.md)
+- [**ADR-0002: Standardizing Metadata with YAML Frontmatter**](./docs/adr/0002-standard-metadata.md)
 
 ### Competenze e Flussi (skills)
-- [**AI Prompting Skill**](./skills/ai-prompting.md) - *Questa skill definisce come scrivere **prompt efficaci** per agenti AI (Gemini, GPT, Claude) all'int...*
-- [**API Design Standards**](./skills/api-design.md) - *Queste istruzioni si applicano ogni volta che generi router, controller o specchi OpenAPI.*
-- [**API Versioning Skill**](./skills/api-versioning.md) - *Questa skill definisce i pattern per gestire il **versionamento delle API** in modo da evolvere il c...*
-- [**Auth Patterns Skill**](./skills/auth-patterns.md) - *Questa skill definisce i pattern canonici per implementare **Autenticazione e Autorizzazione** sicur...*
-- [**Context Management Skill (Context Hygiene)**](./skills/context-management.md) - *Questa skill definisce come gestire e pulire il contesto della chat per mantenere l'AI (Antigravity)...*
-- [**Systematic Debugging Pro**](./skills/debugging-pro.md) - *Il debugging non consiste nel tirare a indovinare. È un processo scientifico di osservazione, formul...*
-- [**DevOps Pipeline Skill**](./skills/devops-pipeline.md) - *Questa skill definisce i pattern per configurare **CI/CD, containerizzazione e monitoring** di un'ap...*
-- [**Documentation Standards**](./skills/documentation-standards.md) - *Aderisci sempre agli standard di documentazione per assicurare che altri agenti, bot LLM o ingegneri...*
-- [**Error Monitoring Skill**](./skills/error-monitoring.md) - *Questa skill definisce i pattern per implementare **observability** completa: error tracking, tracin...*
-- [**Performance Optimization Skill**](./skills/performance-optimization.md) - *Questa skill definisce i pattern sistematici per identificare e risolvere i problemi di performance....*
-- [**Refactoring Guide**](./skills/refactoring-guide.md) - *Il Refactoring è il processo di miglioramento della struttura interna del codice senza alterarne il ...*
-- [**TDD Workflow Skill**](./skills/tdd-workflow.md) - *Il Test-Driven Development (TDD) serve non solo a prevenire i bug, ma soprattutto a **disegnare** le...*
-- [**Testing Strategy Skill**](./skills/testing-strategy.md) - *Questa skill definisce una strategia di test completa e pratica per applicazioni moderne. Applicala ...*
+- [**AI Prompting Skill**](./skills/ai-prompting.md) - *Pattern e framework per scrivere prompt agentici efficaci.*
+- [**API Design Standards**](./skills/api-design.md) - *Standard per la creazione di API RESTful e documentazione OpenAPI.*
+- [**API Versioning Skill**](./skills/api-versioning.md) - *Pattern per gestire il ciclo di vita e le breaking changes delle API.*
+- [**Auth Patterns Skill**](./skills/auth-patterns.md) - *Pattern di implementazione per autenticazione JWT e autorizzazione RBAC.*
+- [**Context Management Skill**](./skills/context-management.md) - *Guida alla Context Hygiene per mantenere l'AI precisa nelle lunghe sessioni.*
+- [**Systematic Debugging Pro**](./skills/debugging-pro.md) - *Metodologia scientifica per la risoluzione rapida di bug complessi.*
+- [**DevOps Pipeline Skill**](./skills/devops-pipeline.md) - *Standard per CI/CD, Docker e automazione del deployment.*
+- [**Documentation Standards**](./skills/documentation-standards.md) - *Linee guida per documentazione tecnica chiara, scalabile e AI-friendly.*
+- [**Error Monitoring Skill**](./skills/error-monitoring.md) - *Pattern per implementare observability completa: Sentry, OpenTelemetry e SLO.*
+- [**Performance Optimization Skill**](./skills/performance-optimization.md) - *Pattern sistematici per identificare e risolvere colli di bottiglia.*
+- [**Refactoring Guide**](./skills/refactoring-guide.md) - *Tecniche per migliorare la struttura del codice senza alterarne il comportamento.*
+- [**TDD Workflow Skill**](./skills/tdd-workflow.md) - *Workflow Red-Green-Refactor per un design del codice guidato dai test.*
+- [**Testing Strategy Skill**](./skills/testing-strategy.md) - *Strategia di test completa: piramide dei test, pattern e coverage goals.*
 
 ### Personas (agents)
-- [**Architect Agent**](./agents/architect.md) - *Sei un **Software Architect** con specializzazione in System Design, Clean Architecture e decisioni ...*
-- [**Base Agent Persona**](./agents/base_agent.md) - *Sei un **Ingegnere del Software Senior con oltre 10 anni di esperienza** in Clean Architecture, Syst...*
-- [**Code Reviewer Agent**](./agents/code-reviewer.md) - *Sei un **Senior Code Reviewer** con 10+ anni di esperienza in code quality, refactoring e design pat...*
-- [**Security Auditor Agent**](./agents/security-auditor.md) - *Sei un **Security Engineer** specializzato in Application Security (AppSec) con mindset da penetrati...*
+- [**Architect Agent**](./agents/architect.md) - *Software Architect esperto in System Design, Clean Architecture e ADR.*
+- [**Base Agent Persona**](./agents/base_agent.md) - *Persona base per lo sviluppo software senior con focus su Clean Architecture e DevSecOps.*
+- [**Code Reviewer Agent**](./agents/code-reviewer.md) - *Senior Code Reviewer focalizzato su qualità del codice, pattern e feedback costruttivo.*
+- [**Security Auditor Agent**](./agents/security-auditor.md) - *Security Engineer esperto in AppSec, OWASP e threat modeling.*
 
 ### Workflows (.agent/workflows)
-- [**Execution Workflow**](./.agent/workflows/execution.md) - *Una volta che il piano è stato approvato (`[Planning](./planning.md)` completato), l'agente deve pro...*
-- [**Main Workflow Orchestrator**](./.agent/workflows/main-workflow.md) - *Questo file definisce il flusso di lavoro principale per gli agenti all'interno del workspace Antigr...*
-- [**Massive Refactor Workflow**](./.agent/workflows/mass-refactor.md) - *Attiva la modalità Esecuzione Massiva. Ti indicherò una root folder (es. `agents/`) e uno standard d...*
-- [**Plan Skill Workflow**](./.agent/workflows/plan-skill.md) - *Avvia la modalità Pianificazione (Cole Medin). Ti fornirò un'idea generale per una nuova 'Skill' per...*
-- [**Planning Workflow**](./.agent/workflows/planning.md) - *La fase di pianificazione è cruciale per garantire che il codice sviluppato risponda esattamente ai ...*
-- [**Primer Workflow**](./.agent/workflows/primer.md) - *Esegui un Primer. Leggi immediatamente il `README.md` (tutto il catalogo), il `GEMINI.md` e il `docs...*
-- [**Review Workflow**](./.agent/workflows/review.md) - *Una volta che gli step di esecuzione (`[Execution](./execution.md)`) sono completati, entra in gioco...*
+- [**Execution Workflow**](./.agent/workflows/execution.md)
+- [**Main Workflow Orchestrator**](./.agent/workflows/main-workflow.md)
+- [**mass-refactor.md**](./.agent/workflows/mass-refactor.md) - *Attiva la modalità Esecuzione Massiva (DevOps) per applicare standard su più file*
+- [**plan-skill.md**](./.agent/workflows/plan-skill.md) - *Avvia la modalità Pianificazione (Cole Medin) per creare una nuova Skill*
+- [**planning.md**](./.agent/workflows/planning.md)
+- [**primer.md**](./.agent/workflows/primer.md) - *Esegui un Primer (Metodo Cody) per ricaricare rapidamente il contesto critico in una chat pulita*
+- [**Review Workflow**](./.agent/workflows/review.md)
 
 <!-- CATALOG_END -->

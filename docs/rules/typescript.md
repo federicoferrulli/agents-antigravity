@@ -1,3 +1,11 @@
+---
+title: "TypeScript Rules"
+description: "Standard per TypeScript type-safe e professionale."
+category: "Backend"
+severity: "Important"
+tags: ["typescript", "typing", "performance"]
+---
+
 # TypeScript Rules
 
 Queste regole si applicano a **ogni file TypeScript prodotto o modificato**. L'obiettivo è type-safety massima e codice prevedibile.

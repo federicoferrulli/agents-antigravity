@@ -1,3 +1,11 @@
+---
+title: "Database Rules"
+description: "Standard per design schema, ORM e sicurezza dei dati."
+category: "Backend"
+severity: "Critical"
+tags: ["database", "sql", "nosql", "prisma", "performance"]
+---
+
 # Database Rules
 
 Queste regole si applicano a **ogni interazione con un database**, SQL o NoSQL. L'obiettivo è garantire integrità, performance e manutenibilità del data layer.

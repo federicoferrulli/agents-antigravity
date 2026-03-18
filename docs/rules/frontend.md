@@ -1,3 +1,11 @@
+---
+title: "Frontend Rules"
+description: "Standard per UI/UX, accessibilità e testing frontend."
+category: "Frontend"
+severity: "Important"
+tags: ["frontend", "vue", "react", "testing", "a11y"]
+---
+
 # Frontend Rules
 
 Queste regole si applicano allo sviluppo di **qualsiasi interfaccia utente** (Web, Mobile, Desktop). Framework-agnostic dove possibile, con note specifiche per Vue e React.

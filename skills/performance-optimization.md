@@ -1,3 +1,11 @@
+---
+title: "Performance Optimization Skill"
+description: "Pattern sistematici per identificare e risolvere colli di bottiglia."
+category: "General"
+effort: "L"
+tags: ["performance", "optimization", "bottleneck", "profiling"]
+---
+
 # Performance Optimization Skill
 
 Questa skill definisce i pattern sistematici per identificare e risolvere i problemi di performance. Applicala quando ricevi segnalazioni di lentezza o in fase di code review proattiva.

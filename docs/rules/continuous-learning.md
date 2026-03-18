@@ -1,3 +1,11 @@
+---
+title: "Continuous Learning Rule"
+description: "Mandato per l'auto-miglioramento proattivo della libreria."
+category: "General"
+severity: "Important"
+tags: ["governance", "harvesting", "proactivity"]
+---
+
 # Continuous Learning Rule (Knowledge Harvesting)
 
 Questa regola definisce come l'agente (tu) deve comportarsi come un manutentore attivo di questa stessa libreria, imparando dall'esperienza vissuta con l'utente (Continuous Knowledge Harvesting).

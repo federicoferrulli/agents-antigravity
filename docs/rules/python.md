@@ -1,3 +1,11 @@
+---
+title: "Python Rules"
+description: "Standard per sviluppo Python moderno con focus su sicurezza e tipi."
+category: "Backend"
+severity: "Important"
+tags: ["python", "fastapi", "ruff", "testing"]
+---
+
 # Python Rules
 
 Queste regole si applicano a **ogni file Python generato o modificato**. L'obiettivo è codice leggibile, type-safe e moderno (Python 3.10+).

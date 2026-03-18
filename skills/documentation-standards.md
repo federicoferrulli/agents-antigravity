@@ -1,3 +1,11 @@
+---
+title: "Documentation Standards"
+description: "Linee guida per documentazione tecnica chiara, scalabile e AI-friendly."
+category: "General"
+effort: "S"
+tags: ["documentation", "standards", "markdown", "technical-writing"]
+---
+
 # Documentation Standards
 
 Aderisci sempre agli standard di documentazione per assicurare che altri agenti, bot LLM o ingegneri umani possano mantenere il sistema.

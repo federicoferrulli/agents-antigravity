@@ -1,3 +1,11 @@
+---
+title: "Security Standards (OWASP)"
+description: "Standard di sicurezza obbligatori basati su OWASP Top 10."
+category: "Security"
+severity: "Critical"
+tags: ["security", "owasp", "vulnerability"]
+---
+
 # Security Standards (OWASP)
 
 Queste regole si applicano a **tutto il codice generato** per garantire sicurezza by design. Non sono opzionali.

@@ -1,3 +1,11 @@
+---
+title: "API Versioning Skill"
+description: "Pattern per gestire il ciclo di vita e le breaking changes delle API."
+category: "Backend"
+effort: "S"
+tags: ["api", "versioning", "deprecation", "evolution"]
+---
+
 # API Versioning Skill
 
 Questa skill definisce i pattern per gestire il **versionamento delle API** in modo da evolvere il contratto senza rompere i client esistenti. Applicala prima di rilasciare un breaking change o quando pianifichi l'evoluzione di un'API pubblica.

@@ -7,47 +7,53 @@ const README_PATH = path.join(ROOT_DIR, 'README.md');
 // Directory da scansionare col rispettivo titolo nel catagolo
 const CATALOG_SECTIONS = [
   { dir: 'docs/rules', title: 'Regole e Standard (docs/rules)' },
+  { dir: 'docs/adr', title: 'Decisioni Architetturali (docs/adr)' },
   { dir: 'skills', title: 'Competenze e Flussi (skills)' },
   { dir: 'agents', title: 'Personas (agents)' },
   { dir: '.agent/workflows', title: 'Workflows (.agent/workflows)' }
 ];
 
 /**
- * Legge la prima riga utile del file Markdown per usarla come titolo (H1)
- * Se non la trova, usa il nome del file.
+ * Estrae i metadati dallo YAML Frontmatter
  */
-function extractTitleFromMarkdown(filePath) {
-  const content = fs.readFileSync(filePath, 'utf-8');
-  const lines = content.split('\n');
-  for (const line of lines) {
-    if (line.startsWith('# ')) {
-      return line.replace('# ', '').trim();
+function parseFrontmatter(content) {
+  const frontmatterRegex = /^---\r?\n([\s\S]*?)\r?\n---/;
+  const match = content.match(frontmatterRegex);
+  if (!match) return null;
+
+  const yaml = match[1];
+  const metadata = {};
+  yaml.split('\n').forEach(line => {
+    const colonIndex = line.indexOf(':');
+    if (colonIndex !== -1) {
+      const key = line.substring(0, colonIndex).trim();
+      let value = line.substring(colonIndex + 1).trim();
+      // Rimuove virgolette se presenti
+      value = value.replace(/^["'](.*)["']$/, '$1');
+      metadata[key] = value;
     }
-  }
-  return path.basename(filePath); // Fallback
+  });
+  return metadata;
 }
 
-/**
- * Cerca di estrarre una piccola descrizione o il primo paragrafo testuale utile (non header, non lista)
- */
-function extractDescriptionFromMarkdown(filePath) {
-    const content = fs.readFileSync(filePath, 'utf-8');
-    const lines = content.split('\n');
-    let titleFound = false;
-    
-    for (const line of lines) {
-        if (line.startsWith('# ')) {
-            titleFound = true;
-            continue;
-        }
-        
-        const trimmed = line.trim();
-        // Cerca il primo paragrafo non vuoto e non speciale dopo il titolo
-        if (titleFound && trimmed.length > 0 && !trimmed.startsWith('#') && !trimmed.startsWith('-') && !trimmed.startsWith('>') && !trimmed.startsWith('1.')) {
-            return trimmed.length > 100 ? trimmed.substring(0, 100) + '...' : trimmed;
-        }
-    }
-    return '';
+function getFileMetadata(filePath) {
+  const content = fs.readFileSync(filePath, 'utf-8');
+  const metadata = parseFrontmatter(content);
+  
+  if (metadata) {
+    return {
+      title: metadata.title || path.basename(filePath),
+      description: metadata.description || '',
+      tags: metadata.tags || ''
+    };
+  }
+
+  // Fallback se non c'è frontmatter
+  let title = path.basename(filePath);
+  const titleMatch = content.match(/^# (.*)/m);
+  if (titleMatch) title = titleMatch[1].trim();
+
+  return { title, description: '', tags: '' };
 }
 
 function generateCatalogMarkdown() {
@@ -66,13 +72,13 @@ function generateCatalogMarkdown() {
     } else {
         files.forEach(file => {
           const filePath = path.join(fullDirPath, file);
-          const title = extractTitleFromMarkdown(filePath);
-          let desc = extractDescriptionFromMarkdown(filePath);
+          const meta = getFileMetadata(filePath);
+          let desc = meta.description;
           if (desc) { desc = ` - *${desc}*`; }
           
           // Link relativo basato sul README
           const relativeLink = `./${section.dir}/${file}`;
-          catalogMd += `- [**${title}**](${relativeLink})${desc}\n`;
+          catalogMd += `- [**${meta.title}**](${relativeLink})${desc}\n`;
         });
     }
     catalogMd += '\n';

@@ -1,3 +1,11 @@
+---
+title: "Systematic Debugging Pro"
+description: "Metodologia scientifica per la risoluzione rapida di bug complessi."
+category: "General"
+effort: "M"
+tags: ["debugging", "troubleshooting", "methodology"]
+---
+
 # Systematic Debugging Pro
 
 Il debugging non consiste nel tirare a indovinare. È un processo scientifico di osservazione, formulazione di tesi, esperimenti temporanei e analisi.

@@ -8,8 +8,9 @@
   },
   "scripts": {
     "catalog": "node scripts/generate-catalog.js",
-    "create": "node scripts/create-asset.js",
     "validate": "node scripts/validate-library.js",
+    "sync": "node sync-library.js",
+    "adr": "node scripts/create-adr.js",
     "precommit": "npm run validate && npm run catalog && git add README.md",
     "prepare": "node -e \"const fs=require('fs'); if(!fs.existsSync('.git/hooks')) process.exit(0); const hook='.git/hooks/pre-commit'; fs.writeFileSync(hook, '#!/bin/sh\\nnpm run precommit\\n'); fs.chmodSync(hook, '755');\""
   },

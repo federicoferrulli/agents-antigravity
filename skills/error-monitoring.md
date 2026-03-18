@@ -1,3 +1,11 @@
+---
+title: "Error Monitoring Skill"
+description: "Pattern per implementare observability completa: Sentry, OpenTelemetry e SLO."
+category: "DevOps"
+effort: "M"
+tags: ["monitoring", "observability", "sentry", "telemetry"]
+---
+
 # Error Monitoring Skill
 
 Questa skill definisce i pattern per implementare **observability** completa: error tracking, tracing distribuito e alerting. Applicala quando un'applicazione va in produzione o quando "non sai cosa sta succedendo in prod".

@@ -1,3 +1,11 @@
+---
+title: "Refactoring Guide"
+description: "Tecniche per migliorare la struttura del codice senza alterarne il comportamento."
+category: "General"
+effort: "M"
+tags: ["refactoring", "clean-code", "debt", "quality"]
+---
+
 # Refactoring Guide
 
 Il Refactoring è il processo di miglioramento della struttura interna del codice senza alterarne il comportamento esterno (funzionalità immutata).

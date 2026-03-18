@@ -1,3 +1,11 @@
+---
+title: "TDD Workflow Skill"
+description: "Workflow Red-Green-Refactor per un design del codice guidato dai test."
+category: "General"
+effort: "M"
+tags: ["tdd", "testing", "design", "workflow"]
+---
+
 # TDD Workflow Skill
 
 Il Test-Driven Development (TDD) serve non solo a prevenire i bug, ma soprattutto a **disegnare** le interfacce e i contratti prima di scrivere l'implementazione pratica.

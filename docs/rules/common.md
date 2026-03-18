@@ -1,3 +1,11 @@
+---
+title: "Common Rules"
+description: "Regole universali applicabili a ogni riga di codice generata."
+category: "General"
+severity: "Critical"
+tags: ["clean-architecture", "solid", "naming", "error-handling"]
+---
+
 # Common Rules
 
 Queste regole si applicano a **tutto il codice generato**, indipendentemente dal linguaggio o framework. Rappresentano il contratto minimo di qualità per ogni output.

@@ -1,3 +1,11 @@
+---
+title: "API Design Standards"
+description: "Standard per la creazione di API RESTful e documentazione OpenAPI."
+category: "Backend"
+effort: "M"
+tags: ["api", "rest", "openapi", "standards"]
+---
+
 # API Design Standards
 
 Queste istruzioni si applicano ogni volta che generi router, controller o specchi OpenAPI.

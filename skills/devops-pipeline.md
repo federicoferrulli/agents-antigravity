@@ -1,3 +1,11 @@
+---
+title: "DevOps Pipeline Skill"
+description: "Standard per CI/CD, Docker e automazione del deployment."
+category: "DevOps"
+effort: "L"
+tags: ["devops", "docker", "ci-cd", "github-actions"]
+---
+
 # DevOps Pipeline Skill
 
 Questa skill definisce i pattern per configurare **CI/CD, containerizzazione e monitoring** di un'applicazione. Applicala quando si vuole portare un progetto in produzione o automatizzarne il deployment.

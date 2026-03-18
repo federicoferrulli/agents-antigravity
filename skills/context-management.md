@@ -1,3 +1,11 @@
+---
+title: "Context Management Skill"
+description: "Guida alla Context Hygiene per mantenere l'AI precisa nelle lunghe sessioni."
+category: "AI"
+effort: "XS"
+tags: ["context", "primer", "reset", "hygiene"]
+---
+
 # Context Management Skill (Context Hygiene)
 
 Questa skill definisce come gestire e pulire il contesto della chat per mantenere l'AI (Antigravity) performante, precisa e libera da allucinazioni. Applicala ogni volta che senti che la conversazione sta diventando "pesante" o quando l'AI inizia a confondere i task.

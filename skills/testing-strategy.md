@@ -1,3 +1,11 @@
+---
+title: "Testing Strategy Skill"
+description: "Strategia di test completa: piramide dei test, pattern e coverage goals."
+category: "General"
+effort: "M"
+tags: ["testing", "strategy", "pyramid", "coverage"]
+---
+
 # Testing Strategy Skill
 
 Questa skill definisce una strategia di test completa e pratica per applicazioni moderne. Applicala quando avvii un nuovo progetto o quando devi aumentare la copertura di uno esistente.
