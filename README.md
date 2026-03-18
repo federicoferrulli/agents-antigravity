@@ -4,6 +4,12 @@ Benvenuti nella libreria personale di skill, regole e agenti per **Antigravity**
 Questo repository è progettato per centralizzare e standardizzare il comportamento degli agenti AI, garantendo coerenza, sicurezza e alta qualità nello sviluppo software.
 
 ## Struttura del Repository
+# Antigravity Skills & Rules Library
+
+Benvenuti nella libreria personale di skill, regole e agenti per **Antigravity**. 
+Questo repository è progettato per centralizzare e standardizzare il comportamento degli agenti AI, garantendo coerenza, sicurezza e alta qualità nello sviluppo software.
+
+## Struttura del Repository
 
 - **`agents/`**: Definizioni delle personas degli agenti (es. Architect, Code Reviewer).
 - **`docs/rules/`**: Regole e standard di codifica (es. comuni, specifiche per linguaggio come Python, TS).
@@ -12,6 +18,9 @@ Questo repository è progettato per centralizzare e standardizzare il comportame
 
 ## Filosofia
 L'obiettivo è creare un ecosistema dove l'AI non è solo una chat, ma uno strumento specializzato guidato da regole ferree e competenze specifiche (skills).
+
+👉 **[Leggi la Guida all'Uso Completa](./howtouse.md)** per imparare a integrare Antigravity nel tuo workflow quotidiano.
+
 
 ## Come Contribuire
 Aggiungi nuove regole in `docs/rules/` o nuove competenze in `skills/` seguendo i template esistenti.
