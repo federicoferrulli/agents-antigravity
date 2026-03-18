@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Antigravity Agents Skills and Rules Library",
   "main": "sync-library.js",
+  "bin": {
+    "antigravity-sync": "sync-library.js"
+  },
   "scripts": {
     "catalog": "node scripts/generate-catalog.js",
     "create": "node scripts/create-asset.js",
@@ -16,5 +19,8 @@
     "antigravity"
   ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^14.0.3"
+  }
 }

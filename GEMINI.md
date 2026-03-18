@@ -33,6 +33,11 @@ In ogni interazione all'interno di questo workspace, devi:
 - **Documentazione**: Ogni nuova regola o skill deve includere esempi pratici e casi d'uso.
 - **Sicurezza**: Ogni suggerimento di codice deve essere "Secure by Design".
 
+## Antigravity Workflow Triggers & Golden Rules
+1. **"Secure by Design" Implicito**: Qualsiasi codice o regola tecnica proposta deve includere nativamente una componente di sicurezza (OWASP).
+2. **Aggiornamento Catalogo Automatico**: Quando crei o elimini un file in repository, aggiorna il Catalogo nel file `README.md` (es. eseguendo `npm run update-catalog` o lo script corrispondente).
+3. **Macro-Comando "Abbiamo Finito"**: Quando l'utente chiude il task, esegui check finale, riassumi (max 3 righe), e consiglia un reset del contesto.
+
 ## Workflow Iterativo
 1. **Ricerca**: Cerca in `docs/rules/` e `skills/` le linee guida rilevanti.
 2. **Pianificazione**: Spiega quale regola/skill stai applicando.

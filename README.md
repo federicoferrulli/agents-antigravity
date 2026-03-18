@@ -41,7 +41,10 @@ Aggiungi nuove regole in `docs/rules/` o nuove competenze in `skills/` seguendo 
 ### Workflows (.agent/workflows)
 - [**Execution Workflow**](./.agent/workflows/execution.md) - *Una volta che il piano è stato approvato (`[Planning](./planning.md)` completato), l'agente deve pro...*
 - [**Main Workflow Orchestrator**](./.agent/workflows/main-workflow.md) - *Questo file definisce il flusso di lavoro principale per gli agenti all'interno del workspace Antigr...*
+- [**Massive Refactor Workflow**](./.agent/workflows/mass-refactor.md) - *Attiva la modalità Esecuzione Massiva. Ti indicherò una root folder (es. `agents/`) e uno standard d...*
+- [**Plan Skill Workflow**](./.agent/workflows/plan-skill.md) - *Avvia la modalità Pianificazione (Cole Medin). Ti fornirò un'idea generale per una nuova 'Skill' per...*
 - [**Planning Workflow**](./.agent/workflows/planning.md) - *La fase di pianificazione è cruciale per garantire che il codice sviluppato risponda esattamente ai ...*
+- [**Primer Workflow**](./.agent/workflows/primer.md) - *Esegui un Primer. Leggi immediatamente il `README.md` (tutto il catalogo), il `GEMINI.md` e il `docs...*
 - [**Review Workflow**](./.agent/workflows/review.md) - *Una volta che gli step di esecuzione (`[Execution](./execution.md)`) sono completati, entra in gioco...*
 
 <!-- CATALOG_END -->

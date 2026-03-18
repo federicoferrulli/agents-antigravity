@@ -1,5 +1,8 @@
+#!/usr/bin/env node
+
 const fs = require('fs');
 const path = require('path');
+const { Command } = require('commander');
 
 /**
  * Antigravity Library Sync Utility
@@ -8,13 +11,23 @@ const path = require('path');
  * di questa libreria in un altro progetto.
  */
 
-const SOURCE_DIR = __dirname;
-const TARGET_DIR = process.cwd();
+const program = new Command();
 
-// Parse command line arguments
-const args = process.argv.slice(2);
-const isDryRun = args.includes('--dry-run');
-const isForce = args.includes('--force');
+// Configurazione CLI
+program
+  .name('antigravity-sync')
+  .description('Sincronizza le regole e le skill di Antigravity nel progetto corrente')
+  .version('1.0.0')
+  .option('-d, --dry-run', 'Visualizza le modifiche senza applicarle')
+  .option('-f, --force', 'Sovrascrive i file esistenti senza creare backup')
+  .option('-t, --target <path>', 'Specifica una directory di destinazione diversa da quella corrente', process.cwd())
+  .parse(process.argv);
+
+const options = program.opts();
+const isDryRun = options.dryRun;
+const isForce = options.force;
+const TARGET_DIR = path.resolve(options.target);
+const SOURCE_DIR = __dirname;
 
 // Cartelle e file da sincronizzare
 const ASSETS_TO_SYNC = [
@@ -70,7 +83,8 @@ if (isForce) console.log(`⚠️ [FORCE MODE] I backup non verranno creati.`);
 console.log(`Source: ${SOURCE_DIR}`);
 console.log(`Target: ${TARGET_DIR}\n`);
 
-if (SOURCE_DIR === TARGET_DIR) {
+// Verifica che sorgente e destinazione non siano la stessa cartella
+if (path.resolve(SOURCE_DIR) === path.resolve(TARGET_DIR)) {
   console.error('❌ Errore: La cartella sorgente e quella di destinazione sono le stesse.');
   process.exit(1);
 }

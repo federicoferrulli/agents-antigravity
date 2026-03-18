@@ -1,3 +1,7 @@
+---
+description: 
+---
+
 # Planning Workflow
 
 La fase di pianificazione è cruciale per garantire che il codice sviluppato risponda esattamente ai requisiti e aderisca agli standard del progetto.
@@ -19,7 +23,7 @@ La fase di pianificazione è cruciale per garantire che il codice sviluppato ris
 
 4. **Creazione del Piano d'Azione**:
    - Sviluppa un piano in formato Markdown. Deve essere diviso in step enumerati, ciascuno focalizzato su un'azione chiara.
-   - Assicurati di includere uno step dedicato per il pre-commit / verifiche.
+   - Assicurati di includere uno step dedicato per il verifiche.
    - Quando il piano è pronto, sottomettilo (se applicabile con lo strumento `set_plan` o richiedendo revisione tramite `request_plan_review`).
 
 **Non procedere all'esecuzione finché il piano non è chiaro o approvato.**
