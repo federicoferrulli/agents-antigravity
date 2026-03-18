@@ -15,3 +15,33 @@ L'obiettivo è creare un ecosistema dove l'AI non è solo una chat, ma uno strum
 
 ## Come Contribuire
 Aggiungi nuove regole in `docs/rules/` o nuove competenze in `skills/` seguendo i template esistenti.
+
+
+<!-- CATALOG_START -->
+## Catalogo 
+
+*Questo catalogo è generato automaticamente dallo script `scripts/generate-catalog.js`*
+
+### Regole e Standard (docs/rules)
+- [**Common Rules**](./docs/rules/common.md)
+- [**Continuous Learning Rule (Knowledge Harvesting)**](./docs/rules/continuous-learning.md) - *Questa regola definisce come l'agente (tu) deve comportarsi come un manutentore attivo di questa ste...*
+- [**Security Standards (OWASP)**](./docs/rules/security.md) - *Queste regole si applicano a tutto il codice generato per garantire un base level di sicurezza:*
+- [**TypeScript Rules**](./docs/rules/typescript.md)
+
+### Competenze e Flussi (skills)
+- [**API Design Standards**](./skills/api-design.md) - *Queste istruzioni si applicano ogni volta che generi router, controller o specchi OpenAPI.*
+- [**Systematic Debugging Pro**](./skills/debugging-pro.md) - *Il debugging non consiste nel tirare a indovinare. È un processo scientifico di osservazione, formul...*
+- [**Documentation Standards**](./skills/documentation-standards.md) - *Aderisci sempre agli standard di documentazione per assicurare che altri agenti, bot LLM o ingegneri...*
+- [**Refactoring Guide**](./skills/refactoring-guide.md) - *Il Refactoring è il processo di miglioramento della struttura interna del codice senza alterarne il ...*
+- [**TDD Workflow Skill**](./skills/tdd-workflow.md) - *Il Test-Driven Development (TDD) serve non solo a prevenire i bug, ma soprattutto a **disegnare** le...*
+
+### Personas (agents)
+- [**Base Agent Persona**](./agents/base_agent.md) - *Sei un Ingegnere del Software Senior con oltre 10 anni di esperienza in Clean Architecture, System D...*
+
+### Workflows (.agent/workflows)
+- [**Execution Workflow**](./.agent/workflows/execution.md) - *Una volta che il piano è stato approvato (`[Planning](./planning.md)` completato), l'agente deve pro...*
+- [**Main Workflow Orchestrator**](./.agent/workflows/main-workflow.md) - *Questo file definisce il flusso di lavoro principale per gli agenti all'interno del workspace Antigr...*
+- [**Planning Workflow**](./.agent/workflows/planning.md) - *La fase di pianificazione è cruciale per garantire che il codice sviluppato risponda esattamente ai ...*
+- [**Review Workflow**](./.agent/workflows/review.md) - *Una volta che gli step di esecuzione (`[Execution](./execution.md)`) sono completati, entra in gioco...*
+
+<!-- CATALOG_END -->

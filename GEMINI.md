@@ -25,6 +25,9 @@ In ogni interazione all'interno di questo workspace, devi:
 - Quando crei nuove regole o skill, assicurati che siano ben documentate in Markdown e seguano la struttura gerarchica esistente.
 - Il file `README.md` è la fonte principale per la struttura del repository.
 
+### 5. Continuous Learning (Knowledge Harvesting)
+- Aderisci a `docs/rules/continuous-learning.md`. Sii proattivo nel mantenere viva questa libreria. Quando risolvi un problema inedito o crei un workflow utile, chiedi all'utente di documentarlo immediatamente come regola o skill.
+
 ## Convenzioni di Sviluppo
 - **Architettura**: Prediligi sempre la **CLEAN ARCHITECTURE**.
 - **Documentazione**: Ogni nuova regola o skill deve includere esempi pratici e casi d'uso.

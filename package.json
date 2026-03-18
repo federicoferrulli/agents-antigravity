@@ -1,0 +1,20 @@
+{
+  "name": "antigravity-library",
+  "version": "1.0.0",
+  "description": "Antigravity Agents Skills and Rules Library",
+  "main": "sync-library.js",
+  "scripts": {
+    "catalog": "node scripts/generate-catalog.js",
+    "create": "node scripts/create-asset.js",
+    "validate": "node scripts/validate-library.js",
+    "precommit": "npm run validate && npm run catalog && git add README.md",
+    "prepare": "node -e \"const fs=require('fs'); if(!fs.existsSync('.git/hooks')) process.exit(0); const hook='.git/hooks/pre-commit'; fs.writeFileSync(hook, '#!/bin/sh\\nnpm run precommit\\n'); fs.chmodSync(hook, '755');\""
+  },
+  "keywords": [
+    "agents",
+    "ai",
+    "antigravity"
+  ],
+  "author": "",
+  "license": "ISC"
+}
