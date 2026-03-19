@@ -159,7 +159,7 @@ passport.use(new GoogleStrategy({
 
 ---
 
-## Pattern 4: Password Hashing
+## Pattern 4: Password Hashing (Se necessario salt casuale salvato su db)
 
 ```typescript
 import argon2 from 'argon2';
