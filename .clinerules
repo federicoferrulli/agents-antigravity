@@ -1,0 +1,10 @@
+# Cline/Roo-Code Rules - Antigravity
+
+Instructions for Cline/Roo-Code agents:
+
+- **Source of Truth**: Always read and follow `AGENT.md` in the root directory.
+- **Mandatory Rules**: Apply `docs/rules/common.md` for every coding task.
+- **Skills**: Check `skills/` for specific "How-To" guides.
+- **Context Management**: Be proactive in updating the library and catalog.
+
+Refer to `AGENT.md` for the full operational framework.

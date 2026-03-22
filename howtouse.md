@@ -19,8 +19,11 @@ All'apertura di una nuova chat, la prima cosa da fare è caricare le regole base
 
 Questo comando istruisce l'AI a leggere:
 - `README.md` (Catalogo delle competenze)
-- `GEMINI.md` (Mandati e Golden Rules)
+- `AGENT.md` (Mandati universali e Golden Rules)
 - `docs/rules/common.md` (Clean Architecture e Standards)
+
+> [!NOTE]
+> Se usi **Cursor** o **Cline**, questa inizializzazione avviene spesso automaticamente grazie ai file `.cursorrules` e `.clinerules` presenti nel root.
 
 ---
 
@@ -93,3 +96,21 @@ npm run adr "Titolo Decisione"
 6. **AI (@security-auditor)**: Identifica un rischio di session fixation e suggerisce il fix.
 7. **User**: `Applica. Poi aggiorna il catalogo.`
 8. **AI**: Applica il fix, gira `npm run catalog` e chiude il task.
+
+---
+
+## 🐚 6. Utilizzo con Agenti CLI (Claude Code, Gemini CLI)
+
+Gli agenti CLI moderni sono progettati per scoprire automaticamente il contesto del progetto. Antigravity fornisce entry point dedicati:
+
+- **Claude Code**: Utilizza automaticamente il file `CLAUDE.md` per caricare build/test commands e coding standards.
+- **Gemini CLI**: Utilizza il file `GEMINI.md` per le istruzioni di sistema e le configurazioni del repository.
+
+### Come Attivarli
+Non devi fare nulla! Quando apri Claude Code o Gemini CLI nella cartella del progetto, l'agente leggerà questi file e saprà immediatamente:
+1. Quali script eseguire (es. `npm run validate`).
+2. Quali regole di Clean Architecture seguire.
+3. Dove trovare le skill approfondite.
+
+> [!TIP]
+> Se l'agente CLI sembra ignorare le regole, digli esplicitamente: *"Leggi CLAUDE.md (o GEMINI.md) e AGENT.md per allinearti ai miei standard."*

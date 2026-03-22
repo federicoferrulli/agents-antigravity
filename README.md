@@ -19,7 +19,7 @@ Questo repository è progettato per centralizzare e standardizzare il comportame
 ## Filosofia
 L'obiettivo è creare un ecosistema dove l'AI non è solo una chat, ma uno strumento specializzato guidato da regole ferree e competenze specifiche (skills).
 
-👉 **[Leggi la Guida all'Uso Completa](./howtouse.md)** per imparare a integrare Antigravity nel tuo workflow quotidiano.
+👉 **[Leggi la Guida all'Uso Completa](./howtouse.md)** e le **[Istruzioni per l'Agente](./AGENT.md)** per imparare a integrare Antigravity nel tuo workflow quotidiano.
 
 
 ## Come Contribuire

@@ -35,7 +35,8 @@ const ASSETS_TO_SYNC = [
   'docs/rules',
   'skills',
   '.agent/workflows',
-  'GEMINI.md'
+  'GEMINI.md',
+  'CLAUDE.md'
 ];
 
 function copyRecursiveSync(src, dest) {
