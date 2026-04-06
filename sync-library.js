@@ -31,12 +31,7 @@ const SOURCE_DIR = __dirname;
 
 // Cartelle e file da sincronizzare
 const ASSETS_TO_SYNC = [
-  'agents',
-  'docs/rules',
-  'skills',
-  '.agent/workflows',
-  'GEMINI.md',
-  'CLAUDE.md'
+  '.agent'
 ];
 
 function copyRecursiveSync(src, dest) {
@@ -57,17 +52,17 @@ function copyRecursiveSync(src, dest) {
   } else {
     // Gestione dei file
     const destExists = fs.existsSync(dest);
-    
+
     if (destExists) {
-        if (!isForce) {
-            const backupPath = `${dest}.bak`;
-            if (!isDryRun) {
-                fs.copyFileSync(dest, backupPath);
-            }
-            console.log(`💾 [Backup Created] ${backupPath}`);
-        } else {
-            console.log(`⚠️ [Force Overwrite] ${dest}`);
+      if (!isForce) {
+        const backupPath = `${dest}.bak`;
+        if (!isDryRun) {
+          fs.copyFileSync(dest, backupPath);
         }
+        console.log(`💾 [Backup Created] ${backupPath}`);
+      } else {
+        console.log(`⚠️ [Force Overwrite] ${dest}`);
+      }
     }
 
     if (!isDryRun) {
@@ -104,5 +99,5 @@ ASSETS_TO_SYNC.forEach((asset) => {
 
 console.log('\n✅ Importazione completata con successo!');
 if (!isDryRun) {
-    console.log('Ora il tuo progetto è configurato con le regole e le skill di Antigravity.');
+  console.log('Ora il tuo progetto è configurato con le regole e le skill di Antigravity.');
 }
