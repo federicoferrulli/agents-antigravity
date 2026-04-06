@@ -31,8 +31,20 @@ Aggiungi nuove regole in `docs/rules/` o nuove competenze in `skills/` seguendo 
 
 *Questo catalogo è generato automaticamente dallo script `scripts/generate-catalog.js`*
 
+### Regole e Standard (docs/rules)
+- *(Nessun file presente)*
+
 ### Decisioni Architetturali (docs/adr)
 - [**ADR-0001: Adopting Architecture Decision Records**](./docs/adr/0001-adopting-adr.md)
 - [**ADR-0002: Standardizing Metadata with YAML Frontmatter**](./docs/adr/0002-standard-metadata.md)
+
+### Competenze e Flussi (skills)
+- *(Nessun file presente)*
+
+### Personas (agents)
+- *(Nessun file presente)*
+
+### Workflows (.agent/workflows)
+- *(Nessun file presente)*
 
 <!-- CATALOG_END -->

@@ -161,3 +161,25 @@ Copre bene il **backend con TypeScript + REST API**, ma presenta **buchi signifi
 - App **multi-linguaggio** (solo TypeScript)
 
 Le regole e skill esistenti sono qualitativamente buone ma **troppo sintetiche** — andrebbero arricchite con esempi di codice concreti per massimizzare l'efficacia dell'agente AI.
+    "Frontend Rules": [0.5, 0.85]
+    "Auth Patterns": [0.35, 0.75]
+    "Espandi common.md": [0.2, 0.7]
+    "DevOps/CI-CD": [0.7, 0.6]
+    "Performance Skill": [0.6, 0.65]
+    "Python Rules": [0.25, 0.4]
+    "Espandi Workflows": [0.3, 0.35]
+```
+
+---
+
+## 🎯 Verdetto Finale
+
+> **La libreria è adatta come fondazione, ma non è pronta per "tutti i tipi di app".**
+
+Copre bene il **backend con TypeScript + REST API**, ma presenta **buchi significativi** per:
+- App con **frontend** (nessuna regola UI/UX)
+- App con **database** (nessuna regola data layer)
+- App in **produzione** (nessuna regola DevOps)
+- App **multi-linguaggio** (solo TypeScript)
+
+Le regole e skill esistenti sono qualitativamente buone ma **troppo sintetiche** — andrebbero arricchite con esempi di codice concreti per massimizzare l'efficacia dell'agente AI.
