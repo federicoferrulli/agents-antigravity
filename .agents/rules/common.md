@@ -186,17 +186,18 @@ L'AI **deve** sempre generare test unitari e/o d'integrazione per ogni funzional
 
 ## 9. Traceability & Memory Management
 
-L'AI **deve** mantenere una traccia storica e mnemonica di ogni cambiamento significativo effettuato.
+L'AI **deve** mantenere una traccia storica e mnemonica di ogni singola interazione che produca una modifica nel repository.
 
 **Regole operative**:
-- **Generazione Trace Log**: Per ogni richiesta o modifica sostanziale, deve essere generato un file Markdown nella cartella `logTrace/`.
-- **Naming del Log**: Il file deve seguire il pattern `trace-<ID-BREVE>-<DESCRIZIONE-SINTETICA>.md`.
+- **Atomic Log**: Ogni richiesta (ad eccezione delle semplici query informative) deve generare un log di tracciamento nella cartella `logTrace/`.
+- **Central Indexing**: Ogni nuovo log deve essere registrato in [INDEX.md](file:///c:/repository/agents/logTrace/INDEX.md) per mantenere la cronologia navigabile.
+- **Naming del Log**: Il file deve seguire il pattern `trace-<DATA>-<DESCRIZIONE-SINTETICA>.md`.
 - **Contenuto Obbligatorio**:
-    - **ID della Sessione/Richiesta**: Un identificativo univoco (es. Timestamp ISO o ID sessione).
-    - **Obiettivo**: Lo scopo principale della modifica richiesta dall'utente.
-    - **Cambiamenti Effettuati**: Elenco puntato delle modifiche ai file e dei file creati.
-    - **Test Superati**: Riferimento esplicito alla validazione di successo eseguita (vedi Sezione 8).
-    - **Decisioni Architetturali**: Breve spiegazione del "perché" sono state fatte certe scelte (ADR light).
+    - **ID della Sessione**: Identificativo univoco (formato YYYYMMDD-NNN).
+    - **Obiettivo**: Lo scopo principale della modifica richiesta.
+    - **Cambiamenti Effettuati**: Elenco puntato delle modifiche ai file.
+    - **Test Superati**: Riferimento alla validazione di successo (obbligatorio se modificato codice, vedi Sezione 8).
+    - **Decisioni Architetturali**: Breve spiegazione del "perché" (ADR light).
 
 > [!TIP]
-> Questa "memoria" esterna permette all'AI di recuperare rapidamente il contesto delle modifiche precedenti senza sovraccaricare il contesto di sistema, e fornisce all'utente un audit-trail chiaro del lavoro svolto.
+> Per sincronizzare il contesto basandosi sulla cronologia dei log, usa il workflow `/sync-trace`. Questa "memoria" esterna permette all'AI di recuperare rapidamente il contesto senza sovraccaricare il prompt di sistema.
