@@ -201,3 +201,21 @@ L'AI **deve** mantenere una traccia storica e mnemonica di ogni singola interazi
 
 > [!TIP]
 > Per sincronizzare il contesto basandosi sulla cronologia dei log, usa il workflow `/sync-trace`. Questa "memoria" esterna permette all'AI di recuperare rapidamente il contesto senza sovraccaricare il prompt di sistema.
+
+---
+
+## 10. Versioning & Semantic Tagging
+
+Ogni rilascio o modifica significativa deve essere accompagnato da un incremento della versione semantica (SemVer) e dalla creazione di un tag Git corrispondente.
+
+**Regole operative**:
+- **Semantic Versioning (SemVer)**: Segui rigorosamente lo standard `MAJOR.MINOR.PATCH`.
+    - **MAJOR**: Breaking changes o refactoring strutturali del repository.
+    - **MINOR**: Nuove funzionalità, nuove Skill, nuovi Workflow o nuove Regole.
+    - **PATCH**: Bugfix, piccoli miglioramenti testuali o maintenance.
+- **Automated Update**: L'AI deve aggiornare la versione nel file `package.json` prima di procedere al commit di una nuova funzionalità.
+- **Git Tagging**: Ogni completamento di feature deve essere marcato con un tag git (es. `v1.1.0`). Usa il comando `npm run release` per automatizzare il processo di staging, commit e tagging.
+- **Trace Log Reference**: Il tag di versione creato deve essere referenziato nell'ultimo Trace Log della sessione.
+
+> [!IMPORTANT]
+> Non creare mai tag duplicati o senza aver prima validato la libreria (`npm run validate`).
