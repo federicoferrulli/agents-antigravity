@@ -38,6 +38,18 @@ if (!parsed.success) {
 - Imposta limiti di lunghezza minimo e massimo su tutti i campi stringa.
 - Non usare mai `eval()` o costrutti dinamici con input utente.
 
+> [!IMPORTANT]
+> La validazione dell'input è la prima linea di difesa contro injection, XSS e buffer overflow. Non saltarla MAI, nemmeno per comunicazioni inter-servizio "fidate".
+
+```mermaid
+graph LR
+    Input[External Input] --> V[Validation Layer]
+    V -->|Invalid| E[Error Response]
+    V -->|Valid| S[Sanitization]
+    S --> P[Secure Processing]
+    P --> Out[Output Encoding]
+```
+
 ---
 
 ## 2. Authentication & Authorization

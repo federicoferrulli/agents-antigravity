@@ -33,7 +33,27 @@ Aderisci sempre agli standard di documentazione per assicurare che altri agenti,
 
 ## "Clean" Comments In-Code
 - Il codice dovrebbe essere auto-documentante (attraverso le regole Naming `common.md`). Se devi scrivere un lungo commento dentro la fuzione per spiegare *cosa sta facendo* o il *come*, molto probabilmente hai bisogno di applicare una tecnica di **Extract Method** (`refactoring.md`).
-- I commenti si dovrebbero utilizzare principalmente per spiegare il *Perché* hai preso una decisione architetturale particolare, spesso quando utilizzi hack specifici (e.g., ignorare lint, regex estese di workaround, eccellente debito da riparare).
+- I commenti si dovrebbero utilizzare principalmente per spiegare il *Perché* hai preso una decisione architetturale particolare, spesso quando utilizzi hack specifici (e.g., ignorare lint, regex estese di workaround, eccellente debito da riparare).## Standard di Qualità (Indice 100/100)
+Per essere considerato "Definitive", ogni file `.md` nella libreria deve soddisfare i seguenti criteri:
 
+- **YAML Frontmatter**: Deve includere `title`, `description` e `tags`.
+- **Esempi di Codice**: Almeno 3 blocchi di codice (JS/TS, Bash, etc.) che illustrano i pattern.
+- **Visualizzazione**: Deve includere almeno un diagramma **Mermaid** (graph, sequence, etc.) per spiegare flussi complessi.
+- **Micro-documentazione**: Utilizzo degli alert tag (`> [!NOTE]`, `> [!IMPORTANT]`, etc.) per evidenziare punti critici.
+- **Profondità**: Almeno 60 righe di contenuto strutturato.
 
+> [!TIP]
+> Usa lo script `node scripts/evaluate-md-quality.js <file>` per verificare il punteggio di qualità di un file prima del commit.
+
+```mermaid
+graph TD
+    A[Crea MD] --> B[Aggiungi Frontmatter]
+    B --> C[Scrivi Regole]
+    C --> D[Aggiungi Esempi Codice]
+    D --> E[Aggiungi Diagrammi Mermaid]
+    E --> F[Esegui Valutatore Qualità]
+    F -->|Score < 100| G[Migliora Contenuto]
+    G --> F
+    F -->|Score 100| H[Commit & Tag]
+```
 

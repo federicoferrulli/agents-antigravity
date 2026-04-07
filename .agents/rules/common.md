@@ -23,6 +23,19 @@ Separa sempre le preoccupazioni in livelli distinti e a dipendenza unidirezional
 | **Interface Adapters** | Convertono dati: Controller, Presenter, Gateway | Use Cases |
 | **Frameworks & Drivers** | DB, Web Framework, UI — dettagli implementativi | Interface Adapters |
 
+> [!NOTE]
+> Le dipendenze puntano sempre verso i layer interni. Questo significa che le Entities non possono "importare" nulla dagli Use Cases, e gli Use Cases non sanno nulla del Database o del Web Server.
+
+```mermaid
+graph TD
+    subgraph "Clean Architecture Layers"
+        FD[Frameworks & Drivers] --> IA[Interface Adapters]
+        IA --> UC[Use Cases]
+        UC --> E[Entities]
+    end
+```
+
+
 ```
 // ✅ CORRETTO — Use Case non conosce Express
 class CreateUserUseCase {
