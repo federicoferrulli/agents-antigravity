@@ -1,11 +1,28 @@
 ---
+title: "Python Rules"
 trigger: model_decision
 description: "Standard per sviluppo Python moderno con focus su sicurezza e tipi."
+category: "Engine"
+tags: ["python", "fastapi", "pydantic", "poetry", "async", "mypy"]
 ---
+
 
 # Python Rules
 
 Queste regole si applicano a **ogni file Python generato o modificato**. L'obiettivo è codice leggibile, type-safe e moderno (Python 3.10+).
+
+```mermaid
+graph LR
+    A[Clients] --> B[Interface Layer / FastAPI]
+    B --> C[Application Layer / Use Cases]
+    C --> D[Domain Layer / Entities]
+    C --> E[Infrastructure Layer / Repository]
+    E --> F[Postgres / Redis / External API]
+```
+
+> [!TIP]
+> In Python, la leggibilità conta quanto il funzionamento. Usa `ruff` e `black` per garantire uno stile coerente e concentrati sulla logica di business invece che sulla formattazione.
+
 
 ---
 
@@ -45,6 +62,10 @@ select = ["E", "F", "I", "N", "UP", "S"]
 ## 2. Type Hints — Obbligatori
 
 Ogni funzione, metodo e variabile di modulo deve avere type hints. Usa `mypy` o `pyright` per la verifica statica.
+
+> [!IMPORTANT]
+> I Type Hint non sono opzionali. Una funzione senza tipi è considerata "legacy" e deve essere refactorata immediatamente. Questo è fondamentale per prevenire bug a runtime in applicazioni complesse.
+
 
 ```python
 # ✅ CORRETTO — type hints completi

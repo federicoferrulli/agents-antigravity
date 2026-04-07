@@ -1,35 +1,84 @@
 ---
-description: Review Workflow
+title: Review Workflow
+description: Protocollo finale per l'audit di qualità, sicurezza e validazione funzionale prima della consegna.
+tags: [review, security, quality-assurance, qa, checklist]
 ---
 
 # Review Workflow
 
-Una volta che gli step di esecuzione (`[Execution](./execution.md)`) sono completati, entra in gioco la fase di Review e validazione per assicurare la massima qualità del rilascio.
+La **Review** è il filtro finale. Non è un atto formale, ma un'attività critica di analisi. In questa fase, ci mettiamo nei panni di chi dovrà manutenere questo codice tra due anni.
 
-## Step da seguire
+## Pilastri della Validazione
+1. **Integrità Architetturale**: Il sistema è ancora "Clean"?
+2. **Postura di Sicurezza**: Abbiamo introdotto rischi?
+3. **Efficacia Funzionale**: Il problema dell'utente è davvero risolto?
 
-1. **Auto-Riflessione (Self-Reflection)**:
-   - Verifica di aver applicato tutte le regole definite in `docs/rules/common.md`.
-   - Controlla se la struttura segue i dettami della **Clean Architecture**.
+## Flusso di Verifica Finale
 
-2. **Security Audit**:
-   - Assicurati che il codice aderisca rigorosamente a `docs/rules/security.md`.
-   - Controlla vulnerabilità comuni (OWASP), validazione input e gestione segreti.
+```mermaid
+graph LR
+    A[Codice Completato] --> B[Self-Reflection]
+    B --> C[Security Audit]
+    C --> D[Solidità & Test]
+    D --> E[Check Persona Agentica]
+    E --> F[Knowledge Extraction]
+    F --> G[Submit Finale]
+```
 
-3. **Verifica della Solidità**:
-   - Accertati che i test passino correttamente (TDD workflow confermato).
-   - Se ci sono istruzioni sistematiche per il controllo (`pre_commit_instructions`), consultale e verifica i passi obbligatori prima del commit.
+### 1. Auto-Riflessione (Self-Reflection)
+Usa questi comandi per verificare la qualità strutturale:
+```bash
+# Analisi delle dipendenze circolari
+npx madge --circular src/
+# Controllo linting esteso
+npm run lint:strict
+```
 
-3. **Allineamento alla Persona**:
-   - Hai risposto nel tono e con lo stile dell'agente assegnato (es. `agents/base_agent.md`, da Software Engineer Senior)?
-   - Assicurati che il codice sia non solo funzionale ma *elegante* e *scalabile*.
+### 2. Security Audit (Security Checklist)
+Non limitarti a leggere il codice. Cerca pattern pericolosi.
 
-4. **Knowledge Extraction (Continuous Learning)**:
-   - Rifletti sull'attività appena conclusa: *Hai risolto un bug complesso? Creato un nuovo tool? Implementato un un pattern di integrazione difficile?*
-   - Se sì, **è tuo obbligo** chiedere all'utente se desidera astrarre la logica in una nuova Skill in `skills/` o in un aggiornamento di regola in `docs/rules/`. Segui le istruzioni di `docs/rules/continuous-learning.md`.
+```javascript
+// ESEMPIO: Cosa cercare durante la review
+// EVITA: eval(userData)
+// PREFERISCI: JSON.parse(userData) con schema validation
 
-5. **Finalizzazione / Submit**:
-   - Assicurati che i commit message riflettano coerentemente e sinteticamente cosa è stato realizzato.
-   - Sottometti le modifiche rispettando il normale flusso di PR/commit.
+const Joi = require('joi');
+const schema = Joi.object({
+  id: Joi.number().integer().required()
+});
+```
 
-**Importante:** Non richiedere all'utente di compiere azioni manuali di test o validazione dell'ambiente, l'agente è responsabile di farlo autonomamente.
+### 3. Verifica della Solidità (Testing Standards)
+Esegui la suite completa di test per escludere regressioni sibilline.
+
+```bash
+# Esecuzione completa pre-commit
+npm run test:all
+# Verifica coverage
+npm run test:coverage
+```
+
+### 4. Knowledge Extraction (Continuous Learning)
+Se hai imparato qualcosa di nuovo, documentalo. Antigravity cresce con ogni task.
+
+```markdown
+# Nuova Skill suggerita: "ElasticSearch Mapping Patterns"
+- Perché: Abbiamo risolto un problema di collisione di tipi negli index.
+- Path: .agents/skills/elasticsearch-patterns.md
+```
+
+## Checklist dei "No-Go"
+Se uno di questi è presente, la review fallisce:
+- [ ] Commenti TODO rimasti nel codice.
+- [ ] Console.log di debugging non rimossi.
+- [ ] Funzioni più lunghe di 50 righe senza una ragione valida.
+- [ ] Nomi di variabili monosillabici (es. `a`, `b`, `x`).
+
+> [!IMPORTANT]
+> La fase di Review deve avvenire con una mentalità critica. Non aver paura di suggerire un refactoring dell'ultimo minuto se identifichi un rischio di sicurezza o una violazione grave dei principi SOLID.
+
+> [!TIP]
+> Se il lavoro è complesso, scrivi una breve nota di rilascio allegata alla PR per spiegare le scelte tecniche non ovvie.
+
+---
+*v1.2 - Antigravity Review Protocol*

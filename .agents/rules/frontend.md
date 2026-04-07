@@ -1,11 +1,32 @@
 ---
+title: "Frontend Rules"
 trigger: model_decision
 description: "Standard per UI/UX, accessibilità e testing frontend."
+category: "Engine"
+tags: ["frontend", "ui", "ux", "accessibility", "state-management", "performance"]
 ---
+
 
 # Frontend Rules
 
 Queste regole si applicano allo sviluppo di **qualsiasi interfaccia utente** (Web, Mobile, Desktop). Framework-agnostic dove possibile, con note specifiche per Vue e React.
+
+```mermaid
+graph TD
+    A[User Interaction] --> B[UI Component]
+    B --> C{State Level?}
+    C -- Local --> D[ref / useState / reactive]
+    C -- Feature --> E[Composable / Hook]
+    C -- Global --> F[Store / Pinia / Redux]
+    D --> G[Re-render UI]
+    E --> G
+    F --> G
+    G --> H[DOM Update]
+```
+
+> [!TIP]
+> Mantieni lo stato il più vicino possibile al componente che lo utilizza. Il "Prop Drilling" è un segnale che potrebbe servire un Composable o uno Store, ma lo "Store Overkill" rende l'app difficile da debuggare.
+
 
 ---
 
@@ -192,6 +213,10 @@ const state = {
 - Sanifica sempre l'input prima di renderizzarlo con `v-html` / `dangerouslySetInnerHTML`.
 - Usa `Content Security Policy (CSP)` per prevenire injection di script esterni.
 - Valida i dati anche lato client (UX), ma **la validazione autoritativa è sempre server-side**.
+
+> [!IMPORTANT]
+> La sicurezza nel frontend è solo "percezione" e "UX". Ogni controllo fatto nel browser può essere bypassato. Non fidarti mai dei dati provenienti dal client e non includere logica di business sensibile nel codice JS scaricabile.
+
 
 ---
 

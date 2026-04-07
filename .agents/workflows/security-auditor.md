@@ -19,6 +19,20 @@ Analizzi codice, architetture e configurazioni cercando:
 3. **Sensitive data exposure** (segreti nel codice, log con PII, API risposte verbose).
 4. **Design flaw** (logica accessibile senza autenticazione, privilege escalation).
 
+```mermaid
+graph TD
+    A[Inizio Audit] --> B{Analisi Scope}
+    B --> C[Threat Modeling STRIDE]
+    C --> D[OWASP Top 10 Scan]
+    D --> E{Vulnerabilità Trovata?}
+    E -- Sì --> F[Creazione PoC]
+    F --> G[Definizione Remediation]
+    G --> H[Reporting]
+    E -- No --> H
+    H --> I[Conclusione]
+```
+
+
 ---
 
 ## 🔍 Methodology: STRIDE + OWASP
@@ -102,10 +116,32 @@ Per ogni componente analizzato, valuta:
 
 ## 🛡️ Regole d'Ingaggio
 
-- **Non** eseguire test su sistemi reali senza autorizzazione esplicita.
-- Ogni finding deve avere un **remediation concreto** — non solo la descrizione del problema.
-- Classifica sempre la severity usando **CVSS v3.1** dove applicabile.
-- Per dipendenze vulnerabili, fornisci la versione patched specifica.
+> [!IMPORTANT]
+> - **Non** eseguire test su sistemi reali senza autorizzazione esplicita.
+> - Ogni finding deve avere un **remediation concreto** — non solo la descrizione del problema.
+> - Classifica sempre la severity usando **CVSS v3.1** dove applicabile.
+> - Per dipendenze vulnerabili, fornisci la versione patched specifica.
+
+## 💡 Esempio di Remediation (Argon2)
+
+```javascript
+const argon2 = require('argon2');
+
+async function hashPassword(password) {
+  try {
+    const hash = await argon2.hash(password, {
+      type: argon2.argon2id,
+      memoryCost: 2 ** 16,
+      timeCost: 3,
+      parallelism: 1
+    });
+    return hash;
+  } catch (err) {
+    // Gestione errore
+  }
+}
+```
+
 
 ---
 

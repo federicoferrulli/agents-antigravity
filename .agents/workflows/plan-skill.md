@@ -1,6 +1,82 @@
 ---
-description: Avvia la modalità Pianificazione (Cole Medin) per creare una nuova Skill
+title: PlanSkill Workflow
+description: Protocollo per la progettazione e la creazione di nuove Skill agentiche in Antigravity.
+tags: [skill, creation, planning, extensibility]
 ---
 
-# Plan Skill Workflow
-Avvia la modalità Pianificazione (Cole Medin). Ti fornirò un'idea generale per una nuova 'Skill' per Antigravity. Il tuo unico compito è fare domande chiarificatrici (Vibe Planning) e poi produrre un file PRD (Product Requirements Document) formattato in Markdown. Il file deve contenere lo scopo della skill, un esempio di applicazione e la struttura gerarchica del documento finale. Non scrivere la skill definitiva finché non approvo il PRD.
+# PlanSkill Workflow
+
+Le **Skill** sono i muscoli dell'agente Antigravity. Questo workflow guida l'agente nella creazione di nuove capacità modularizzate, garantendo che siano riutilizzabili, ben documentate e facili da integrare in diversi contesti.
+
+## Quando creare una Skill?
+- Quando una logica complessa viene ripetuta in più task.
+- Quando si implementa un nuovo framework o libreria esterna.
+- Quando si risolve un bug architetturale che richiede una "guida" per essere evitato in futuro.
+
+## Circuito di Creazione
+
+```mermaid
+graph TD
+    A[Identificazione Bisogno] --> B[Definizione Scope]
+    B --> C[Creazione SKILL.md]
+    C --> D[Aggiunta Guide & Script]
+    D --> E[Validazione Coerenza]
+    E --> F[Integrazione nel Catalogo]
+```
+
+### 1. Definizione dello Scope
+Identifica chiaramente cosa la skill FA e cosa NON FA. Evita "Mega-Skill" onnipresenti.
+
+### 2. Struttura della Skill
+Una skill deve seguire questa gerarchia di file:
+```text
+.agents/skills/[skill-name]/
+├── SKILL.md            # Istruzioni principali (YAML + Markdown)
+├── scripts/            # Helper scripts (opzionale)
+├── examples/           # Reference implementations (opzionale)
+└── resources/          # Asset aggiuntivi (opzionale)
+```
+
+### 3. Esempio di SKILL.md
+```markdown
+---
+name: high-performance-react
+description: Pattern per ottimizzare il rendering di React.
+---
+# High Performance React
+## Metodologia
+Utilizza `useMemo` e `useCallback` solo...
+```
+
+### 4. Automatizzazione via Script
+Se la skill richiede passi ripetitivi, crea uno script in `scripts/`.
+```javascript
+// .agents/skills/my-skill/scripts/setup.js
+console.log("Inizializzazione ambiente per MySkill...");
+// Logica di setup...
+```
+
+### 5. Registrazione nel Catalogo
+Dopo la creazione, aggiorna il catalogo globale.
+```bash
+# Comando per aggiornare il catalogo delle skill
+npm run catalog:update
+```
+
+## Requisiti di Qualità per una Skill
+- Deve avere almeno un esempio di codice "Prima vs Dopo".
+- Deve includere una sezione "Gotchas" o "Error Handling".
+- Deve essere scritta in un linguaggio agnostico rispetto all'utente (istruzioni chiare per l'AI).
+
+> [!IMPORTANT]
+> Una Skill senza un `SKILL.md` correttamente formattato con YAML frontmatter non verrà caricata correttamente dal sistema di orchestrazione Antigravity.
+
+> [!TIP]
+> Mantieni le skill atomiche. Se senti che la skill sta diventando troppo grande, spezzala in più skill correlate (es. `auth-core` e `auth-jwt`).
+
+## Changelog
+- **v1.1**: Introdotto lo standard per la struttura delle sub-directory.
+- **v1.0**: Definizione iniziale del workflow di creazione skill.
+
+---
+*v1.1 - Antigravity Skill Engineering*

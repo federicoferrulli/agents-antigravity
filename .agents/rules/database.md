@@ -1,11 +1,31 @@
 ---
+title: "Database Rules"
 trigger: model_decision
 description: "Standard per design schema, ORM e sicurezza dei dati."
+category: "Engine"
+tags: ["database", "sql", "nosql", "orm", "prisma", "performance"]
 ---
+
 
 # Database Rules
 
 Queste regole si applicano a **ogni interazione con un database**, SQL o NoSQL. L'obiettivo è garantire integrità, performance e manutenibilità del data layer.
+
+```mermaid
+graph TD
+    A[Application Layer] --> B{Data Access Layer}
+    B -- SQL --> C[PostgreSQL / MySQL / SQLite]
+    B -- NoSQL --> D[MongoDB / Redis]
+    C --> E[Prisma / Drizzle / TypeORM]
+    D --> F[Mongoose / Redis-om]
+    E --> G[Database Schema]
+    F --> G
+    G --> H[Security & Auth Policies]
+```
+
+> [!NOTE]
+> La scelta tra SQL e NoSQL deve essere basata sulla natura dei dati e sulla complessità delle relazioni, non sulla preferenza personale.
+
 
 ---
 
@@ -168,6 +188,10 @@ CREATE INDEX idx_products_search ON products USING GIN(to_tsvector('english', na
 ```
 
 **Non over-indicizzare**: ogni indice rallenta INSERT/UPDATE. Aggiungi solo dove hai query lente documentate.
+
+> [!CAUTION]
+> L'assenza di indici sulle Foreign Key può portare a deadlock e table scan massivi durante le operazioni di JOIN in produzione. Ricordati sempre di indicizzarle.
+
 
 ---
 

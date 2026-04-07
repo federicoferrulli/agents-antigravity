@@ -1,45 +1,80 @@
 ---
-description: Attiva la modalità Esecuzione Massiva (DevOps) per applicare standard su più file
+title: MassRefactor Workflow
+description: Attiva la modalità Esecuzione Massiva (DevOps) per applicare standard su più file contemporaneamente.
+tags: [refactoring, devops, automation, scaling]
 ---
 
-# Massive Refactor Workflow
+# MassRefactor Workflow
 
-Questo workflow è progettato per gestire refactoring su larga scala (10+ file) senza richiedere l'intervento manuale continuo dell'utente. Trasforma l'agente in un motore di manutenzione automatizzata.
+Il **MassRefactor** è il workflow di Antigravity per operazioni su larga scala. Viene utilizzato quando un cambiamento architetturale o un aggiornamento di standard deve essere propagato su decine o centinaia di file, garantendo coerenza e riducendo l'errore umano.
 
-## Persona: The Sustenance Engineer
-In questa modalità, il tuo tono è asciutto, orientato all'efficienza e alla precisione chirurgica. Il tuo obiettivo è la coerenza del repository.
+## Scenari d'Uso
+- Cambiamento sistematico di una convenzione di naming.
+- Migrazione di una libreria (es. da Moikit a Jest).
+- Aggiunta di standard di sicurezza (es. sanitizzazione input) in tutti i controller.
 
-## Phase 1: Context Absorption
-1. **Target Identification**: Identifica la directory root da processare (es. `src/modules/`).
-2. **Rule Selection**: Carica la regola o lo standard da applicare (es. `docs/rules/common.md` o un prompt specifico).
-3. **Audit**: Leggi i file uno ad uno per mappare le discrepanze esistenti senza modificarli immediatamente.
+## Pipeline di Refactoring
 
-## Phase 2: Execution Planning
-1. Genera un piano di modifica per ogni file.
-2. Dividi il lavoro in lotti (batches) se i file sono molti, per evitare limiti di memoria del contesto.
-
-## Phase 3: Recursive Transformation
-1. **Apply**: Esegui le modifiche blocco per blocco (usando `replace_file_content` o `multi_replace`).
-2. **Verify**: Verifica che il file modificato rispetti ancora la sintassi (se applicabile).
-3. **Report**: Fornisci un breve diff riassuntivo per ogni file.
-
-## Esempio di Prompt d'Ingresso
-> "Applica lo standard Clean Architecture a tutti i Controller in `src/handlers/`. Riduci gli accoppiamenti con Express. Procedi in autonomia."
-
-## System Constraints
-- Non chiedere conferma per ogni file (Silent Operation).
-- Mantieni integrità: se un file non può essere refactorizzato in sicurezza, taggalo e passa al successivo.
-- Aggiorna il catalogo se aggiungi/rimuovi file durante il processo.
-
-## Reporting Format (Example)
-L'agente deve restituire un report compatto alla fine di ogni file processato:
-
-```markdown
-### ✅ File: src/controllers/user-controller.ts
-- [x] Rimosso `import { Request, Response } from 'express'` dal service.
-- [x] Introdotto `UserDTO` per il mapping dei dati.
-- [x] Separazione logica tra Controller e UseCase completata.
+```mermaid
+graph TD
+    A[Identificazione Pattern] --> B[Creazione Script di Mutazione]
+    B --> C[Dry Run su Campione]
+    C --> D[Verifica Impatto]
+    D --> E[Esecuzione Massiva]
+    E --> F[Test di Regressione]
+    F --> G[Validazione Finale]
 ```
 
-## Error Handling
-In caso di errore bloccante in un file, documenta l'errore nel report finale e continua con gli altri asset. Non interrompere il workflow globale per un singolo file corrotto.
+### 1. Analisi del Pattern
+Trova tutti i file coinvolti utilizzando strumenti di ricerca avanzata.
+```bash
+# Esempio: Trova tutti i file che usano il vecchio pattern
+grep -r "oldLogger.log" ./src --include="*.js"
+```
+
+### 2. Automazione della Modifica
+Invece di editare a mano, progetta uno script (o usa strumenti come `sed`, `jscodeshift` o lo strumento `multi_replace_file_content`).
+
+```javascript
+// Esempio di script di refactoring programmato
+const files = getFiles('./src');
+files.forEach(file => {
+    const content = readFile(file);
+    const updated = content.replace(/oldLogger\.log/g, 'newLogger.info');
+    writeFile(file, updated);
+});
+```
+
+### 3. Esecuzione e Controllo Qualità
+Non eseguire mai tutto in una volta. Usa un approccio a "ondate".
+
+```bash
+# Ondata 1: Solo file in ./src/utils
+# Ondata 2: File in ./src/services
+# Ondata 3: Applicazione globale
+```
+
+### 4. Gestione Errori e Rollback
+Se un refactoring massivo rompe i test, devi avere una strategia di revert immediata.
+```bash
+# Comando rapido per rollback git se necessario
+git checkout -- src/
+```
+
+## Checklist di Sicurezza per MassRefactor
+- [ ] Ho verificato che lo script di mutazione non crei loop infiniti?
+- [ ] Ho testato il refactoring su almeno 3 file con strutture diverse?
+- [ ] Il sistema di versionamento è pulito prima di iniziare?
+
+> [!CAUTION]
+> Un refactoring massivo senza una suite di test solida è un suicidio tecnico. Assicurati che il coverage sia sufficiente prima di iniziare operazioni globali.
+
+> [!TIP]
+> Usa `ripgrep` (`rg`) per ricerche veloci in codebase di grandi dimensioni. È integrato nei tool Antigravity.
+
+## Changelog
+- **v1.1**: Aggiunta sezione pipeline DevOps e gestione ondate.
+- **v1.0**: Prima release del protocollo di modifica su larga scala.
+
+---
+*v1.1 - Antigravity Scaling Operations*

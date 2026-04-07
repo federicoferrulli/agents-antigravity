@@ -1,20 +1,91 @@
 ---
-description: Main Workflow Orchestrator
+title: Main Workflow Orchestrator
+description: Il punto di ingresso e l'orchestrazione principale per tutti i task di sviluppo nell'ecosistema Antigravity.
+tags: [orchestration, workflow, development-lifecycle, lifecycle]
 ---
 
 # Main Workflow Orchestrator
 
-Questo file definisce il flusso di lavoro principale per gli agenti all'interno del workspace Antigravity. Ogni richiesta complessa o task di sviluppo deve seguire questo ciclo di vita.
+In Antigravity, l'orchestrazione è fondamentale per mantenere la coerenza tra migliaia di righe di codice. Questo workflow funge da spina dorsale per ogni agente, guidandolo dalla comprensione iniziale alla consegna finale.
 
-## Fasi del Workflow
+## Filosofia d'Orchestrazione
+Non seguiamo un percorso lineare rigido, ma un ciclo iterativo di raffinamento. Ogni fase alimenta la successiva, creando un circolo virtuoso di qualità.
 
-1. **[Planning](./planning.md)**: Analisi della richiesta, esplorazione del codice e pianificazione delle attività.
-2. **[Execution](./execution.md)**: Implementazione iterativa del codice seguendo gli standard (Clean Architecture, TDD).
-3. **[Review](./review.md)**: Verifica finale del lavoro, riflessione sulla sicurezza e validazione del risultato.
+## Ciclo di Vita del Task
 
-## Come utilizzare questo workflow
-Quando inizi un nuovo task, non passare subito all'esecuzione. Leggi e applica le linee guida descritte in `planning.md`. Una volta che il piano è approvato o stabilito, procedi con `execution.md`. Infine, prima di completare e submittare, segui le direttive di `review.md`.
+L'orchestrazione segue un percorso strutturato:
 
-Inoltre, assicurati sempre di:
-- Caricare le regole base da `docs/rules/common.md`.
-- Assumere la corretta persona dall'agente (es. `agents/base_agent.md`).
+```mermaid
+graph LR
+    A[Richiesta Utente] --> B[Planning]
+    B --> C[Execution]
+    C --> D[Review]
+    D --> E{Validato?}
+    E -- No: Bug/Rifiuto --> C
+    E -- No: Re-Design --> B
+    E -- Sì --> F[Completamento]
+```
+
+### 1. Planning (Analisi Strategy)
+La fase di [Planning](./planning.md) è dove avviene il "heavy lifting" mentale. Qui l'agente deve:
+- Identificare i moduli core.
+- Valutare i rischi di sicurezza.
+- Definire una strategia di test.
+
+### 2. Execution (Active Coding)
+Durante l'[Execution](./execution.md), il codice viene scritto seguendo il principio del "Smallest Change Possible".
+- Implementazione di test unitari.
+- Scrittura del codice di business logic.
+- Integrazione infrastrutturale.
+
+### 3. Review (Final Audit)
+La fase di [Review](./review.md) non è facoltativa. Assicura che:
+- Non ci siano regressioni.
+- Gli standard Clean Architecture siano rispettati.
+- La documentazione sia aggiornata.
+
+## Esempi Operativi
+
+### Esempio 1: Integrazione di una nuova API
+```markdown
+# Workflow Start
+1. PLANNING: Analisi endpoint REST.
+2. EXECUTION: Implementazione Controller e Service.
+3. REVIEW: Verifica status code e security headers.
+```
+
+### Esempio 2: Refactoring Core
+```bash
+# Comandi tipici in questa fase
+npm run lint
+npm run test:unit
+node scripts/validate-library.js
+```
+
+### Esempio 3: Gestione di un Bug Critico
+```javascript
+// Esempio di fix immediato in fase di execution
+try {
+    const result = await processData(input);
+    return result;
+} catch (error) {
+    logger.error("Failed to process data", { error });
+    throw new CriticalError("Data processing failed");
+}
+```
+
+## Protocollo di Emergenza
+Se un task fallisce ripetutamente in fase di `Execution`, l'orchestrazione prevede un ritorno immediato al `Planning` per una ri-analisi del problema.
+
+> [!IMPORTANT]
+> Un'orchestrazione di successo si riconosce dalla mancanza di ripensamenti durante la scrittura del codice. Se devi cambiare design mentre scrivi, il tuo planning era insufficiente.
+
+> [!TIP]
+> Mantieni i log delle decisioni presi nelle fasi precedenti per dare senso alle implementazioni correnti.
+
+## Changelog
+- **v1.2**: Introdotto diagramma Mermaid e protocollo di emergenza.
+- **v1.1**: Prima versione strutturata del workflow.
+
+---
+*Antigravity System - 2026 Edition*

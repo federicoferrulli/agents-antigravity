@@ -1,11 +1,30 @@
 ---
+title: "TypeScript Rules"
 trigger: model_decision
 description: "Standard per TypeScript type-safe e professionale."
+category: "Engine"
+tags: ["typescript", "type-safety", "async", "generics", "tsconfig"]
 ---
+
 
 # TypeScript Rules
 
 Queste regole si applicano a **ogni file TypeScript prodotto o modificato**. L'obiettivo è type-safety massima e codice prevedibile.
+
+```mermaid
+graph TD
+    A[Nuova Definizione Dati] --> B{È un Oggetto?}
+    B -- No --> C[Usa TYPE / ALIAS]
+    B -- Sì --> D{Serve Ereditarietà?}
+    D -- Sì --> E[Usa INTERFACE]
+    D -- No --> F{Combinazione di Tipi?}
+    F -- Sì --> G[Usa TYPE / INTERSECTION]
+    F -- No --> E
+```
+
+> [!NOTE]
+> Le `interface` sono preferite per API pubbliche ed estendibili (grazie alla declaration merging), mentre i `type` eccellono nella manipolazione di tipi complessi (Union, Intersection, Mapped Types).
+
 
 ---
 
@@ -28,6 +47,10 @@ Abilita sempre `strict: true` in `tsconfig.json`. Questo attiva:
 ```
 
 **Non usare mai `any`**. Usa alternative sicure:
+
+> [!CAUTION]
+> L'uso di `any` disabilita completamente il controllo dei tipi di TypeScript, rendendo il compilatore inutile. È una violazione grave dei princìpi di Clean Architecture e sicurezza del codice. Se il tipo è ignoto all'origine, usa `unknown`.
+
 
 ```typescript
 // ❌ Evita
