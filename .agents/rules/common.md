@@ -1,9 +1,6 @@
 ---
-title: "Common Rules"
+trigger: always_on
 description: "Regole universali applicabili a ogni riga di codice generata."
-category: "General"
-severity: "Critical"
-tags: ["clean-architecture", "solid", "naming", "error-handling"]
 ---
 
 # Common Rules
@@ -36,7 +33,7 @@ graph TD
 ```
 
 
-```
+```typescript
 // ✅ CORRETTO — Use Case non conosce Express
 class CreateUserUseCase {
   constructor(private userRepo: UserRepository) {}
@@ -58,7 +55,7 @@ class CreateUserUseCase {
 
 - **S — Single Responsibility**: Una classe/funzione = un motivo per cambiare.
 - **O — Open/Closed**: Estendi il comportamento (Strategy, Plugin) senza modificare il codice esistente.
-- **L — Liskov Substitution**: Le implementazioni concrete devono essere intercambiabili con le astrazioni (`UserRepository` → `MongoUserRepository` o `InMemoryUserRepository`).
+- **L — Liskov Substitution**: Le implementazioni concrete devono essere intercambiabili con le astrazioni (`UserRepository` -> `MongoUserRepository` o `InMemoryUserRepository`).
 - **I — Interface Segregation**: Preferisci interfacce piccole e specifiche a monoliti.
 - **D — Dependency Inversion**: Dipendi da astrazioni (`interface`), non da implementazioni concrete.
 
@@ -169,3 +166,37 @@ console.log(`User ${user.email} logged in with password ${password}`);
 - In produzione usa formato **JSON strutturato** (non testo libero) — permette indexing e alerting.
 - Includi sempre un `correlationId` / `requestId` per tracciare un'intera request chain.
 - Non usare `console.log` in produzione: usa una libreria configurabile (pino, winston).
+
+---
+
+## 8. Test-Driven Development (TDD) & Validation
+
+L'AI **deve** sempre generare test unitari e/o d'integrazione per ogni funzionalità o modifica significativa. Il task non è considerato completato finché tutti i test non sono stati creati ed eseguiti con successo.
+
+**Regole operative**:
+- **Test-First Approach**: Definisci il comportamento atteso tramite i test prima di procedere con l'implementazione completa (seguendo lo schema **Red-Green-Refactor**).
+- **Copertura Obbligatoria**: Ogni nuova logica di business (Entities/Use Cases) deve essere accompagnata da test che ne validino il comportamento.
+- **Validazione Automatica**: L'AI deve eseguire i test localmente e confermare l'esito positivo prima di dichiarare il lavoro finito.
+- **Gestione dei Fallimenti**: Se i test falliscono, l'AI deve analizzare il log, correggere il codice e rieseguire i test finché non sono tutti verdi.
+
+> [!IMPORTANT]
+> Non è permesso procedere o consegnare codice che non superi la suite di test associata. La qualità è garantita dalla validazione empirica.
+
+---
+
+## 9. Traceability & Memory Management
+
+L'AI **deve** mantenere una traccia storica e mnemonica di ogni cambiamento significativo effettuato.
+
+**Regole operative**:
+- **Generazione Trace Log**: Per ogni richiesta o modifica sostanziale, deve essere generato un file Markdown nella cartella `logTrace/`.
+- **Naming del Log**: Il file deve seguire il pattern `trace-<ID-BREVE>-<DESCRIZIONE-SINTETICA>.md`.
+- **Contenuto Obbligatorio**:
+    - **ID della Sessione/Richiesta**: Un identificativo univoco (es. Timestamp ISO o ID sessione).
+    - **Obiettivo**: Lo scopo principale della modifica richiesta dall'utente.
+    - **Cambiamenti Effettuati**: Elenco puntato delle modifiche ai file e dei file creati.
+    - **Test Superati**: Riferimento esplicito alla validazione di successo eseguita (vedi Sezione 8).
+    - **Decisioni Architetturali**: Breve spiegazione del "perché" sono state fatte certe scelte (ADR light).
+
+> [!TIP]
+> Questa "memoria" esterna permette all'AI di recuperare rapidamente il contesto delle modifiche precedenti senza sovraccaricare il contesto di sistema, e fornisce all'utente un audit-trail chiaro del lavoro svolto.

@@ -31,7 +31,7 @@ const SOURCE_DIR = __dirname;
 
 // Cartelle e file da sincronizzare
 const ASSETS_TO_SYNC = [
-  '.agent'
+  '.agents'
 ];
 
 function copyRecursiveSync(src, dest) {
