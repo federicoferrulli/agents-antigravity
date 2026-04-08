@@ -88,6 +88,7 @@ function authorize(...roles: Role[]) {
 - Applica il principio del **minimo privilegio** (Least Privilege).
 - Separa sempre **autenticazione** (chi sei?) da **autorizzazione** (cosa puoi fare?).
 - Non implementare crypto home-made. Usa librerie battle-tested (jsonwebtoken, bcrypt, Argon2).
+- Per esempi di implementazione dettagliati, consulta la skill [auth-patterns](../skills/auth-patterns/SKILL.md).
 
 ---
 

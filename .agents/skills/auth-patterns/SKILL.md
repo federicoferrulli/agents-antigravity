@@ -87,6 +87,19 @@ async function refreshTokenHandler(req: Request, res: Response) {
 
   return res.json({ accessToken: tokens.accessToken });
 }
+
+// Logout endpoint (Invalidazione sessione)
+async function logoutHandler(req: Request, res: Response) {
+  const incomingRefresh = req.cookies?.refreshToken;
+  if (incomingRefresh) {
+    // Invalida il token nel DB così non può più essere usato per il refresh
+    await sessionRepo.deleteByToken(incomingRefresh);
+  }
+  
+  // Rimuovi il cookie dal client
+  res.clearCookie('refreshToken');
+  return res.status(204).send();
+}
 ```
 
 ---
@@ -181,6 +194,36 @@ async function verifyPassword(hash: string, plaintext: string): Promise<boolean>
 
 // ❌ Non usare MD5, SHA1, SHA256 per le password — sono hash veloci, non adatti
 // ❌ Non usare bcrypt con cost < 12
+```
+
+---
+
+## Pattern 5: MFA — Multi-Factor Authentication
+
+Implementazione obbligatoria per account privilegiati (Admin/Staff).
+
+### Architettura (TOTP: Time-based One-Time Password)
+1. **Enrollment**: Generazione di un segreto univoco -> Visualizzazione QR Code (per Google Authenticator/Authy).
+2. **Verification**: Invio del codice a 6 cifre durante il login.
+
+### Setup (Node.js con `otplib`)
+```typescript
+import { authenticator } from 'otplib';
+import qrcode from 'qrcode';
+
+// 1. Generazione Segreto MFA
+async function generateMfaSecret(user: User) {
+  const secret = authenticator.generateSecret();
+  const otpauth = authenticator.keyuri(user.email, 'AntigravityAppName', secret);
+  const qrCodeUrl = await qrcode.toDataURL(otpauth);
+  
+  return { secret, qrCodeUrl }; // Salva il segreto (criptato!) nel DB
+}
+
+// 2. Validazione Codice
+function verifyMfaToken(token: string, secret: string): boolean {
+  return authenticator.check(token, secret);
+}
 ```
 
 ---
