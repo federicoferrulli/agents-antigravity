@@ -41,4 +41,10 @@ Aggiungi nuove regole in `docs/rules/` o nuove competenze in `skills/` seguendo 
 ### Competenze e Flussi (skills)
 - *(Nessun file presente)*
 
+### Personas (agents)
+- *(Nessun file presente)*
+
+### Workflows (.agent/workflows)
+- *(Nessun file presente)*
+
 <!-- CATALOG_END -->

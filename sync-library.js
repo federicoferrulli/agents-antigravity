@@ -31,8 +31,52 @@ const SOURCE_DIR = __dirname;
 
 // Cartelle e file da sincronizzare
 const ASSETS_TO_SYNC = [
-  '.agents'
+  '.agents',
+  'scripts'
 ];
+
+/**
+ * Verifica se il package.json del target ha gli script necessari
+ * e suggerisce le aggiunte se mancanti.
+ */
+function checkPackageJson(targetDir) {
+  const pkgPath = path.join(targetDir, 'package.json');
+  if (!fs.existsSync(pkgPath)) {
+    console.log('\nℹ️ [Notice] Nessun package.json trovato nella directory di destinazione.');
+    return;
+  }
+
+  try {
+    const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+    const missingScripts = [];
+    const recommendedScripts = {
+      "catalog": "node scripts/generate-catalog.js",
+      "validate": "node scripts/validate-library.js",
+      "adr": "node scripts/create-adr.js"
+    };
+
+    if (!pkg.scripts) pkg.scripts = {};
+
+    Object.keys(recommendedScripts).forEach(s => {
+      if (!pkg.scripts[s]) {
+        missingScripts.push({ name: s, command: recommendedScripts[s] });
+      }
+    });
+
+    if (missingScripts.length > 0) {
+      console.log('\n💡 [Recommendation] Per abilitare tutte le funzionalità di Antigravity,');
+      console.log('aggiungi i seguenti script al tuo package.json:');
+      console.log('\n"scripts": {');
+      missingScripts.forEach((s, i) => {
+        const comma = i < missingScripts.length - 1 ? ',' : '';
+        console.log(`  "${s.name}": "${s.command}"${comma}`);
+      });
+      console.log('}');
+    }
+  } catch (err) {
+    console.warn(`\n⚠️ Warning: Impossibile analizzare package.json: ${err.message}`);
+  }
+}
 
 function copyRecursiveSync(src, dest) {
   const exists = fs.existsSync(src);
@@ -96,6 +140,9 @@ ASSETS_TO_SYNC.forEach((asset) => {
     console.warn(`⚠️ Warning: Asset non trovato: ${asset}`);
   }
 });
+
+// Verifica package.json per gli script
+checkPackageJson(TARGET_DIR);
 
 console.log('\n✅ Importazione completata con successo!');
 if (!isDryRun) {
