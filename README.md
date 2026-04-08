@@ -46,17 +46,17 @@ Aggiungi nuove regole in `.agents/rules/` o nuove competenze in `.agents/skills/
 
 ### Competenze e Flussi (.agents/skills)
 - [**SKILL.md**](./.agents/skills/ai-prompting/SKILL.md) - *Pattern e framework per scrivere prompt agentici efficaci.*
-- [**SKILL.md**](./.agents/skills/api-design/SKILL.md) - *Standard per la creazione di API RESTful e documentazione OpenAPI.*
+- [**RESTful API Design & OpenAPI Standards**](./.agents/skills/api-design/SKILL.md) - *Best practices per la progettazione di API scalabili, sicure e ben documentate utilizzando standard REST e specifiche OpenAPI.*
 - [**SKILL.md**](./.agents/skills/api-versioning/SKILL.md) - *Pattern per gestire il ciclo di vita e le breaking changes delle API.*
 - [**SKILL.md**](./.agents/skills/auth-patterns/SKILL.md) - *Pattern di implementazione per autenticazione JWT e autorizzazione RBAC.*
 - [**SKILL.md**](./.agents/skills/context-management/SKILL.md) - *Guida alla Context Hygiene per mantenere l'AI precisa nelle lunghe sessioni.*
-- [**SKILL.md**](./.agents/skills/debugging-pro/SKILL.md) - *Metodologia scientifica per la risoluzione rapida di bug complessi.*
+- [**Systematic Debugging & Root Cause Analysis**](./.agents/skills/debugging-pro/SKILL.md) - *Metodologia scientifica per l'identificazione, l'isolamento e la risoluzione definitiva di bug complessi.*
 - [**SKILL.md**](./.agents/skills/devops-pipeline/SKILL.md) - *Standard per CI/CD, Docker e automazione del deployment.*
 - [**SKILL.md**](./.agents/skills/documentation-standards/SKILL.md) - *Linee guida per documentazione tecnica chiara, scalabile e AI-friendly.*
 - [**SKILL.md**](./.agents/skills/error-monitoring/SKILL.md) - *Pattern per implementare observability completa: Sentry, OpenTelemetry e SLO.*
 - [**SKILL.md**](./.agents/skills/performance-optimization/SKILL.md) - *Pattern sistematici per identificare e risolvere colli di bottiglia.*
-- [**SKILL.md**](./.agents/skills/refactoring-guide/SKILL.md) - *Tecniche per migliorare la struttura del codice senza alterarne il comportamento.*
-- [**SKILL.md**](./.agents/skills/tdd-workflow/SKILL.md) - *Workflow Red-Green-Refactor per un design del codice guidato dai test.*
+- [**Refactoring Best Practices & Technical Debt Management**](./.agents/skills/refactoring-guide/SKILL.md) - *Tecniche avanzate per migliorare la qualità, la leggibilità e la manutenibilità del codice senza alterarne il comportamento esterno.*
+- [**TDD Workflow & Testing Strategy**](./.agents/skills/tdd-workflow/SKILL.md) - *Guida completa al ciclo Red-Green-Refactor, design patterns per il testing e best practices di validazione.*
 - [**SKILL.md**](./.agents/skills/testing-strategy/SKILL.md) - *Strategia di test completa: piramide dei test, pattern e coverage goals.*
 
 ### Workflows (.agents/workflows)

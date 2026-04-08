@@ -1,33 +1,101 @@
 ---
-name: "debugging-pro"
-description: "Metodologia scientifica per la risoluzione rapida di bug complessi."
-category: "General"
-effort: "M"
-tags: ["debugging", "troubleshooting", "methodology"]
+title: "Systematic Debugging & Root Cause Analysis"
+description: "Metodologia scientifica per l'identificazione, l'isolamento e la risoluzione definitiva di bug complessi."
+tags: ["debugging", "troubleshooting", "observability", "quality"]
 ---
 
-# Systematic Debugging Pro
+# Systematic Debugging & Root Cause Analysis
 
-Il debugging non consiste nel tirare a indovinare. È un processo scientifico di osservazione, formulazione di tesi, esperimenti temporanei e analisi.
+Il debugging non è un atto di fortuna o intuizione pura; in Antigravity lo consideriamo un **processo scientifico** rigoroso. Risolvere un bug significa comprenderne l'origine profonda per evitare che si ripresenti.
 
-## L'Approccio Metodico
-1. **Isolamento (Isolate the Error)**: 
-   - Non provare a fixare l'intero programma se l'errore è in fondo a uno stack enorme.
-   - Crea un ambiente isolato, se necessario estraendo i soli file che interagiscono in quel contesto.
-2. **Riproducibilità (Reproduce)**:
-   - Se non sei in grado di riprodurre il test sul tuo ambiente/script, fermati. Prima devi comprendere quali input, passaggi e log ambientali generano il bug in modo deterministico.
-   - Idealmente, scrivi uno Unit o Integration Test automatico che fallisca *esattamente* replicando il bug (il test documenterà la issue).
-3. **Identificazione (Root Cause Analysis)**:
-   - Usa tecniche come la Binary Search / Divide et Impera partendo dai log. (Togli o aggiungi un `return` fittizio a riga P/2, per scoprire se l'errore succede prima o dopo P/2).
-   - "Five Whys": Chiediti 5 volte "Perché è successo?". Es: Perché c'è NulReferenceException? Perché il DB ha ritornato NULL. Perché? Perché l'ID era errato. Perché? Ecc.
-4. **Risoluzione & Verifica (Fix & Verify)**:
-   - Implementa il fix.
-   - Assicurati che scaturiscano esiti verdi anche per il test scritto prima (step 2).
-   - Analizza la regressione: chiediti "Questo fix romperà qualcos'altro in altre aree?".
+> [!IMPORTANT]
+> Non provare mai a risolvere un bug che non sei riuscito a riprodurre in modo deterministico. Una soluzione basata sull'ipotesi senza conferma è spesso un "cerotto" che nasconde il vero problema.
 
-## Strumenti ed Osservabilità
-- Smetti di usare massivamente `console.log()` sparsi. Usa breakpoint, ispezione dello stack e step-by-step debug nei file interessati. 
-- Aggiungi logging e tracing strutturato anziché messaggi temporanei.
+## Il Metodo Scientifico di Debugging
 
+Segui questo flusso per ridurre drasticamente il tempo di risoluzione delle issue complesse.
 
+```mermaid
+graph TD
+    Obs["1. Osservazione: Raccogli i log e lo stack trace"]
+    Rep["2. Riproduzione: Crea un test che fallisce"]
+    Hyp["3. Ipotesi: Identifica la causa probabile"]
+    Exp["4. Esperimento: Applica un fix circoscritto"]
+    Ver["5. Verifica: Il test è ora verde?"]
+    End["6. Chiusura: Pulisci e documenta"]
 
+    Obs --> Rep
+    Rep --> Hyp
+    Hyp --> Exp
+    Exp --> Ver
+    Ver -- No --> Hyp
+    Ver -- Sì --> End
+```
+
+## Tecniche Avanzate
+
+### 1. Root Cause Analysis (I Cinque Perché)
+La tecnica dei "5 Whys" aiuta a scavare oltre i sintomi superficiali.
+
+```markdown
+**Esempio di Analisi:**
+1. Perché il sistema è andato in crash? -> C'è stata una NullReferenceException.
+2. Perché l'oggetto era null? -> Perché la chiamata all'API esterna ha fallito.
+3. Perché la chiamata ha fallito? -> Perché il token di autenticazione era scaduto.
+4. Perché non è stato rinnovato? -> Perché il cronjob di refresh non è partito.
+5. Perché il cronjob non è partito? -> Perché la configurazione del path era errata.
+**FIX REALE:** Correggere il path del cronjob (non aggiungere un controllo if(null)).
+```
+
+### 2. Binary Search Debugging (Divide et Impera)
+Se hai una funzione lunga o una pipeline complessa e non sai dove fallisce, usa la ricerca binaria commentando/isolando metà del codice.
+
+```javascript
+async function complexProcess(data) {
+  // Step A: Validazione
+  await stepA(data); 
+  
+  // LOGICA DI CONTROLLO: Se torno qui, il bug è negli Step B o C
+  // return { message: "Step A OK" }; 
+
+  // Step B: Trasformazione
+  await stepB(data); 
+  
+  // Step C: Salvataggio
+  await stepC(data);
+}
+```
+
+### 3. Riproduzione tramite Test (Test-Double)
+Scrivi sempre un test di regressione prima di correggere. Questo serve come documentazione vivente del bug.
+
+```typescript
+describe('Bug #123 Regression Test', () => {
+  it('should handle special characters in username without crashing', async () => {
+    // Arrange: input che causava il crash
+    const maliciousInput = "mario;-- DROP TABLE users";
+    const service = new UserService();
+
+    // Act & Assert
+    // Questo test DEVE fallire prima del fix e passare dopo il fix
+    await expect(service.updateProfile(maliciousInput)).resolves.not.toThrow();
+  });
+});
+```
+
+## Observability vs Debugging
+
+In produzione, il debugging classico è impossibile. Devi fare affidamento sull'**Osservabilità**.
+
+> [!TIP]
+> Logga sempre il contesto! Un messaggio di errore come `"Error: failed"` è inutile. Usa:
+> `logger.error({ userId, action, errorCode: 'AUTH_001', originalError: err.message }, "Authentication failed")`.
+
+### Checklist Anti-Bug
+- [ ] Hai controllato i log del server e del browser (se applicabile)?
+- [ ] Hai verificato la versione delle dipendenze (package-lock.json)?
+- [ ] Esistono variabili d'ambiente mancanti o errate?
+- [ ] Il bug dipende dallo stato globale (cache, db persistente)?
+
+> [!CAUTION]
+> Evita di usare `console.log` in produzione o di lasciarli nel codice dopo la sessione di debugging. Possono rallentare le prestazioni e inquinare i log di sistema.
