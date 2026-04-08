@@ -1,6 +1,6 @@
 {
   "name": "antigravity-library",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Antigravity Agents Skills and Rules Library",
   "main": "sync-library.js",
   "bin": {

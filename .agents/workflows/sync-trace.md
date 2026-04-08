@@ -16,7 +16,7 @@ Questo workflow viene attivato tramite `/sync-trace` e serve a ricostruire lo st
 ## Procedura di Sincronizzazione
 
 ### 1. Scansione dell'Indice
-L'agente deve leggere [INDEX.md](file:///c:/repository/agents/logTrace/INDEX.md) per identificare gli ultimi task completati o in corso.
+L'agente deve leggere [INDEX.md]({{WORKSPACE}}/logTrace/INDEX.md) per identificare gli ultimi task completati o in corso.
 
 ### 2. Deep Dive sull'Ultimo Log
 L'agente legge l'ultimo file di log (identificato dall'ID più recente) per capire:

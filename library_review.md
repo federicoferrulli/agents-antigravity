@@ -8,15 +8,15 @@ Analisi completa della libreria per valutare se è adatta a **tutti i tipi di ap
 
 | Area | Copertura | File |
 |---|---|---|
-| Clean Architecture | Solida | [common.md](file:///c:/repository/agents/docs/rules/common.md) |
-| Sicurezza (OWASP) | Buona base | [security.md](file:///c:/repository/agents/docs/rules/security.md) |
-| TDD | Ben strutturato | [tdd-workflow.md](file:///c:/repository/agents/skills/tdd-workflow.md) |
-| API REST | Completo | [api-design.md](file:///c:/repository/agents/skills/api-design.md) |
-| Debugging sistematico | Eccellente | [debugging-pro.md](file:///c:/repository/agents/skills/debugging-pro.md) |
-| Refactoring (Fowler) | Buono | [refactoring-guide.md](file:///c:/repository/agents/skills/refactoring-guide.md) |
-| Documentazione | Completo | [documentation-standards.md](file:///c:/repository/agents/skills/documentation-standards.md) |
-| Continuous Learning | Innovativo | [continuous-learning.md](file:///c:/repository/agents/docs/rules/continuous-learning.md) |
-| Workflow orchestrato | Planning → Execution → Review | [main-workflow.md](file:///c:/repository/agents/.agent/workflows/main-workflow.md) |
+| Clean Architecture | Solida | [common.md]({{WORKSPACE}}/docs/rules/common.md) |
+| Sicurezza (OWASP) | Buona base | [security.md]({{WORKSPACE}}/docs/rules/security.md) |
+| TDD | Ben strutturato | [tdd-workflow.md]({{WORKSPACE}}/skills/tdd-workflow.md) |
+| API REST | Completo | [api-design.md]({{WORKSPACE}}/skills/api-design.md) |
+| Debugging sistematico | Eccellente | [debugging-pro.md]({{WORKSPACE}}/skills/debugging-pro.md) |
+| Refactoring (Fowler) | Buono | [refactoring-guide.md]({{WORKSPACE}}/skills/refactoring-guide.md) |
+| Documentazione | Completo | [documentation-standards.md]({{WORKSPACE}}/skills/documentation-standards.md) |
+| Continuous Learning | Innovativo | [continuous-learning.md]({{WORKSPACE}}/docs/rules/continuous-learning.md) |
+| Workflow orchestrato | Planning → Execution → Review | [main-workflow.md]({{WORKSPACE}}/.agent/workflows/main-workflow.md) |
 
 > [!TIP]
 > Il ciclo **Planning → Execution → Review** con Knowledge Harvesting integrato è un punto di forza distintivo. Poche librerie di agenti lo hanno.
@@ -56,14 +56,14 @@ Manca completamente copertura su:
 ### 3. 🔐 Autenticazione & Autorizzazione (approfondimento)
 **Impatto**: Qualsiasi app multi-utente.
 
-[security.md](file:///c:/repository/agents/docs/rules/security.md) copre solo 5 punti ad alto livello. Mancano:
+[security.md]({{WORKSPACE}}/docs/rules/security.md) copre solo 5 punti ad alto livello. Mancano:
 - Pattern JWT (access + refresh token, rotation)
 - OAuth2/OIDC flow specifici
 - RBAC / ABAC implementation patterns
 - Session management e CSRF protection
 - Rate limiting e brute-force prevention
 
-> **Suggerimento**: Espandere [security.md](file:///c:/repository/agents/docs/rules/security.md) o creare `skills/auth-patterns.md`.
+> **Suggerimento**: Espandere [security.md]({{WORKSPACE}}/docs/rules/security.md) o creare `skills/auth-patterns.md`.
 
 ---
 
@@ -98,7 +98,7 @@ Mancano:
 ### 6. 🔌 Regole per Linguaggi Mancanti
 **Impatto**: Progetti non-TypeScript.
 
-Esiste solo [typescript.md](file:///c:/repository/agents/docs/rules/typescript.md). Mancano regole per:
+Esiste solo [typescript.md]({{WORKSPACE}}/docs/rules/typescript.md). Mancano regole per:
 - **Python** (PEP 8, type hints, venv/poetry, FastAPI/Django patterns)
 - **Go** (idiomi, error handling, goroutines)
 - Qualsiasi altro linguaggio che potresti usare in futuro
@@ -114,16 +114,16 @@ Alcuni file sono **troppo sintetici** per guidare effettivamente un agente AI:
 
 | File | Righe | Problema |
 |---|---|---|
-| [common.md](file:///c:/repository/agents/docs/rules/common.md) | 15 | Manca profondità: nessun esempio di codice, regole troppo generiche |
-| [security.md](file:///c:/repository/agents/docs/rules/security.md) | 14 | Solo 5 bullet point, nessun esempio pratico |
-| [typescript.md](file:///c:/repository/agents/docs/rules/typescript.md) | 8 | Troppo breve: manca error handling TS-specifico, decorators, generics |
-| [base_agent.md](file:///c:/repository/agents/agents/base_agent.md) | 10 | Manca definizione del tono, dei limiti, e degli edge case |
+| [common.md]({{WORKSPACE}}/docs/rules/common.md) | 15 | Manca profondità: nessun esempio di codice, regole troppo generiche |
+| [security.md]({{WORKSPACE}}/docs/rules/security.md) | 14 | Solo 5 bullet point, nessun esempio pratico |
+| [typescript.md]({{WORKSPACE}}/docs/rules/typescript.md) | 8 | Troppo breve: manca error handling TS-specifico, decorators, generics |
+| [base_agent.md]({{WORKSPACE}}/agents/base_agent.md) | 10 | Manca definizione del tono, dei limiti, e degli edge case |
 
 > [!IMPORTANT]
 > Un agente AI è tanto efficace quanto le sue istruzioni sono **specifiche e dettagliate**. Documenti di 8-15 righe tendono a produrre output generici.
 
 ### Workflow non completi
-I file [mass-refactor.md](file:///c:/repository/agents/.agent/workflows/mass-refactor.md), [plan-skill.md](file:///c:/repository/agents/.agent/workflows/plan-skill.md) e [primer.md](file:///c:/repository/agents/.agent/workflows/primer.md) contengono solo 1 riga di istruzioni operative (ora con H1, ma il corpo resta minimale).
+I file [mass-refactor.md]({{WORKSPACE}}/.agent/workflows/mass-refactor.md), [plan-skill.md]({{WORKSPACE}}/.agent/workflows/plan-skill.md) e [primer.md]({{WORKSPACE}}/.agent/workflows/primer.md) contengono solo 1 riga di istruzioni operative (ora con H1, ma il corpo resta minimale).
 
 ---
 

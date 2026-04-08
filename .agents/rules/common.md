@@ -190,7 +190,7 @@ L'AI **deve** mantenere una traccia storica e mnemonica di ogni singola interazi
 
 **Regole operative**:
 - **Atomic Log**: Ogni richiesta (ad eccezione delle semplici query informative) deve generare un log di tracciamento nella cartella `logTrace/`.
-- **Central Indexing**: Ogni nuovo log deve essere registrato in [INDEX.md](file:///c:/repository/agents/logTrace/INDEX.md) per mantenere la cronologia navigabile.
+- **Central Indexing**: Ogni nuovo log deve essere registrato in [INDEX.md]({{WORKSPACE}}/logTrace/INDEX.md) per mantenere la cronologia navigabile.
 - **Naming del Log**: Il file deve seguire il pattern `trace-<DATA>-<DESCRIZIONE-SINTETICA>.md`.
 - **Contenuto Obbligatorio**:
     - **ID della Sessione**: Identificativo univoco (formato YYYYMMDD-NNN).
