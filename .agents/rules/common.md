@@ -179,6 +179,52 @@ L'AI **deve** sempre generare test unitari e/o d'integrazione per ogni funzional
 - **Validazione Automatica**: L'AI deve eseguire i test localmente e confermare l'esito positivo prima di dichiarare il lavoro finito.
 - **Gestione dei Fallimenti**: Se i test falliscono, l'AI deve analizzare il log, correggere il codice e rieseguire i test finché non sono tutti verdi.
 
+### Esempio Ciclo TDD (Red-Green-Refactor)
+
+#### 1. 🔴 Red: Implementazione del Test (Fallisce)
+Definisci il comportamento atteso tramite un test prima di scrivere la logica. Il test deve fallire (o non compilare).
+
+```typescript
+// tests/unit/math.test.ts
+describe('MathUtils', () => {
+  it('should sum two numbers correctly', () => {
+    const math = new MathUtils();
+    expect(math.add(2, 3)).toBe(5); // ❌ Fallisce: MathUtils non esiste ancora
+  });
+});
+```
+
+#### 2. 🟢 Green: Implementazione minima (Passa)
+Scrivi il codice minimo indispensabile per far passare il test nel modo più semplice possibile.
+
+```typescript
+// src/math.ts
+export class MathUtils {
+  add(a: number, b: number): number {
+    return a + b; // ✅ Il test ora passa
+  }
+}
+```
+
+#### 3. 🔵 Refactor: Miglioramento del codice
+Ottimizza, pulisci e rendi professionale il codice, assicurandoti che i test rimangano verdi.
+
+```typescript
+// src/math.ts
+export class MathUtils {
+  /**
+   * Somma due numeri interi.
+   * @param a - Primo addendo
+   * @param b - Secondo addendo
+   * @returns La somma aritmetica
+   */
+  add(a: number, b: number): number {
+    return a + b;
+  }
+}
+```
+
+
 > [!IMPORTANT]
 > Non è permesso procedere o consegnare codice che non superi la suite di test associata. La qualità è garantita dalla validazione empirica.
 
