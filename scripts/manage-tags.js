@@ -46,7 +46,8 @@ function manageTags() {
     console.log(`Creating tag ${tagName}...`);
     runCommand(`git tag -a ${tagName} -m "Release ${tagName}"`);
     console.log(`Successfully created tag ${tagName}`);
-    runCommand(`git sync`);
+    runCommand(`git pull --tags`);
+    runCommand(`git push`);
 }
 
 const action = process.argv[2] || 'create';
