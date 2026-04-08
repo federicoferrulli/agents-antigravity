@@ -26,7 +26,7 @@ function manageTags() {
     const existingTags = runCommand('git tag -l');
     if (existingTags.split('\n').includes(tagName)) {
         console.log(`Tag ${tagName} already exists.`);
-        
+
         // Option to delete and recreate or just skip
         // For now, let's just inform.
         return;
@@ -35,7 +35,7 @@ function manageTags() {
     // 2. Add and commit everything
     console.log('Staging changes...');
     runCommand('git add .');
-    
+
     try {
         runCommand(`git commit -m "chore: release ${tagName}"`);
     } catch (e) {
@@ -46,6 +46,7 @@ function manageTags() {
     console.log(`Creating tag ${tagName}...`);
     runCommand(`git tag -a ${tagName} -m "Release ${tagName}"`);
     console.log(`Successfully created tag ${tagName}`);
+    runCommand(`git sync`);
 }
 
 const action = process.argv[2] || 'create';
