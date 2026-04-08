@@ -6,11 +6,11 @@ const README_PATH = path.join(ROOT_DIR, 'README.md');
 
 // Directory da scansionare col rispettivo titolo nel catagolo
 const CATALOG_SECTIONS = [
-  { dir: 'docs/rules', title: 'Regole e Standard (docs/rules)' },
+  { dir: '.agents/rules', title: 'Regole e Standard (.agents/rules)' },
   { dir: 'docs/adr', title: 'Decisioni Architetturali (docs/adr)' },
-  { dir: 'skills', title: 'Competenze e Flussi (skills)' },
+  { dir: '.agents/skills', title: 'Competenze e Flussi (.agents/skills)' },
   { dir: 'agents', title: 'Personas (agents)' },
-  { dir: '.agent/workflows', title: 'Workflows (.agent/workflows)' }
+  { dir: '.agents/workflows', title: 'Workflows (.agents/workflows)' }
 ];
 
 /**
@@ -56,6 +56,25 @@ function getFileMetadata(filePath) {
   return { title, description: '', tags: '' };
 }
 
+function getFilesRecursively(dir, baseDir) {
+  let results = [];
+  const list = fs.readdirSync(dir);
+  list.forEach(file => {
+    const fullPath = path.join(dir, file);
+    const stat = fs.statSync(fullPath);
+    if (stat && stat.isDirectory()) {
+      results = results.concat(getFilesRecursively(fullPath, baseDir));
+    } else if (file.endsWith('.md')) {
+      const relativeToRoot = path.relative(ROOT_DIR, fullPath).replace(/\\/g, '/');
+      results.push({
+        fullPath,
+        relativeLink: `./${relativeToRoot}`
+      });
+    }
+  });
+  return results;
+}
+
 function generateCatalogMarkdown() {
   let catalogMd = `<!-- CATALOG_START -->\n## Catalogo \n\n*Questo catalogo è generato automaticamente dallo script \`scripts/generate-catalog.js\`*\n\n`;
 
@@ -65,20 +84,17 @@ function generateCatalogMarkdown() {
 
     catalogMd += `### ${section.title}\n`;
     
-    const files = fs.readdirSync(fullDirPath).filter(file => file.endsWith('.md'));
+    const mdFiles = getFilesRecursively(fullDirPath, fullDirPath);
     
-    if (files.length === 0) {
+    if (mdFiles.length === 0) {
         catalogMd += `- *(Nessun file presente)*\n`;
     } else {
-        files.forEach(file => {
-          const filePath = path.join(fullDirPath, file);
-          const meta = getFileMetadata(filePath);
+        mdFiles.forEach(fileObj => {
+          const meta = getFileMetadata(fileObj.fullPath);
           let desc = meta.description;
           if (desc) { desc = ` - *${desc}*`; }
           
-          // Link relativo basato sul README
-          const relativeLink = `./${section.dir}/${file}`;
-          catalogMd += `- [**${meta.title}**](${relativeLink})${desc}\n`;
+          catalogMd += `- [**${meta.title}**](${fileObj.relativeLink})${desc}\n`;
         });
     }
     catalogMd += '\n';

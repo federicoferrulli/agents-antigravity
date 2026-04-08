@@ -20,7 +20,7 @@ All'apertura di una nuova chat, la prima cosa da fare è caricare le regole base
 Questo comando istruisce l'AI a leggere:
 - `README.md` (Catalogo delle competenze)
 - `AGENT.md` (Mandati universali e Golden Rules)
-- `docs/rules/common.md` (Clean Architecture e Standards)
+- `.agents/rules/common.md` (Clean Architecture e Standards)
 
 > [!NOTE]
 > Se usi **Cursor** o **Cline**, questa inizializzazione avviene spesso automaticamente grazie ai file `.cursorrules` e `.clinerules` presenti nel root.
@@ -34,12 +34,12 @@ Segui sempre il ciclo **Planning → Execution → Review**.
 ### Fase A: Planning (Pianificazione)
 Inizia descrivendo il problema. L'AI creerà un piano d'azione.
 > **User**: "Devo aggiungere un sistema di notifiche push al backend."
-> **AI (@architect)**: Genera un `implementation_plan.md` basandosi su `skills/api-design.md` e `docs/rules/common.md`.
+> **AI (@architect)**: Genera un `implementation_plan.md` basandosi su `.agents/skills/api-design/SKILL.md` e `.agents/rules/common.md`.
 
 ### Fase B: Execution (Esecuzione)
 Una volta approvato il piano, l'AI procede alla scrittura del codice.
-- L'AI caricherà le skill specifiche necessarie (es. `skills/auth-patterns.md` se ci sono permessi da gestire).
-- Verranno seguite le regole di linguaggio (es. `docs/rules/typescript.md`).
+- L'AI caricherà le skill specifiche necessarie (es. `.agents/skills/auth-patterns/SKILL.md` se ci sono permessi da gestire).
+- Verranno seguite le regole di linguaggio (es. `.agents/rules/typescript.md`).
 
 ### Fase C: Review (Revisione)
 Dopo l'esecuzione, attiva la revisione specializzata:
@@ -61,7 +61,7 @@ Puoi invocare agenti specifici taggandoli o chiedendo all'AI di cambiare "mindse
 ## 🧹 4. Context Hygiene (Pulizia)
 
 Nelle sessioni lunghe, l'AI può confondersi.
-- Se l'AI inizia ad allucinare o a ignorare le regole, usa la skill **[`context-management.md`](./skills/context-management.md)**.
+- Se l'AI inizia ad allucinare o a ignorare le regole, usa la skill **[`.agents/skills/context-management/SKILL.md`](./.agents/skills/context-management/SKILL.md)**.
 - **Azione**: Chiudi la chat attuale, apri un thread nuovo ed esegui nuovamente il `/primer`.
 
 ---
@@ -89,9 +89,9 @@ npm run adr "Titolo Decisione"
 ## 💡 Esempio di Caso d'Uso Completo
 
 1. **User**: `/primer. Devo rifattorizzare il login.`
-2. **AI**: Legge le regole e propone un piano (`implementation_plan.md`) usando `skills/auth-patterns.md`.
+2. **AI**: Legge le regole e propone un piano (`implementation_plan.md`) usando `.agents/skills/auth-patterns/SKILL.md`.
 3. **User**: `Approvo.`
-4. **AI**: Implementa il codice seguendo `docs/rules/security.md`.
+4. **AI**: Implementa il codice seguendo `.agents/rules/security.md`.
 5. **User**: `@security-auditor fai un controllo.`
 6. **AI (@security-auditor)**: Identifica un rischio di session fixation e suggerisce il fix.
 7. **User**: `Applica. Poi aggiorna il catalogo.`

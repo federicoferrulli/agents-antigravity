@@ -4,10 +4,10 @@ const path = require('path');
 const ROOT_DIR = path.resolve(__dirname, '..');
 
 const DIRECTORIES_TO_CHECK = [
-  'docs/rules',
-  'skills',
+  '.agents/rules',
+  '.agents/skills',
   'agents',
-  '.agent/workflows'
+  '.agents/workflows'
 ];
 
 // [SEC-1] Ensures that a resolved path does not escape the repository root

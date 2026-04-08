@@ -13,8 +13,8 @@ This file provides the definitive context and operational instructions for **Gem
 All operations performed via Gemini CLI must strictly follow these mandates:
 
 - **Clean Architecture**: Mandatory implementation of Clean Architecture principles for all design and development tasks. Divide logic into Entities, Use Cases, Adapters, and Frameworks.
-- **Security First**: Security is a primary requirement. Consult and apply the guidelines in `docs/rules/security.md` for every code modification.
-- **Context Hygiene**: Maintain a lean and relevant context. Refer to `skills/context-management.md` to avoid "hallucinations" or performance degradation during long sessions.
+- **Security First**: Security is a primary requirement. Consult and apply the guidelines in `.agents/rules/security.md` for every code modification.
+- **Context Hygiene**: Maintain a lean and relevant context. Refer to `.agents/skills/context-management/SKILL.md` to avoid "hallucinations" or performance degradation during long sessions.
 
 > [!IMPORTANT]
 > Failure to adhere to these mandates will trigger a validation error during the pre-commit phase.
@@ -47,9 +47,9 @@ Gemini CLI is configured to recognize the following directory structure, which i
 
 | Directory | Purpose | Detailed Functionality |
 | :--- | :--- | :--- |
-| `docs/rules/` | Operational rules | Contains markdown files defining the "how-to" for security, db, and frontend. |
-| `skills/` | Agent skills | Reusable scripts and instructions that extend the agent's base capabilities. |
-| `.agent/workflows/` | Workflows | BPMN-like sequences of tasks for complex operations (e.g., mass refactoring). |
+| `.agents/rules/` | Operational rules | Contains markdown files defining the "how-to" for security, db, and frontend. |
+| `.agents/skills/` | Agent skills | Reusable scripts and instructions that extend the agent's base capabilities. |
+| `.agents/workflows/` | Workflows | BPMN-like sequences of tasks for complex operations (e.g., mass refactoring). |
 | `agents/` | Agent Personas | Specific configurations for specialized AI roles (Architect, Researcher). |
 
 ## 🔄 Interaction Workflow
@@ -68,7 +68,7 @@ graph TD
 
 ## ⚡ Workflow Activation
 
-To invoke a specific workflow, use the slash command syntax. This notifies the agent to load the corresponding instructions from `.agent/workflows/`.
+To invoke a specific workflow, use the slash command syntax. This notifies the agent to load the corresponding instructions from `.agents/workflows/`.
 
 ```markdown
 # Example: Triggering a mass refactor
@@ -86,7 +86,7 @@ Gemini CLI has built-in guardrails to prevent common vulnerabilities:
 
 1. **Be Specific**: When invoking a workflow, provide all necessary parameters to minimize ambiguity.
 2. **Review Diffs**: Always review the suggested changes before applying them to ensure intent alignment.
-3. **Use Skills**: Explicitly refer to `skills/` files to leverage pre-defined best practices and patterns.
+3. **Use Skills**: Explicitly refer to `.agents/skills/` files to leverage pre-defined best practices and patterns.
 
 > [!TIP]
 > Use `/primer` to quickly reload critical context if the conversation becomes too long or fragmented.
