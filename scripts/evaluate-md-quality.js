@@ -42,11 +42,15 @@ function evaluate(filePath) {
     return Math.min(score, 100);
 }
 
-const targetFile = process.argv[2];
-if (!targetFile) {
-    console.error('Usage: node evaluate-md-quality.js <file-path>');
-    process.exit(1);
-}
+module.exports = { evaluate };
 
-const score = evaluate(targetFile);
-console.log(score);
+if (require.main === module) {
+    const targetFile = process.argv[2];
+    if (!targetFile) {
+        console.error('Usage: node evaluate-md-quality.js <file-path>');
+        process.exit(1);
+    }
+
+    const score = evaluate(targetFile);
+    console.log(score);
+}

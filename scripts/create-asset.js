@@ -4,14 +4,71 @@ const path = require('path');
 const ROOT_DIR = path.join(__dirname, '..');
 
 const TEMPLATES = {
-  rule: `# {{title}}\n\nDescrizione breve della regola o standard.\n\n## Principio\n...\n\n## Esempi (Do / Don't)\n...\n`,
-  skill: `# {{title}}\n\nContesto: Quando utilizzare questo workflow.\n\n## Obiettivo\n...\n\n## Step da seguire\n1. \n2. \n3. \n`,
-  agent: `# {{title}}\n\nSei un Ingegnere focalizzato su...\n\n## Responsabilità\n...\n\n## Istruzioni Chiave\n1. \n2. \n`
+  rule: `---
+title: {{title}}
+description: "Inserire descrizione qui."
+tags: [standard, clean-architecture]
+---
+
+# {{title}}
+
+> [!NOTE]
+> Inserire principio cardine della regola.
+
+## Principio
+...
+
+## Esempi (Do / Don't)
+...
+`,
+  skill: `---
+title: {{title}}
+description: "Inserire descrizione qui."
+category: "General"
+effort: "M"
+tags: [skill, workflow]
+---
+
+# {{title}}
+
+> [!TIP]
+> Inserire suggerimento sull'uso della skill.
+
+\`\`\`mermaid
+graph TD
+    A[Start] --> B[Process]
+    B --> C[End]
+\`\`\`
+
+## Obiettivo
+...
+
+## Step da seguire
+1. 
+2. 
+3. 
+`,
+  agent: `---
+title: {{title}} Agent
+description: "Inserire descrizione qui."
+---
+
+# {{title}} Agent
+
+Sei un Ingegnere focalizzato su...
+
+## Responsabilità
+...
+
+## Istruzioni Chiave
+1. 
+2. 
+`
 };
 
 const DIRECTORIES = {
-  rule: 'docs/rules',
-  skill: 'skills',
+  rule: '.agents/rules',
+  skill: '.agents/skills',
   agent: 'agents'
 };
 
@@ -38,12 +95,22 @@ if (!type || !name || !TEMPLATES[type]) {
   printHelp();
 }
 
-const sanitizedFileName = name.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '') + '.md';
-const targetDir = path.join(ROOT_DIR, DIRECTORIES[type]);
-const targetPath = path.join(targetDir, sanitizedFileName);
+const sanitizedName = name.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+let targetPath;
+const targetParentDir = path.join(ROOT_DIR, DIRECTORIES[type]);
 
-if (!fs.existsSync(targetDir)) {
-  fs.mkdirSync(targetDir, { recursive: true });
+if (type === 'skill') {
+  const skillDir = path.join(targetParentDir, sanitizedName);
+  if (!fs.existsSync(skillDir)) {
+    fs.mkdirSync(skillDir, { recursive: true });
+  }
+  targetPath = path.join(skillDir, 'SKILL.md');
+} else {
+  targetPath = path.join(targetParentDir, sanitizedName + '.md');
+}
+
+if (!fs.existsSync(targetParentDir)) {
+  fs.mkdirSync(targetParentDir, { recursive: true });
 }
 
 if (fs.existsSync(targetPath)) {
