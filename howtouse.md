@@ -9,6 +9,16 @@ tags: ["guida", "workflow", "tutorial", "best-practices"]
 
 Questa guida illustra il workflow ideale per massimizzare l'efficacia degli agenti AI utilizzando questa libreria di regole e skill.
 
+```mermaid
+graph TD
+    A[Start Session] --> B[/primer: Context Loading]
+    B --> C[Planning: Action Plan]
+    C --> D[Execution: Coding with Skills]
+    D --> E[Review: Audit & Validation]
+    E --> F[Knowledge Harvesting: Log & Learn]
+    F --> A
+```
+
 ---
 
 ## 🚀 1. Inizio Sessione: Il "Primer"
@@ -111,6 +121,11 @@ Non devi fare nulla! Quando apri Claude Code o Gemini CLI nella cartella del pro
 1. Quali script eseguire (es. `npm run validate`).
 2. Quali regole di Clean Architecture seguire.
 3. Dove trovare le skill approfondite.
+
+### Esempi di Prompt utili
+```markdown
+Usa la skill context-management per ripulire la sessione e poi esegui il primer.
+```
 
 > [!TIP]
 > Se l'agente CLI sembra ignorare le regole, digli esplicitamente: *"Leggi CLAUDE.md (o GEMINI.md) e AGENT.md per allinearti ai miei standard."*
