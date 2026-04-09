@@ -7,7 +7,6 @@ const ROOT_DIR = path.resolve(__dirname, '..');
 const DIRECTORIES_TO_CHECK = [
   '.agents/rules',
   '.agents/skills',
-  'agents',
   '.agents/workflows'
 ];
 
@@ -99,11 +98,30 @@ function scanDirCheck(dir) {
   }
 }
 
+function checkTraceConsistency() {
+  const traceDir = path.join(ROOT_DIR, 'logTrace');
+  if (!fs.existsSync(traceDir)) return;
+
+  const indexPath = path.join(traceDir, 'INDEX.md');
+  if (!fs.existsSync(indexPath)) return;
+
+  const indexContent = fs.readFileSync(indexPath, 'utf-8');
+  const files = fs.readdirSync(traceDir);
+
+  for (const file of files) {
+    if (file === 'INDEX.md' || !file.endsWith('.md')) continue;
+    if (!indexContent.includes(file)) {
+      console.warn(`⚠️ [Warning Consistency] Trace log "${file}" non è registrato in INDEX.md.`);
+    }
+  }
+}
+
 console.log('🔍 Inizio validazione della libreria (Recursive + Quality Enforced)...');
 
 DIRECTORIES_TO_CHECK.forEach(scanDirCheck);
 validateFile(path.join(ROOT_DIR, 'README.md'));
 validateFile(path.join(ROOT_DIR, 'GEMINI.md'));
+checkTraceConsistency();
 
 if (errors > 0) {
     console.error(`\n❌ La validazione ha fallito con ${errors} errore/i. Corrections required.`);

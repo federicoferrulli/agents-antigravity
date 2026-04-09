@@ -9,7 +9,6 @@ const CATALOG_SECTIONS = [
   { dir: '.agents/rules', title: 'Regole e Standard (.agents/rules)' },
   { dir: 'docs/adr', title: 'Decisioni Architetturali (docs/adr)' },
   { dir: '.agents/skills', title: 'Competenze e Flussi (.agents/skills)' },
-  { dir: 'agents', title: 'Personas (agents)' },
   { dir: '.agents/workflows', title: 'Workflows (.agents/workflows)' }
 ];
 
