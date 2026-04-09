@@ -47,6 +47,21 @@ touch docs/adr/0001-adopting-adr.md
 ### ❌ Negative / Trade-off
 - Overload di documentazione se usato per decisioni triviali.
 
+## Visualizzazione Workflow
+\`\`\`mermaid
+graph LR
+    A[New ADR] --> B[Proposed]
+    B --> C[Review]
+    C --> D[Accepted]
+\`\`\`
+
+## Esempio Struttura
+\`\`\`markdown
+# 0004: Template Feature
+**Status**: Accepted
+...
+\`\`\`
+
 ## Struttura Suggerita
 ```markdown
 # ID: Titolo
@@ -56,5 +71,16 @@ touch docs/adr/0001-adopting-adr.md
 ## Conseguenze
 ```
 
+## Checklist di Conformità ADR
+- [ ] Il contesto del problema è chiaramente descritto?
+- [ ] Tutte le opzioni considerate sono state elencate?
+- [ ] La decisione finale è motivata tecnicamente?
+- [ ] Le conseguenze (positive e negative) sono documentate?
+- [ ] Sono stati aggiunti diagrammi Mermaid per visualizzare il processo?
+
+## Riferimenti
+- [ADR-0002: Standardizing Metadata](./0002-standard-metadata.md)
+- [ADR-0003: Quality Enforcement](./0003-quality-enforced-documentation-as-code-structure.md)
+
 ---
-*v1.1 - Architectural Governance*
+*v1.2 - Architectural Governance*

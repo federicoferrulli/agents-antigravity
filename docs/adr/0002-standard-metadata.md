@@ -45,10 +45,18 @@ tags: ["node", "security", "workflow"]
 ### ✅ Positive
 - Automazione robusta per la generazione del catalogo.
 - Possibilità di creare un'interfaccia di ricerca avanzata in futuro.
-- Documentazione più professionale e strutturata.
+- Documentazione più professionale e strutturata per gli utenti esterni.
+- Facilità di integrazione con tool di terze parti e LLM.
 
 ### ❌ Negative / Trade-off
-- Necessità di aggiornare tutti i file esistenti.
+- Necessità di aggiornare tutti i file esistenti per garantire la coerenza.
+- Rischio di dimenticare i metadati se non automatizzato correttamente.
+
+## Infra Integration
+\`\`\`bash
+# Script per validazione frontmatter
+npm run validate:yaml
+\`\`\`
 
 ## Esempio di Utilizzo
 ```markdown
@@ -61,5 +69,15 @@ tags: [tdd, test, quality]
 ...
 ```
 
+## Checklist di Validazione Metadati
+- [ ] Il file contiene il blocco YAML Frontmatter in apertura?
+- [ ] Sono presenti i campi obbligatori: title, description, tags?
+- [ ] I tag utilizzati sono coerenti con la tassonomia del progetto?
+- [ ] La descrizione è sintetica e orientata al catalogo?
+
+## Riferimenti
+- [ADR-0001: Adopting ADRs](./0001-adopting-adr.md)
+- [scripts/generate-catalog.js](../../scripts/generate-catalog.js)
+
 ---
-*v1.1 - Metadata Governance*
+*v1.2 - Metadata Governance*

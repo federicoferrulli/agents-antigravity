@@ -87,9 +87,19 @@ Se durante l'esecuzione noti un'opportunità di refactoring che non era nel pian
 > [!TIP]
 > Commenta il codice "perché", non il "cosa". Il "cosa" dovrebbe essere ovvio dal nome delle funzioni.
 
-## Changelog
-- **v1.2**: Integrati esempi di TDD espliciti.
-- **v1.1**: Prima versione del protocollo di esecuzione iterativa.
+
+
+## Checklist di Esecuzione
+- [ ] Il test (Red) è stato scritto prima della logica?
+- [ ] La logica implementata è la minima necessaria per superare il test (Green)?
+- [ ] È stato effettuato un passaggio di Refactoring per migliorare la leggibilità?
+- [ ] Il codice è isolato dalle dipendenze dei framework (Clean Architecture)?
+- [ ] I comandi di validazione sintattica sono stati eseguiti con successo?
+
+## Riferimenti
+- [.agents/rules/common.md](../rules/common.md)
+- [Planning Workflow](./planning.md)
+- [Review Workflow](./review.md)
 
 ---
-*v1.2 - Antigravity Execution Protocol*
+*v1.3 - Antigravity Execution Protocol*

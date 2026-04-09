@@ -239,9 +239,7 @@ export class MathUtils {
 
 
 > [!IMPORTANT]
-> Non è permesso procedere o consegnare codice che non superi la suite di test associata. La qualità è garantita dalla validazione empirica.
-
----
+> Non è permesso procedere o consegnare codice che non superi ---
 
 ## 10. Traceability & Memory Management
 
@@ -278,3 +276,21 @@ Ogni rilascio o modifica significativa deve essere accompagnato da un incremento
 
 > [!IMPORTANT]
 > Non creare mai tag duplicati o senza aver prima validato la libreria (`npm run validate`).
+
+---
+
+## checklist di Verifica Finale
+- [ ] Il codice segue i layer della Clean Architecture?
+- [ ] I principi SOLID sono rispettati?
+- [ ] L'error handling è esplicito e non ingoiato?
+- [ ] Il naming comunica l'intento e non l'implementazione?
+- [ ] I test (TDD) sono presenti e passano tutti?
+- [ ] La tracciabilità è garantita da un Trace Log?
+
+## Riferimenti
+- [OWASP Top 10 Security Standards](./security.md)
+- [Documentation Standards](../skills/documentation-standards/SKILL.md)
+- [Antigravity Master Agent Protocol](../../AGENT.md)
+
+---
+*v1.2.0 - Antigravity Core Protocol*

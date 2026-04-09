@@ -17,20 +17,52 @@ tags: [skill, workflow]
 graph TD
     A[Richiesta] --> B[Analisi Specifica]
     B --> C[Esecuzione Pattern]
-    C --> D[Risultato]
+    C --> D[Verifica Qualità]
+    D --> E[Risultato Finale]
 ```
 
-## Obiettivo
-...
+## Prerequisiti & Dipendenze
+- Conoscenza di base di {{title}}.
+- Tool di sviluppo configurati.
+- Accesso ai file di configurazione del progetto.
 
-## Implementazione (Example)
+## Implementazione Pratica
 
+### Esempio CLI
 ```bash
 # Esempio di comando per attivare questa skill
-node scripts/my-tool.js --param value
+npm run skill:{{title}} --option default
 ```
 
-## Step Operativi
-1. Analisi del contesto
-2. Selezione del pattern
-3. Validazione finale
+### Esempio Codice / Config
+```javascript
+// Esempio di pattern applicato
+const pattern = {
+    name: '{{title}}',
+    enabled: true,
+    rules: ['Clean Architecture', 'SOLID']
+};
+```
+
+### Esempio Test
+```typescript
+// Validazione della skill tramite test
+describe('{{title}} Skill', () => {
+    it('should be compliant with standards', () => {
+        expect(true).toBe(true);
+    });
+});
+```
+
+## Step Operativi Dettagliati
+1. **Analisi del contesto**: Identificare dove la skill aggiunge maggior valore.
+2. **Selezione del pattern**: Scegliere l'approccio più adatto tra quelli documentati.
+3. **Esecuzione**: Applicare la skill seguendo le best practices.
+4. **Validazione finale**: Verificare l'output tramite test o peer review.
+
+## Error Handling & Troubleshooting
+- **Problema A**: Soluzione...
+- **Problema B**: Soluzione...
+
+---
+*v1.0 - Antigravity Skill System*

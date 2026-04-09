@@ -236,3 +236,20 @@ async def test_create_user_returns_201(async_client: AsyncClient):
 def fake_user_repo() -> UserRepository:
     return InMemoryUserRepository()
 ```
+
+
+## Checklist di Verifica v3.2.0
+- [ ] Il file segue gli standard di Clean Architecture?
+- [ ] Sono presenti esempi di codice reali e validi?
+- [ ] Il diagramma Mermaid è coerente con la logica descritta?
+- [ ] Le sezioni Checklist e Riferimenti sono incluse?
+
+
+
+## Riferimenti
+- [.agents/rules/common.md](../../.agents/rules/common.md)
+- [Antigravity Documentation Standards](../../.agents/skills/documentation-standards/SKILL.md)
+
+
+---
+*v3.2.0 - Antigravity Quality Enforcement*

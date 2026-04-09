@@ -62,6 +62,12 @@ if (score < 100) throw new Error('Quality too low');
 - **Curva di Apprendimento**: I contributori devono conoscere la sintassi Mermaid e lo standard YAML richiesto.
 - **Sincronizzazione**: Lo script di valutazione deve essere aggiornato se cambiano le esigenze architetturali.
 
+## Verification Step
+```bash
+# Verifica manuale dello score
+node scripts/evaluate-md-quality.js docs/adr/0003-quality-enforced-documentation-as-code-structure.md
+```
+
 ## Pipeline di Integrazione
 
 L'integrazione di questo standard avviene tramite l'importazione dei componenti core:
@@ -74,5 +80,17 @@ npx antigravity-sync --target ./my-project
 > [!IMPORTANT]
 > Questa regola si applica retroattivamente a tutti i file esistenti nelle cartelle `.agents/rules`, `.agents/skills` e `.agents/workflows`.
 
+## Checklist di Qualità
+- [ ] Il file raggiunge il punteggio di 100/100?
+- [ ] È presente almeno un diagramma Mermaid esplicativo?
+- [ ] Sono stati inclusi almeno 3 blocchi di codice?
+- [ ] La lunghezza del file è superiore alle 60 righe non vuote?
+- [ ] Sono presenti le sezioni Checklist e Riferimenti (v3.2.0)?
+
+## Riferimenti
+- [scripts/evaluate-md-quality.js](../../scripts/evaluate-md-quality.js)
+- [scripts/validate-library.js](../../scripts/validate-library.js)
+- [ADR-0002: Standardizing Metadata](./0002-standard-metadata.md)
+
 ---
-*v1.0 - Antigravity ADR System*
+*v1.1 - Antigravity Quality System*

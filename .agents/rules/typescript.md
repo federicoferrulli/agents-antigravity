@@ -231,5 +231,20 @@ const rolePermissions: Record<Role, string[]> = { ADMIN: ['*'], USER: ['read'] }
 type UserResponse = Omit<User, 'passwordHash'>;
 
 // Extract / Exclude — filtraggio di union types
-type AdminOrUser = Extract<Role, 'ADMIN' | 'USER'>;
+## Checklist di Qualità TypeScript
+- [ ] Il parametro `strict: true` è abilitato nel `tsconfig.json`?
+- [ ] È stato evitato l'uso di `any` in favore di `unknown` o Generics?
+- [ ] Le `interface` sono state usate per i contratti e i `type` per le union?
+- [ ] Le operazioni asincrone usano `async/await` e gestiscono le Promise in parallelo dove possibile?
+- [ ] Le proprietà sono marcate come `readonly` dove appropriato?
+- [ ] Gli errori sono gestiti tramite classi personalizzate e type guards?
+
+## Riferimenti
+- [.agents/rules/common.md](./common.md)
+- [TypeScript Official Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
+- [Clean Code TypeScript](https://github.com/labs42io/clean-code-typescript)
+
+---
+*v1.1 - Antigravity TypeScript Standards*
+
 ```

@@ -83,9 +83,19 @@ Se un task fallisce ripetutamente in fase di `Execution`, l'orchestrazione preve
 > [!TIP]
 > Mantieni i log delle decisioni presi nelle fasi precedenti per dare senso alle implementazioni correnti.
 
-## Changelog
-- **v1.2**: Introdotto diagramma Mermaid e protocollo di emergenza.
-- **v1.1**: Prima versione strutturata del workflow.
+
+## Checklist di Verifica v3.2.0
+- [ ] Il file segue gli standard di Clean Architecture?
+- [ ] Sono presenti esempi di codice reali e validi?
+- [ ] Il diagramma Mermaid è coerente con la logica descritta?
+- [ ] Le sezioni Checklist e Riferimenti sono incluse?
+
+
+
+## Riferimenti
+- [.agents/rules/common.md](../../.agents/rules/common.md)
+- [Antigravity Documentation Standards](../../.agents/skills/documentation-standards/SKILL.md)
+
 
 ---
-*Antigravity System - 2026 Edition*
+*v3.2.0 - Antigravity Quality Enforcement*

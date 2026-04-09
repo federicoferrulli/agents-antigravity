@@ -75,3 +75,20 @@ L'agente deve confermare la sincronizzazione con un breve riassunto:
 
 ---
 *v1.1 - Antigravity Traceability System*
+
+
+## Checklist di Verifica v3.2.0
+- [ ] Il file segue gli standard di Clean Architecture?
+- [ ] Sono presenti esempi di codice reali e validi?
+- [ ] Il diagramma Mermaid è coerente con la logica descritta?
+- [ ] Le sezioni Checklist e Riferimenti sono incluse?
+
+
+
+## Riferimenti
+- [.agents/rules/common.md](../../.agents/rules/common.md)
+- [Antigravity Documentation Standards](../../.agents/skills/documentation-standards/SKILL.md)
+
+
+---
+*v3.2.0 - Antigravity Quality Enforcement*

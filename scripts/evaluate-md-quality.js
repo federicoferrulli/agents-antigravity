@@ -23,21 +23,25 @@ function evaluate(filePath) {
     // 2. Struttura H1 (10 punti)
     if (/^# .+/m.test(content)) score += 10;
 
-    // 3. Esempi di codice (20 punti)
+    // 3. Esempi di codice (15 punti)
     const codeBlocks = (content.match(/```[\s\S]*?```/g) || []).length;
-    if (codeBlocks >= 1) score += 10;
+    if (codeBlocks >= 1) score += 5;
     if (codeBlocks >= 3) score += 10;
 
-    // 4. Lunghezza e profondità (20 punti)
+    // 4. Lunghezza e profondità (15 punti)
     const lines = content.split('\n').filter(l => l.trim().length > 0).length;
-    if (lines > 30) score += 10;
+    if (lines > 30) score += 5;
     if (lines > 60) score += 10;
 
     // 5. Mermaid diagrams (10 punti)
     if (content.includes('```mermaid')) score += 10;
 
-    // 6. Alert tags (e.g., > [!NOTE], > [!IMPORTANT]) (5 punti)
+    // 6. Alert tags (5 punti)
     if (/> \[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/.test(content)) score += 5;
+
+    // 7. Enterprise Sections (20 punti totali)
+    if (/##.*Checklist/i.test(content)) score += 10;
+    if (/##.*(Riferimenti|Reference|Riferimento)/i.test(content)) score += 10;
 
     return Math.min(score, 100);
 }

@@ -15,22 +15,48 @@ Sei un esperto focalizzato su {{title}}. Il tuo compito è...
 
 ```mermaid
 sequenceDiagram
-    User->>Agent: Request
-    Agent->>Agent: Process using Skillset
-    Agent->>User: Secure Output
+    participant U as User
+    participant A as {{title}} Agent
+    participant S as Project Standards
+    U->>A: Request Task
+    A->>S: Validate against common.md
+    S-->>A: Valid
+    A->>A: Execute Logic
+    A->>U: Final Report
 ```
 
-## Responsabilità
-- Gestione di...
-- Revisione di...
+## Mandati & Responsabilità
+- **Ambito**: Definizione del perimetro d'azione...
+- **Protocollo**: Sequenza di passaggi obbligatori...
+- **Qualità**: Standard minimi accettabili...
 
-## Manuale d'Uso (Script Example)
+## Manuale d'Uso (Interazione)
 
+### Esempio Prompt 1
 ```markdown
-# Esempio di interazione
-@[{{title}}] - "Analizza il modulo XYZ"
+@[{{title}}] - "Analizza il modulo XYZ focalizzandoti sulla manutenibilità."
 ```
 
-## Istruzioni Chiave
-1. Segui SEMPRE le regole di common.md
-2. Valida ogni output
+### Esempio Prompt 2 (Con Skill)
+```markdown
+@[{{title}}] - "Usa la skill di refactoring per migliorare questo modulo."
+```
+
+### Esempio Output Atteso
+```markdown
+### Analysis Result
+- ✅ Punto di forza 1
+- ⚠️ Area di miglioramento
+```
+
+## Istruzioni Chiave per l'Agente
+1. **Context Loading**: Carica sempre `GEMINI.md` o `CLAUDE.md`.
+2. **Standard Enforcement**: Segui ogni riga di `common.md`.
+3. **Traceability**: Registra ogni modifica significativa in `logTrace/`.
+
+## Error Management
+- Se l'input è ambiguo, chiedi chiarimenti.
+- Se una regola viene violata, interrompi e segnala.
+
+---
+*v1.0 - Antigravity Workflow Infrastructure*

@@ -7,7 +7,8 @@ const ROOT_DIR = path.resolve(__dirname, '..');
 const DIRECTORIES_TO_CHECK = [
   '.agents/rules',
   '.agents/skills',
-  '.agents/workflows'
+  '.agents/workflows',
+  'docs/adr'
 ];
 
 // [SEC-1] Ensures that a resolved path does not escape the repository root

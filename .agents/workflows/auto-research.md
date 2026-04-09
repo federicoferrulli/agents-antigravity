@@ -78,6 +78,17 @@ node scripts/evaluate-md-quality.js .agents/workflows/auto-research.md
 > [!TIP]
 > Per massimizzare l'efficienza, è consigliabile fornire all'agente una cronologia delle mutazioni fallite per evitare di ripetere gli stessi errori.
 
-## Changelog
-- **v1.1**: Aggiunta documentazione estesa, diagramma Mermaid e standard YAML.
-- **v1.0**: Definizione iniziale del framework di iterazione.
+## Checklist Operativa Auto-Research
+- [ ] Il componente mutabile (`algorithm.ext`) è isolato?
+- [ ] Lo script di valutazione (`eval.ext`) è deterministico?
+- [ ] L'agente ha accesso di sola lettura all'ambiente di test?
+- [ ] È stata definita una baseline chiara per la metrica?
+- [ ] Il loop di ricorsione ha un limite di iterazioni configurato?
+
+## Riferimenti
+- [scripts/evaluate-md-quality.js](../../scripts/evaluate-md-quality.js)
+- [.agents/rules/continuous-learning.md](../rules/continuous-learning.md)
+- [ImproveMd Workflow](./improve-md.md)
+
+---
+*v1.2 - Antigravity Optimization Framework*
