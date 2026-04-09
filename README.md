@@ -32,7 +32,7 @@ Aggiungi nuove regole in `.agents/rules/` o nuove competenze in `.agents/skills/
 *Questo catalogo è generato automaticamente dallo script `scripts/generate-catalog.js`*
 
 ### Regole e Standard (.agents/rules)
-- [**common.md**](./.agents/rules/common.md) - *Regole universali applicabili a ogni riga di codice generata.*
+- [**Common Rules**](./.agents/rules/common.md) - *Regole universali applicabili a ogni riga di codice generata.*
 - [**Continuous Learning Rule**](./.agents/rules/continuous-learning.md) - *Mandato per l'auto-miglioramento proattivo della libreria tramite Knowledge Harvesting.*
 - [**Database Rules**](./.agents/rules/database.md) - *Standard per design schema, ORM e sicurezza dei dati.*
 - [**Frontend Rules**](./.agents/rules/frontend.md) - *Standard per UI/UX, accessibilità e testing frontend.*

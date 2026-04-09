@@ -1,6 +1,7 @@
 ---
-trigger: always_on
+title: Common Rules
 description: "Regole universali applicabili a ogni riga di codice generata."
+tags: [architecture, solid, clean-code, devsecops]
 ---
 
 # Common Rules
@@ -141,13 +142,25 @@ I nomi devono comunicare **intento**, non implementazione.
 
 ---
 
-## 6. OWASP — Secure by Default
+## 6. Clean Code & Simplicity
 
-Ogni output di codice deve considerare nativamente la sicurezza. Vedi [`security.md`](./security.md) per le regole complete. Regola minima: **non fidarti mai dell'input esterno** — valida, sanitizza ed esegui escape sempre.
+Il codice deve essere leggibile dagli umani, non solo dalle macchine.
+
+**Regole**:
+- **KISS (Keep It Simple, Stupid)**: Evita sovra-ingegnerizzazione. La soluzione più semplice è spesso la migliore.
+- **YAGNI (You Ain't Gonna Need It)**: Non implementare funzionalità "per il futuro" che non sono richieste ora.
+- **Small Functions**: Le funzioni non dovrebbero superare le 20-30 righe. Se sono più lunghe, estrai sotto-funzioni.
+- **Minimal Parameters**: Massimo 3 parametri per funzione. Oltre i 3, usa un oggetto di configurazione (DTO).
 
 ---
 
-## 7. Logging Standards
+## 7. OWASP — Secure by Default
+
+Ogni output di codice deve considerare nativamente la sicurezza. Vedi [`./security.md`](./security.md) per le regole complete. Regola minima: **non fidarti mai dell'input esterno** — valida, sanitizza ed esegui escape sempre.
+
+---
+
+## 8. Logging Standards
 
 Il logging è una preoccupazione trasversale — si applica a **tutti i layer**, non solo all'infrastruttura.
 
@@ -169,7 +182,7 @@ console.log(`User ${user.email} logged in with password ${password}`);
 
 ---
 
-## 8. Test-Driven Development (TDD) & Validation
+## 9. Test-Driven Development (TDD) & Validation
 
 L'AI **deve** sempre generare test unitari e/o d'integrazione per ogni funzionalità o modifica significativa. Il task non è considerato completato finché tutti i test non sono stati creati ed eseguiti con successo.
 
@@ -230,19 +243,19 @@ export class MathUtils {
 
 ---
 
-## 9. Traceability & Memory Management
+## 10. Traceability & Memory Management
 
 L'AI **deve** mantenere una traccia storica e mnemonica di ogni singola interazione che produca una modifica nel repository.
 
 **Regole operative**:
 - **Atomic Log**: Ogni richiesta (ad eccezione delle semplici query informative) deve generare un log di tracciamento nella cartella `logTrace/`.
-- **Central Indexing**: Ogni nuovo log deve essere registrato in [INDEX.md]({{WORKSPACE}}/logTrace/INDEX.md) per mantenere la cronologia navigabile.
+- **Central Indexing**: Ogni nuovo log deve essere registrato in [INDEX.md](../logTrace/INDEX.md) per mantenere la cronologia navigabile.
 - **Naming del Log**: Il file deve seguire il pattern `trace-<DATA>-<DESCRIZIONE-SINTETICA>.md`.
 - **Contenuto Obbligatorio**:
     - **ID della Sessione**: Identificativo univoco (formato YYYYMMDD-NNN).
     - **Obiettivo**: Lo scopo principale della modifica richiesta.
     - **Cambiamenti Effettuati**: Elenco puntato delle modifiche ai file.
-    - **Test Superati**: Riferimento alla validazione di successo (obbligatorio se modificato codice, vedi Sezione 8).
+    - **Test Superati**: Riferimento alla validazione di successo (obbligatorio se modificato codice, vedi Sezione 9).
     - **Decisioni Architetturali**: Breve spiegazione del "perché" (ADR light).
 
 > [!TIP]
@@ -250,7 +263,7 @@ L'AI **deve** mantenere una traccia storica e mnemonica di ogni singola interazi
 
 ---
 
-## 10. Versioning & Semantic Tagging
+## 11. Versioning & Semantic Tagging
 
 Ogni rilascio o modifica significativa deve essere accompagnato da un incremento della versione semantica (SemVer) e dalla creazione di un tag Git corrispondente.
 
