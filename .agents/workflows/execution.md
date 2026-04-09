@@ -1,105 +1,121 @@
 ---
 title: Execution Workflow
-description: Protocollo operativo per l'implementazione del codice, basato su cicli iterativi di TDD e principi di Clean Architecture.
+description: Protocollo operativo per l'implementazione del codice, basato su cicli iterativi di TDD come Design Architetturale.
 tags: [execution, implementation, coding, tdd, clean-architecture]
 ---
 
 # Execution Workflow
 
-L'**Execution** è la fase in cui il progetto prende vita. In Antigravity, l'esecuzione è governata dalla precisione. Non "buttiamo giù codice", ma costruiamo componenti solidi seguendo il piano stabilito.
+L'**Execution** è la fase in cui il progetto prende vita. In Antigravity, l'esecuzione non è solo "scrivere codice", ma un processo di **Design Guidato dai Test**. Ogni componente viene forgiato attraverso il disaccoppiamento forzato dalla testabilità.
 
 ## Principi Guida
-- **TDD (Test Driven Development)**: Il test guida il design.
-- **Clean Architecture**: Ogni riga di codice deve stare nel posto giusto.
-- **Resilio**: Codice capace di gestire i fallimenti con grazia.
+- **TDD come Architettura**: Il test non valida solo la funzione, definisce l'interfaccia e i confini (DIP).
+- **Clean Architecture**: Ogni riga di codice deve rispettare il layer di appartenenza.
+- **Resilienza per Design**: Gestione degli errori e stati di fallback definiti già in fase di test "Red".
 
-## Ciclo di Implementazione
+## Ciclo di Implementazione: Design Loop
 
 ```mermaid
 graph TD
-    A[Step del Piano] --> B[Implementazione Test]
-    B --> C[Esecuzione Test - RED]
-    C --> D[Codifica Logica]
-    D --> E[Esecuzione Test - GREEN]
-    E --> F[Refactoring]
+    A[Step del Piano] --> B[🔴 Red: Design & Contract]
+    B --> C[Definizione Interfacce & Mock]
+    C --> D[🟢 Green: Business Logic]
+    D --> E[Esecuzione Test]
+    E --> F[🔵 Refactor: Clean Code]
     F --> G[Verifica Qualità & Standard]
     G --> H{Step Completato?}
     H -- Sì --> I[Prossimo Step]
     H -- No --> B
 ```
 
-### 1. Implementazione Incrementale
-Lavora sempre su una piccola unità alla volta. Non creare file da 1000 righe in un solo passaggio.
+### 1. Il Momento del Design (Red Phase)
+In Antigravity, la fase **Red** è dove si decide come il componente interagirà con il resto del sistema. 
+- **User Story**: "Il sistema deve salvare un utente solo se l'email è valida."
+- **Design Decision**: Creiamo un'interfaccia `IUserRepository` invece di usare direttamente un DB.
 
-### 2. Esempi di Codificazione
+### 2. Esempi di Codificazione Architetturale
 
-#### Snippet 1: Implementazione Test (Red)
-```javascript
-// tests/unit/parser.test.js
-describe('DataParser', () => {
-    it('should extract date from messy strings', () => {
-        const parser = new DataParser();
-        expect(parser.extractDate("Done on 2026-04-07")).toBe("2026-04-07");
+#### Snippet 1: Design dell'Interfaccia tramite Test (Red)
+```typescript
+// tests/unit/create-user.test.ts
+describe('CreateUserUseCase', () => {
+    it('should decouple from database using repository pattern', async () => {
+        // 💡 Il test ci forza a definire l'astrazione prim'ancora di scegliere il DB.
+        const repoMock: IUserRepository = { save: jest.fn() };
+        const useCase = new CreateUserUseCase(repoMock);
+        
+        await useCase.execute({ email: 'test@example.com' });
+        
+        expect(repoMock.save).toHaveBeenCalled();
     });
 });
 ```
 
-#### Snippet 2: Implementazione Logica (Green)
-```javascript
-class DataParser {
-    extractDate(input) {
-        const match = input.match(/\d{4}-\d{2}-\d{2}/);
-        return match ? match[0] : null;
+#### Snippet 2: Implementazione Disaccoppiata (Green)
+```typescript
+// src/use-cases/create-user.ts
+class CreateUserUseCase {
+    constructor(private userRepository: IUserRepository) {} // Dependency Inversion
+
+    async execute(data: UserData) {
+        if (!this.isValid(data.email)) throw new ValidationError();
+        return await this.userRepository.save(data);
     }
 }
 ```
 
-#### Snippet 3: Refactoring e Manutenibilità
-```javascript
-// Refactoring per estrarre il pattern in una costante
-const DATE_PATTERN = /\d{4}-\d{2}-\d{2}/;
+#### Snippet 3: Refactoring e Robustezza
+```typescript
+// Refactoring per aggiungere logging e gestione errori centralizzata senza inquinare la logica
+class CreateUserUseCase {
+    constructor(
+        private userRepository: IUserRepository,
+        private logger: ILogger // Nuova dipendenza astratta emersa dal refactoring
+    ) {}
 
-class DataParser {
-    extractDate(input) {
-        return input.match(DATE_PATTERN)?.[0] || null;
+    async execute(data: UserData) {
+        try {
+            this.logger.info('Creating user', { email: data.email });
+            return await this.userRepository.save(data);
+        } catch (error) {
+            this.logger.error('Failed to create user', { error });
+            throw new DomainError('User creation failed');
+        }
     }
 }
 ```
 
-### 3. Strumenti di Verifica durante l'Esecuzione
-Assicurati di validare ogni file modificato prima di passare al successivo.
+### 3. Strumenti di Verifica
+Ogni iterazione deve essere validata per assicurare che il disaccoppiamento non abbia introdotto complessità non necessaria.
 
 ```bash
 # Comandi di verifica in-loop
-node scripts/validate-syntax.js src/parser.js
-npm run test -- src/parser.test.js
+npm run test -- <file-path>
+npm run lint
 ```
 
-## Gestione del Debito Tecnico
-Se durante l'esecuzione noti un'opportunità di refactoring che non era nel piano:
-1. Segnala il debito tecnico.
-2. Implementa solo se non altera il piano core.
-3. Altrimenti, crea un task di backlog per la fase successiva.
+## Gestione del Design Emergente
+Se durante il TDD emerge che un'interfaccia è troppo complessa:
+1. **Fermati**: Non forzare l'implementazione.
+2. **Semplifica**: Spezza il componente in unità più piccole (Single Responsibility).
+3. **Aggiorna il Piano**: Se il cambiamento è strutturale, rifletti le modifiche nel Planning.
 
 > [!CAUTION]
-> Evita la "Feature Creep" durate l'esecuzione. Rimani fedele agli obiettivi definiti nella fase di `Planning`. Se il piano non funziona più, torna indietro e rifallo invece di improvvisare.
+> Non saltare la fase di Refactoring. Senza refactoring, il TDD produce solo "codice che funziona", non "codice pulito".
 
-> [!TIP]
-> Commenta il codice "perché", non il "cosa". Il "cosa" dovrebbe essere ovvio dal nome delle funzioni.
+---
 
-
-
-## Checklist di Esecuzione
-- [ ] Il test (Red) è stato scritto prima della logica?
-- [ ] La logica implementata è la minima necessaria per superare il test (Green)?
-- [ ] È stato effettuato un passaggio di Refactoring per migliorare la leggibilità?
-- [ ] Il codice è isolato dalle dipendenze dei framework (Clean Architecture)?
-- [ ] I comandi di validazione sintattica sono stati eseguiti con successo?
+## Checklist di Esecuzione Architetturale
+- [ ] Il test ha definito l'interfaccia prima dell'implementazione?
+- [ ] Le dipendenze esterne sono astratte tramite Interfacce (DIP)?
+- [ ] Il componente è testabile senza avviare database o servizi esterni?
+- [ ] Il "Refactor" ha migliorato la modularità senza cambiare il comportamento?
+- [ ] Il codice segue i principi SOLID emersi durante la stesura del test?
 
 ## Riferimenti
-- [.agents/rules/common.md](../rules/common.md)
+- [.agents/rules/common/tdd.md](../rules/common/tdd.md)
 - [Planning Workflow](./planning.md)
 - [Review Workflow](./review.md)
 
 ---
-*v1.3 - Antigravity Execution Protocol*
+*v2.0 - Antigravity Execution Protocol*

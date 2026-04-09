@@ -91,7 +91,18 @@ Aggiungi nuove regole in `.agents/rules/` o nuove competenze in `.agents/skills/
 *Questo catalogo è generato automaticamente dallo script `scripts/generate-catalog.js`*
 
 ### Regole e Standard (.agents/rules)
-- [**Common Rules**](./.agents/rules/common.md) - *Regole universali applicabili a ogni riga di codice generata.*
+- [**Clean Architecture Standards**](./.agents/rules/common/clean-architecture.md) - *Guida definitiva alla separazione delle responsabilità e all'integrità del dominio.*
+- [**Error Handling & Resilience**](./.agents/rules/common/error-handling.md) - *Standard per la gestione degli errori, la resilienza del codice e la stabilità del sistema.*
+- [**Immutability Standards**](./.agents/rules/common/immutability.md) - *Principi di immutabilità per la prevenzione di side effect e la sicurezza del thread.*
+- [**Logging & Observability Standards**](./.agents/rules/common/logging.md) - *Standard per il logging strutturato, la telemetria e la tracciabilità operativa delle applicazioni.*
+- [**Naming Conventions**](./.agents/rules/common/naming-conventions.md) - *Standard di naming per garantire chiarezza, intenzionalità e coerenza verbale nel codice.*
+- [**Security & OWASP Compliance**](./.agents/rules/common/security.md) - *Standard di sicurezza gestiti tramite approccio secure-by-default e conformità OWASP.*
+- [**Simplicity & Clean Code**](./.agents/rules/common/simplicity.md) - *Principi di semplicità, leggibilità e manutenibilità estrema (KISS, YAGNI).*
+- [**SOLID Principles**](./.agents/rules/common/solid.md) - *Principi SOLID per un design del software robusto, manutenibile e scalabile.*
+- [**TDD as Architectural Design**](./.agents/rules/common/tdd.md) - *Protocollo per il Test-Driven Development (TDD) inteso come strumento di design e disaccoppiamento forzato.*
+- [**Traceability & Session Memory**](./.agents/rules/common/traceability.md) - *Standard per il tracciamento delle modifiche, la cronologia operativa e la gestione della memoria di sessione degli agenti AI.*
+- [**Versioning & Lifecycle**](./.agents/rules/common/versioning.md) - *Standard per il versionamento semantico (SemVer), il tagging git e la gestione del ciclo di vita del software.*
+- [**Antigravity Common Rules**](./.agents/rules/common.md) - *Regole universali applicabili a ogni riga di codice generata nell'ecosistema Antigravity.*
 - [**Continuous Learning Rule**](./.agents/rules/continuous-learning.md) - *Mandato per l'auto-miglioramento proattivo della libreria tramite Knowledge Harvesting.*
 - [**Database Rules**](./.agents/rules/database.md) - *Standard per design schema, ORM e sicurezza dei dati.*
 - [**Frontend Rules**](./.agents/rules/frontend.md) - *Standard per UI/UX, accessibilità e testing frontend.*
@@ -110,7 +121,7 @@ Aggiungi nuove regole in `.agents/rules/` o nuove competenze in `.agents/skills/
 - [**API Versioning Skill**](./.agents/skills/api-versioning/SKILL.md) - *Pattern per gestire il ciclo di vita e le breaking changes delle API.*
 - [**Auth Patterns Skill**](./.agents/skills/auth-patterns/SKILL.md) - *Pattern di implementazione per autenticazione JWT e autorizzazione RBAC.*
 - [**Context Management Skill (Context Hygiene)**](./.agents/skills/context-management/SKILL.md) - *Guida alla Context Hygiene per mantenere l'AI precisa nelle lunghe sessioni.*
-- [**Systematic Debugging & Root Cause Analysis**](./.agents/skills/debugging-pro/SKILL.md) - *Metodologia scientifica per l'identificazione, l'isolamento e la risoluzione definitiva di bug complessi.*
+- [**High-Fidelity Observability & Deep Debugging**](./.agents/skills/debugging-pro/SKILL.md) - *Metodologia avanzata per il distributed tracing, context propagation e analisi di performance profonda (Flame Graphs, Memory Profiling).*
 - [**DevOps Pipeline Skill**](./.agents/skills/devops-pipeline/SKILL.md) - *Standard per CI/CD, Docker e automazione del deployment.*
 - [**Documentation Standards**](./.agents/skills/documentation-standards/SKILL.md) - *Linee guida per documentazione tecnica chiara, scalabile e AI-friendly.*
 - [**Error Monitoring Skill**](./.agents/skills/error-monitoring/SKILL.md) - *Pattern per implementare observability completa: Sentry, OpenTelemetry e SLO.*
@@ -124,7 +135,7 @@ Aggiungi nuove regole in `.agents/rules/` o nuove competenze in `.agents/skills/
 - [**AutoResearch Workflow**](./.agents/workflows/auto-research.md) - *Un framework per l'ottimizzazione autonoma e iterativa di componenti logiche tramite loop di feedback misurabili.*
 - [**Base Agent Persona**](./.agents/workflows/base_agent.md) - *Persona base per lo sviluppo software senior con focus su Clean Architecture e DevSecOps.*
 - [**CodeReviewer Workflow**](./.agents/workflows/code-reviewer.md) - *Senior Code Reviewer focalizzato su qualità del codice, pattern e feedback costruttivo.*
-- [**Execution Workflow**](./.agents/workflows/execution.md) - *Protocollo operativo per l'implementazione del codice, basato su cicli iterativi di TDD e principi di Clean Architecture.*
+- [**Execution Workflow**](./.agents/workflows/execution.md) - *Protocollo operativo per l'implementazione del codice, basato su cicli iterativi di TDD come Design Architetturale.*
 - [**ImproveMd Workflow**](./.agents/workflows/improve-md.md) - *Migliora la qualità della documentazione MD tramite Auto-Research e Git tagging.*
 - [**Main Workflow Orchestrator**](./.agents/workflows/main-workflow.md) - *Il punto di ingresso e l'orchestrazione principale per tutti i task di sviluppo nell'ecosistema Antigravity.*
 - [**MassRefactor Workflow**](./.agents/workflows/mass-refactor.md) - *Attiva la modalità Esecuzione Massiva (DevOps) per applicare standard su più file contemporaneamente.*

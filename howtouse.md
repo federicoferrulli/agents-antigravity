@@ -96,16 +96,61 @@ npm run adr "Titolo Decisione"
 
 ---
 
-## 💡 Esempio di Caso d'Uso Completo
+## 🏆 Case Study: Sviluppo di un Sistema di Pagamenti Idempotente
 
-1. **User**: `/primer. Devo rifattorizzare il login.`
-2. **AI**: Legge le regole e propone un piano (`implementation_plan.md`) usando `.agents/skills/auth-patterns/SKILL.md`.
-3. **User**: `Approvo.`
-4. **AI**: Implementa il codice seguendo `.agents/rules/security.md`.
-5. **User**: `@security-auditor fai un controllo.`
-6. **AI (@security-auditor)**: Identifica un rischio di session fixation e suggerisce il fix.
-7. **User**: `Applica. Poi aggiorna il catalogo.`
-8. **AI**: Applica il fix, gira `npm run catalog` e chiude il task.
+In questo scenario, vedremo come utilizzare l'intera libreria per costruire una funzionalità critica: un **Gateway di Pagamento Multi-valuta** con supporto alla **Idempotenza** e **Audit Log**.
+
+### Fase 1: Inizializzazione e Allineamento
+Iniziamo caricando il contesto per assicurarci che l'AI conosca tutte le regole di Antigravity.
+> **User**: `/primer. Devo sviluppare un modulo per pagamenti internazionali.`
+> 
+> **AI (@base_agent)**: "Ricevuto. Carico `AGENT.md`, le regole di `clean-architecture.md`, `security.md` e i protocolli operativi. Sono pronto per accompagnarti seguendo il Master Agent Protocol."
+
+### Fase 2: Design Architetturale (`/architect`)
+Prima di scrivere codice, definiamo la struttura seguendo i principi di design del progetto.
+> **User**: `/architect. Progetta il sistema seguendo la Clean Architecture.`
+> 
+> **AI (@architect)**: Analizza il dominio e propone la struttura:
+> - **Domain Layer**: `Payment` (Entity), `Money` (Value Object), `PaymentRepository` (Interface).
+> - **UseCase Layer**: `ProcessPayment` (Interactor) con logica di business.
+> - **Infrastructure Layer**: `StripeAdapter`, `PostgresRepository`.
+> 
+> **Output**: Genera un **ADR (Architectural Decision Record)** in `docs/adr/003-payment-idempotency.md` spiegando la scelta strategica dell'idempotenza basata su token nel database di storage.
+
+### Fase 3: Pianificazione Dettagliata (`/planning`)
+Definiamo i task atomici per ridurre il rischio di allucinazioni e errori.
+> **User**: `/planning. Crea un piano per l'implementazione del Domain layer e dei Test.`
+> 
+> **AI**: Analizza `.agents/rules/common/tdd.md` e crea `implementation_plan.md`:
+> 1. Creazione Value Object `Money` con validazione corretta.
+> 2. Implementazione Entity `Payment` con stati (Pending, Completed, Failed).
+> 3. Scrittura Test Unitari per il calcolo delle commissioni basati sulla precisione definita in `immutability.md`.
+
+### Fase 4: Esecuzione TDD (`/execution`)
+Passiamo all'implementazione guidata dai test (TDD come Design Architetturale).
+> **User**: `/execution. Inizia dal Value Object Money.`
+> 
+> **AI**: Seguendo il protocollo di esecuzione:
+> 1. Scrive un test fallimentare (Red) che verifica l'impossibilità di sommare valute diverse.
+> 2. Implementa la classe `Money` seguendo `immutability.md` e `solid.md`.
+> 3. Esegue refactoring (Green) per ottimizzare la gestione dei "cents" ed evitare errori floating point.
+
+### Fase 5: Hardening e Security Check (`/security-auditor`)
+Verifichiamo che i dati sensibili siano gestiti correttamente secondo gli standard OWASP.
+> **User**: `@security-auditor. Revisiona il codice del controller dei pagamenti.`
+> 
+> **AI (@security-auditor)**: Esegue un audit basandosi su `.agents/rules/common/security.md` e identifica che il `CardToken` viene loggato accidentalmente nel trace log.
+> 
+> **Azione**: Suggerisce l'uso del pattern di mascheramento dei log descritto in `logging.md`.
+
+### Fase 6: Validazione Finale e Sincronizzazione
+Infine, rendiamo il lavoro parte della "Project Intelligence".
+> **User**: `Finalizza il task e aggiorna la documentazione.`
+> 
+> **AI**:
+> 1. Esegue `npm run validate` per garantire che tutti i file MD (ADR, Piani) rispettino gli standard di qualità 100/100.
+> 2. Esegue `npm run catalog` per inserire automaticamente la nuova funzionalità nel catalogo del `README.md`.
+> 3. Utilizza `/sync-trace` per salvare lo stato dell'avanzamento nei log di traccia, permettendo alla prossima sessione di ripartire con piena consapevolezza di quanto fatto.
 
 ---
 
@@ -129,3 +174,19 @@ Usa la skill context-management per ripulire la sessione e poi esegui il primer.
 
 > [!TIP]
 > Se l'agente CLI sembra ignorare le regole, digli esplicitamente: *"Leggi CLAUDE.md (o GEMINI.md) e AGENT.md per allinearti ai miei standard."*
+
+---
+
+## Checklist di Verifica Finale
+- [ ] Il primer è stato eseguito correttamente ad inizio sessione?
+- [ ] È stato seguito il ciclo Planning -> Execution -> Review?
+- [ ] Le decisioni architetturali sono state documentate tramite ADR?
+- [ ] Il codice è stato validato con `npm run validate`?
+- [ ] La "Project Intelligence" è stata aggiornata con `npm run catalog`?
+
+## Riferimenti
+- [Antigravity Master Agent Protocol](./AGENT.md)
+- [Clean Architecture & Standards](./.agents/rules/common.md)
+- [Workflow di Architettura](./.agents/workflows/architect.md)
+- [Manuale Claude Code](./CLAUDE.md)
+- [Manuale Gemini CLI](./GEMINI.md)

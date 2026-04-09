@@ -1,296 +1,87 @@
 ---
-title: Common Rules
-description: "Regole universali applicabili a ogni riga di codice generata."
-tags: [architecture, solid, clean-code, devsecops]
+title: "Antigravity Common Rules"
+description: "Regole universali applicabili a ogni riga di codice generata nell'ecosistema Antigravity."
+trigger: always_on
+tags: ["clean-architecture", "solid", "standards", "best-practices"]
 ---
 
 # Common Rules
 
 Queste regole si applicano a **tutto il codice generato**, indipendentemente dal linguaggio o framework. Rappresentano il contratto minimo di qualità per ogni output.
 
+Ogni regola è strutturata secondo il principio del **Contrasto Cognitivo**:
+1.  **✅ Corretto**: La best practice da seguire.
+2.  **🔴 Anti-pattern**: L'errore comune che viola la regola.
+3.  **🔬 Analisi del Fallimento**: Spiegazione teorica del fallimento a livello di Allocazione Memoria, I/O Blocking o Violazione degli Invarianti di Dominio.
+
 ---
 
-## 1. Clean Architecture
+## 🏗️ Architettura e Core Design
 
-Separa sempre le preoccupazioni in livelli distinti e a dipendenza unidirezionale:
+1. **[Clean Architecture](./common/clean-architecture.md)**: Separazione dei layer e regola della dipendenza unidirezionale.
+2. **[Principi SOLID](./common/solid.md)**: Fondamenta per un codice manutenibile e scalabile.
+3. **[Error Handling](./common/error-handling.md)**: Strategie di resilienza e gestione dei fallimenti.
+4. **[Immutability](./common/immutability.md)**: Prevenzione dei side-effect e sicurezza della memoria.
 
-| Layer | Responsabilità | Dipende da |
-|---|---|---|
-| **Entities** | Oggetti di dominio puri, regole di business core | Nessuno |
-| **Use Cases** | Orchestrano il flusso di dati, *applicano* le regole | Entities |
-| **Interface Adapters** | Convertono dati: Controller, Presenter, Gateway | Use Cases |
-| **Frameworks & Drivers** | DB, Web Framework, UI — dettagli implementativi | Interface Adapters |
+## ✍️ Coding Standards
 
-> [!NOTE]
-> Le dipendenze puntano sempre verso i layer interni. Questo significa che le Entities non possono "importare" nulla dagli Use Cases, e gli Use Cases non sanno nulla del Database o del Web Server.
+5. **[Naming Conventions](./common/naming-conventions.md)**: Comunicazione dell'intento tramite nomi significativi.
+6. **[Clean Code & Simplicity](./common/simplicity.md)**: KISS e YAGNI per evitare la sovra-ingegnerizzazione.
+7. **[OWASP — Secure by Default](./common/security.md)**: Sicurezza nativa in ogni input e output.
+8. **[Logging Standards](./common/logging.md)**: Osservabilità tramite log strutturati.
 
+## 🚀 Quality Assurance
+
+9. **[TDD come Design Architetturale](./common/tdd.md)**: Test-first come catalizzatore di design disaccoppiato.
+10. **[Traceability & Memory Management](./common/traceability.md)**: Tracciamento granulare delle modifiche e della cronologia.
+11. **[Versioning & Semantic Tagging](./common/versioning.md)**: Gestione coerente del ciclo di vita del software.
+
+---
+
+## 🛠️ Esempio di Applicazione Regole
+
+```typescript
+/**
+ * Esempio di applicazione simultanea di SOLID, Clean Arch e Immutability.
+ */
+class ProcessInvoiceUseCase {
+  constructor(private readonly repository: IInvoiceRepository) {} // DI & DIP
+
+  async execute(invoice: Invoice): Promise<Invoice> {
+    const updatedInvoice = { ...invoice, status: 'PROCESSED' }; // Immutability
+    await this.repository.save(updatedInvoice);
+    return updatedInvoice;
+  }
+}
+```
+
+## 📊 Matrice di Qualità Antigravity
 ```mermaid
 graph TD
-    subgraph "Clean Architecture Layers"
-        FD[Frameworks & Drivers] --> IA[Interface Adapters]
-        IA --> UC[Use Cases]
-        UC --> E[Entities]
-    end
+    A[Richiesta Sviluppo] --> B{Check Rules}
+    B --> C[Clean Architecture]
+    B --> D[Security Check]
+    B --> E[Test Coverage]
+    C & D & E --> F[Validazione Automatica]
+    F --> G[Rilascio vX.Y.Z]
+    style F fill:#e8f5e9,stroke:#4caf50
 ```
-
-
-```typescript
-// ✅ CORRETTO — Use Case non conosce Express
-class CreateUserUseCase {
-  constructor(private userRepo: UserRepository) {}
-  async execute(data: CreateUserDTO): Promise<User> {
-    const user = User.create(data); // logica di dominio pura
-    return this.userRepo.save(user);
-  }
-}
-
-// ❌ SBAGLIATO — Use Case accoppiato a Express
-class CreateUserUseCase {
-  async execute(req: Request, res: Response) { ... }  // dipendenza da framework
-}
-```
-
----
-
-## 2. Principi SOLID
-
-- **S — Single Responsibility**: Una classe/funzione = un motivo per cambiare.
-- **O — Open/Closed**: Estendi il comportamento (Strategy, Plugin) senza modificare il codice esistente.
-- **L — Liskov Substitution**: Le implementazioni concrete devono essere intercambiabili con le astrazioni (`UserRepository` -> `MongoUserRepository` o `InMemoryUserRepository`).
-- **I — Interface Segregation**: Preferisci interfacce piccole e specifiche a monoliti.
-- **D — Dependency Inversion**: Dipendi da astrazioni (`interface`), non da implementazioni concrete.
-
-```typescript
-// ✅ Dependency Inversion — il Use Case dipende dall'interfaccia, non da Mongoose
-interface UserRepository {
-  findById(id: string): Promise<User | null>;
-  save(user: User): Promise<User>;
-}
-
-class CreateUserUseCase {
-  constructor(private repo: UserRepository) {} // iniettato dall'esterno
-}
-```
-
----
-
-## 3. Error Handling
-
-Non ignorare **mai** gli errori. Uso di `try/catch` e tipi di errore espliciti.
-
-```typescript
-// ✅ CORRETTO
-async function getUserById(id: string): Promise<User> {
-  try {
-    const user = await userRepository.findById(id);
-    if (!user) throw new NotFoundError(`User ${id} not found`);
-    return user;
-  } catch (error) {
-    logger.error('getUserById failed', { id, error });
-    throw error; // re-throw dopo il log, non ingoiare
-  }
-}
-
-// ❌ SBAGLIATO — errore ingoiato silenziosamente
-async function getUserById(id: string) {
-  try {
-    return await userRepository.findById(id);
-  } catch (e) { return null; }
-}
-```
-
-**Regole**:
-- Usa error classes personalizzate (`NotFoundError`, `ValidationError`, `UnauthorizedError`).
-- Non esporre **mai** stack trace all'utente finale in produzione.
-- Usa codici di errore standard HTTP (400, 401, 403, 404, 500).
-
----
-
-## 4. Immutability
-
-Preferisci strutture dati immutabili per prevenire side effect inaspettati.
-
-```typescript
-// ✅ CORRETTO
-const config = Object.freeze({ maxRetries: 3, timeout: 5000 });
-const updatedUser = { ...user, name: 'Mario' }; // copia, non mutazione
-
-// ❌ SBAGLIATO
-config.maxRetries = 5;  // mutazione silently ignorata su oggetti frozen, o bug su non-frozen
-user.name = 'Mario';    // mutazione diretta dell'oggetto
-```
-
----
-
-## 5. Naming Conventions
-
-I nomi devono comunicare **intento**, non implementazione.
-
-| ❌ Generico | ✅ Descrittivo |
-|---|---|
-| `getData()` | `getUserProfileById()` |
-| `val`, `x`, `tmp` | `invoiceTotal`, `retryCount` |
-| `handle()` | `handlePaymentWebhook()` |
-| `Manager` | `UserSessionCoordinator` |
-| `isOk` | `isUserEmailVerified` |
-
-**Convenzioni**:
-- **camelCase** per variabili e funzioni.
-- **PascalCase** per classi, interfacce e tipi.
-- **UPPER_SNAKE_CASE** per costanti globali.
-- **kebab-case** per file e directory.
-
----
-
-## 6. Clean Code & Simplicity
-
-Il codice deve essere leggibile dagli umani, non solo dalle macchine.
-
-**Regole**:
-- **KISS (Keep It Simple, Stupid)**: Evita sovra-ingegnerizzazione. La soluzione più semplice è spesso la migliore.
-- **YAGNI (You Ain't Gonna Need It)**: Non implementare funzionalità "per il futuro" che non sono richieste ora.
-- **Small Functions**: Le funzioni non dovrebbero superare le 20-30 righe. Se sono più lunghe, estrai sotto-funzioni.
-- **Minimal Parameters**: Massimo 3 parametri per funzione. Oltre i 3, usa un oggetto di configurazione (DTO).
-
----
-
-## 7. OWASP — Secure by Default
-
-Ogni output di codice deve considerare nativamente la sicurezza. Vedi [`./security.md`](./security.md) per le regole complete. Regola minima: **non fidarti mai dell'input esterno** — valida, sanitizza ed esegui escape sempre.
-
----
-
-## 8. Logging Standards
-
-Il logging è una preoccupazione trasversale — si applica a **tutti i layer**, non solo all'infrastruttura.
-
-```typescript
-// ✅ Log strutturato in JSON (usa pino, winston o equivalente)
-logger.info({ userId: user.id, action: 'order.created', orderId: order.id }, 'Order created');
-logger.error({ err: error, userId }, 'Payment processing failed');
-
-// ❌ SBAGLIATO — log non strutturato e con dati sensibili
-console.log(`User ${user.email} logged in with password ${password}`);
-```
-
-**Regole**:
-- **Mai loggare**: password, token JWT/API key, dati PII (email, CF, numero carta) in chiaro.
-- Usa livelli semantici: `debug` (dev only) · `info` (eventi business) · `warn` (anomalie non bloccanti) · `error` (errori operativi) · `fatal` (crash).
-- In produzione usa formato **JSON strutturato** (non testo libero) — permette indexing e alerting.
-- Includi sempre un `correlationId` / `requestId` per tracciare un'intera request chain.
-- Non usare `console.log` in produzione: usa una libreria configurabile (pino, winston).
-
----
-
-## 9. Test-Driven Development (TDD) & Validation
-
-L'AI **deve** sempre generare test unitari e/o d'integrazione per ogni funzionalità o modifica significativa. Il task non è considerato completato finché tutti i test non sono stati creati ed eseguiti con successo.
-
-**Regole operative**:
-- **Test-First Approach**: Definisci il comportamento atteso tramite i test prima di procedere con l'implementazione completa (seguendo lo schema **Red-Green-Refactor**).
-- **Copertura Obbligatoria**: Ogni nuova logica di business (Entities/Use Cases) deve essere accompagnata da test che ne validino il comportamento.
-- **Validazione Automatica**: L'AI deve eseguire i test localmente e confermare l'esito positivo prima di dichiarare il lavoro finito.
-- **Gestione dei Fallimenti**: Se i test falliscono, l'AI deve analizzare il log, correggere il codice e rieseguire i test finché non sono tutti verdi.
-
-### Esempio Ciclo TDD (Red-Green-Refactor)
-
-#### 1. 🔴 Red: Implementazione del Test (Fallisce)
-Definisci il comportamento atteso tramite un test prima di scrivere la logica. Il test deve fallire (o non compilare).
-
-```typescript
-// tests/unit/math.test.ts
-describe('MathUtils', () => {
-  it('should sum two numbers correctly', () => {
-    const math = new MathUtils();
-    expect(math.add(2, 3)).toBe(5); // ❌ Fallisce: MathUtils non esiste ancora
-  });
-});
-```
-
-#### 2. 🟢 Green: Implementazione minima (Passa)
-Scrivi il codice minimo indispensabile per far passare il test nel modo più semplice possibile.
-
-```typescript
-// src/math.ts
-export class MathUtils {
-  add(a: number, b: number): number {
-    return a + b; // ✅ Il test ora passa
-  }
-}
-```
-
-#### 3. 🔵 Refactor: Miglioramento del codice
-Ottimizza, pulisci e rendi professionale il codice, assicurandoti che i test rimangano verdi.
-
-```typescript
-// src/math.ts
-export class MathUtils {
-  /**
-   * Somma due numeri interi.
-   * @param a - Primo addendo
-   * @param b - Secondo addendo
-   * @returns La somma aritmetica
-   */
-  add(a: number, b: number): number {
-    return a + b;
-  }
-}
-```
-
 
 > [!IMPORTANT]
-> Non è permesso procedere o consegnare codice che non superi ---
+> Il mancato rispetto di anche una sola di queste regole durante la generazione del codice attiverà un errore di validazione bloccante nel pre-commit.
 
-## 10. Traceability & Memory Management
-
-L'AI **deve** mantenere una traccia storica e mnemonica di ogni singola interazione che produca una modifica nel repository.
-
-**Regole operative**:
-- **Atomic Log**: Ogni richiesta (ad eccezione delle semplici query informative) deve generare un log di tracciamento nella cartella `logTrace/`.
-- **Central Indexing**: Ogni nuovo log deve essere registrato in [INDEX.md](../../logTrace/INDEX.md) per mantenere la cronologia navigabile.
-- **Naming del Log**: Il file deve seguire il pattern `trace-<DATA>-<DESCRIZIONE-SINTETICA>.md`.
-- **Contenuto Obbligatorio**:
-    - **ID della Sessione**: Identificativo univoco (formato YYYYMMDD-NNN).
-    - **Obiettivo**: Lo scopo principale della modifica richiesta.
-    - **Cambiamenti Effettuati**: Elenco puntato delle modifiche ai file.
-    - **Test Superati**: Riferimento alla validazione di successo (obbligatorio se modificato codice, vedi Sezione 9).
-    - **Decisioni Architetturali**: Breve spiegazione del "perché" (ADR light).
-
-> [!TIP]
-> Per sincronizzare il contesto basandosi sulla cronologia dei log, usa il workflow `/sync-trace`. Questa "memoria" esterna permette all'AI di recuperare rapidamente il contesto senza sovraccaricare il prompt di sistema. Vedi [INDEX.md](../../logTrace/INDEX.md) per i dettagli.
-
----
-
-## 11. Versioning & Semantic Tagging
-
-Ogni rilascio o modifica significativa deve essere accompagnato da un incremento della versione semantica (SemVer) e dalla creazione di un tag Git corrispondente.
-
-**Regole operative**:
-- **Semantic Versioning (SemVer)**: Segui rigorosamente lo standard `MAJOR.MINOR.PATCH`.
-    - **MAJOR**: Breaking changes o refactoring strutturali del repository.
-    - **MINOR**: Nuove funzionalità, nuove Skill, nuovi Workflow o nuove Regole.
-    - **PATCH**: Bugfix, piccoli miglioramenti testuali o maintenance.
-- **Automated Update**: L'AI deve aggiornare la versione nel file `package.json` prima di procedere al commit di una nuova funzionalità.
-- **Git Tagging**: Ogni completamento di feature deve essere marcato con un tag git (es. `v1.1.0`). Usa il comando `npm run release` per automatizzare il processo di staging, commit e tagging.
-- **Trace Log Reference**: Il tag di versione creato deve essere referenziato nell'ultimo Trace Log della sessione.
-
-> [!IMPORTANT]
-> Non creare mai tag duplicati o senza aver prima validato la libreria (`npm run validate`).
-
----
-
-## checklist di Verifica Finale
+## Checklist
 - [ ] Il codice segue i layer della Clean Architecture?
 - [ ] I principi SOLID sono rispettati?
-- [ ] L'error handling è esplicito e non ingoiato?
+- [ ] L'error handling è esplicito e non "ingoia" errori?
 - [ ] Il naming comunica l'intento e non l'implementazione?
-- [ ] I test (TDD) sono presenti e passano tutti?
-- [ ] La tracciabilità è garantita da un Trace Log?
+- [ ] Il design è stato guidato dal TDD?
+- [ ] La tracciabilità è garantita da un Trace Log strutturato?
 
 ## Riferimenti
-- [OWASP Top 10 Security Standards](./security.md)
-- [Documentation Standards](../skills/documentation-standards/SKILL.md)
 - [Antigravity Master Agent Protocol](../../AGENT.md)
+- [Documentation Standards](../skills/documentation-standards/SKILL.md)
+- [OWASP Security Standards](./common/security.md)
 
 ---
 *v1.2.0 - Antigravity Core Protocol*

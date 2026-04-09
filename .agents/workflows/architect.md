@@ -30,8 +30,24 @@ Ogni scelta architettonica ha un costo. L'Architect deve documentarlo.
 # Trade-off Analysis: Microservices vs Monolith
 - **Microservices**: Scalabilità granulare, ma complessità di rete.
 - **Monolith**: Semplicità di deployment, ma accoppiamento forte.
-- **Scelta Antigravity**: Monolite Modulare (Modulith).
+- **Scelta Antigravity**: Monolite Modulare (Modulith). Vedi sezione [Isolamento Modulare](#isolamento-modulare) per i dettagli.
 ```
+
+## Isolamento Modulare (Modular Monolith)
+
+In Antigravity, il Monolite Modulare non è un "big ball of mud", ma un insieme di moduli rigorosamente isolati.
+
+### 1. Definizione dei Bounded Context
+Ogni modulo deve rappresentare un **Bounded Context** (DDD) autonomo.
+- **Proprietà dei Dati**: Ogni contesto possiede i propri schemi e tabelle. Il partizionamento dello stato è fisico o logico, ma mai condiviso a livello di query.
+- **Autonomia Logica**: Un modulo deve poter essere estratto in un microservizio con il minimo sforzo.
+
+### 2. Vincoli di Comunicazione
+Per evitare l'accoppiamento "spaghetti", si applicano le seguenti regole:
+- **Event-Driven UI/Logic**: La comunicazione inter-modulo deve essere **asincrona ed event-driven**. Un modulo emette eventi di dominio, gli altri moduli si mettono in ascolto.
+- **Strict API Boundaries**: L'accesso sincrono è permesso solo tramite interfacce pubbliche (`Module API`). È vietato importare classi interne o utility di altri moduli.
+- **Data Isolation**: È **vietato l'accesso diretto ai data store** di domini esterni. Se il Modulo A ha bisogno di dati del Modulo B, deve richiederli tramite API o sincronizzarli tramite eventi.
+
 
 ### 2. Architecture Decision Records (ADR)
 Usa il formato ADR per ogni decisione significativa.
@@ -83,8 +99,9 @@ npx dependency-cruiser --config .dependency-cruiser.js src/
 > Segui il principio "Write code that is easy to delete", non solo facile da scrivere. Il disaccoppiamento è la chiave per la manutenibilità.
 
 ## Changelog
+- **v1.3**: Definizione dei Bounded Context e vincoli di isolamento modulare (Event-driven, Data isolation).
 - **v1.2**: Integrato diagramma di sequenza e checklist dei 5 pilastri.
 - **v1.1**: Prima versione degli standard per ADR.
 
 ---
-*v1.2 - Antigravity System Architecture*
+*v1.3 - Antigravity System Architecture*
