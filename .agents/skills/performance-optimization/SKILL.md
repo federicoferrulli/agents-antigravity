@@ -1,12 +1,25 @@
 ---
-name: "performance-optimization"
+title: Performance Optimization Skill
 description: "Pattern sistematici per identificare e risolvere colli di bottiglia."
-category: "General"
+category: "Backend"
 effort: "L"
-tags: ["performance", "optimization", "bottleneck", "profiling"]
+tags: ["performance", "optimization", "caching", "db-tuning"]
 ---
 
 # Performance Optimization Skill
+
+> [!TIP]
+> L'ottimizzazione prematura è la radice di tutti i mali. Misura prima di agire.
+
+```mermaid
+graph LR
+    A[Analisi: Profiling] --> B[Identificazione Bottleneck]
+    B --> C[Intervento: Caching/Index/Logic]
+    C --> D[Validazione: Benchmarking]
+    D --> E{Performance OK?}
+    E -- No --> A
+    E -- Sì --> F[Deploy]
+```
 
 Questa skill definisce i pattern sistematici per identificare e risolvere i problemi di performance. Applicala quando ricevi segnalazioni di lentezza o in fase di code review proattiva.
 

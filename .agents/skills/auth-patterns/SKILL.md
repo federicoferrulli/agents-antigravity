@@ -1,5 +1,5 @@
 ---
-name: "auth-patterns"
+title: Auth Patterns Skill
 description: "Pattern di implementazione per autenticazione JWT e autorizzazione RBAC."
 category: "Security"
 effort: "M"
@@ -7,6 +7,18 @@ tags: ["auth", "jwt", "rbac", "security"]
 ---
 
 # Auth Patterns Skill
+
+> [!IMPORTANT]
+> L'autenticazione è l'identità, l'autorizzazione è il permesso. Non confonderle mai.
+
+```mermaid
+graph TD
+    A[Login Request] --> B[Auth Service]
+    B --> C{Credenziali Valide?}
+    C -- Sì --> D[Genera JWT con Claims]
+    C -- No --> E[401 Unauthorized]
+    D --> F[Client storage]
+```
 
 Questa skill definisce i pattern canonici per implementare **Autenticazione e Autorizzazione** sicure. Applicala ogni volta che devi proteggere endpoint o gestire identità utente.
 

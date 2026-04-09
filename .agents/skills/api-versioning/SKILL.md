@@ -1,12 +1,24 @@
 ---
-name: "api-versioning"
+title: API Versioning Skill
 description: "Pattern per gestire il ciclo di vita e le breaking changes delle API."
 category: "Backend"
-effort: "S"
-tags: ["api", "versioning", "deprecation", "evolution"]
+effort: "M"
+tags: ["api", "versioning", "semver", "rest"]
 ---
 
 # API Versioning Skill
+
+> [!IMPORTANT]
+> Una strategia di versioning chiara è la spina dorsale della stabilità degli ecosistemi distribuiti.
+
+```mermaid
+graph LR
+    A[Richiesta Client] --> B{Check Header/URL}
+    B -- v1 --> C[Old Handler]
+    B -- v2 --> D[New Handler]
+    C --> E[Response]
+    D --> E
+```
 
 Questa skill definisce i pattern per gestire il **versionamento delle API** in modo da evolvere il contratto senza rompere i client esistenti. Applicala prima di rilasciare un breaking change o quando pianifichi l'evoluzione di un'API pubblica.
 

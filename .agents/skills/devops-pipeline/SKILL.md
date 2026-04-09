@@ -1,12 +1,23 @@
 ---
-name: "devops-pipeline"
+title: DevOps Pipeline Skill
 description: "Standard per CI/CD, Docker e automazione del deployment."
 category: "DevOps"
 effort: "L"
-tags: ["devops", "docker", "ci-cd", "github-actions"]
+tags: ["devops", "ci-cd", "docker", "pipeline"]
 ---
 
 # DevOps Pipeline Skill
+
+> [!TIP]
+> Una pipeline affidabile deve essere veloce, deterministica e capace di fallire presto (Fail Fast).
+
+```mermaid
+graph LR
+    A[Commit] --> B[CI: Test & Lint]
+    B --> C[CI: Build Artifacts]
+    C --> D[CD: Stage Deploy]
+    D --> E[CD: Prod Deploy]
+```
 
 Questa skill definisce i pattern per configurare **CI/CD, containerizzazione e monitoring** di un'applicazione. Applicala quando si vuole portare un progetto in produzione o automatizzarne il deployment.
 

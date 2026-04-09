@@ -45,19 +45,19 @@ Aggiungi nuove regole in `.agents/rules/` o nuove competenze in `.agents/skills/
 - [**ADR-0002: Standardizing Metadata with YAML Frontmatter**](./docs/adr/0002-standard-metadata.md)
 
 ### Competenze e Flussi (.agents/skills)
-- [**SKILL.md**](./.agents/skills/ai-prompting/SKILL.md) - *Pattern e framework per scrivere prompt agentici efficaci.*
+- [**AI Prompting Skill**](./.agents/skills/ai-prompting/SKILL.md) - *Pattern e framework per scrivere prompt agentici efficaci.*
 - [**RESTful API Design & OpenAPI Standards**](./.agents/skills/api-design/SKILL.md) - *Best practices per la progettazione di API scalabili, sicure e ben documentate utilizzando standard REST e specifiche OpenAPI.*
-- [**SKILL.md**](./.agents/skills/api-versioning/SKILL.md) - *Pattern per gestire il ciclo di vita e le breaking changes delle API.*
-- [**SKILL.md**](./.agents/skills/auth-patterns/SKILL.md) - *Pattern di implementazione per autenticazione JWT e autorizzazione RBAC.*
-- [**SKILL.md**](./.agents/skills/context-management/SKILL.md) - *Guida alla Context Hygiene per mantenere l'AI precisa nelle lunghe sessioni.*
+- [**API Versioning Skill**](./.agents/skills/api-versioning/SKILL.md) - *Pattern per gestire il ciclo di vita e le breaking changes delle API.*
+- [**Auth Patterns Skill**](./.agents/skills/auth-patterns/SKILL.md) - *Pattern di implementazione per autenticazione JWT e autorizzazione RBAC.*
+- [**Context Management Skill (Context Hygiene)**](./.agents/skills/context-management/SKILL.md) - *Guida alla Context Hygiene per mantenere l'AI precisa nelle lunghe sessioni.*
 - [**Systematic Debugging & Root Cause Analysis**](./.agents/skills/debugging-pro/SKILL.md) - *Metodologia scientifica per l'identificazione, l'isolamento e la risoluzione definitiva di bug complessi.*
-- [**SKILL.md**](./.agents/skills/devops-pipeline/SKILL.md) - *Standard per CI/CD, Docker e automazione del deployment.*
-- [**SKILL.md**](./.agents/skills/documentation-standards/SKILL.md) - *Linee guida per documentazione tecnica chiara, scalabile e AI-friendly.*
-- [**SKILL.md**](./.agents/skills/error-monitoring/SKILL.md) - *Pattern per implementare observability completa: Sentry, OpenTelemetry e SLO.*
-- [**SKILL.md**](./.agents/skills/performance-optimization/SKILL.md) - *Pattern sistematici per identificare e risolvere colli di bottiglia.*
+- [**DevOps Pipeline Skill**](./.agents/skills/devops-pipeline/SKILL.md) - *Standard per CI/CD, Docker e automazione del deployment.*
+- [**Documentation Standards**](./.agents/skills/documentation-standards/SKILL.md) - *Linee guida per documentazione tecnica chiara, scalabile e AI-friendly.*
+- [**Error Monitoring Skill**](./.agents/skills/error-monitoring/SKILL.md) - *Pattern per implementare observability completa: Sentry, OpenTelemetry e SLO.*
+- [**Performance Optimization Skill**](./.agents/skills/performance-optimization/SKILL.md) - *Pattern sistematici per identificare e risolvere colli di bottiglia.*
 - [**Refactoring Best Practices & Technical Debt Management**](./.agents/skills/refactoring-guide/SKILL.md) - *Tecniche avanzate per migliorare la qualità, la leggibilità e la manutenibilità del codice senza alterarne il comportamento esterno.*
 - [**TDD Workflow & Testing Strategy**](./.agents/skills/tdd-workflow/SKILL.md) - *Guida completa al ciclo Red-Green-Refactor, design patterns per il testing e best practices di validazione.*
-- [**SKILL.md**](./.agents/skills/testing-strategy/SKILL.md) - *Strategia di test completa: piramide dei test, pattern e coverage goals.*
+- [**Testing Strategy Skill**](./.agents/skills/testing-strategy/SKILL.md) - *Strategia di test completa: piramide dei test, pattern e coverage goals.*
 
 ### Workflows (.agents/workflows)
 - [**Software Architect Workflow**](./.agents/workflows/architect.md) - *Software Architect esperto in System Design, Clean Architecture e ADR.*

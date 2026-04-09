@@ -1,5 +1,5 @@
 ---
-name: "ai-prompting"
+title: AI Prompting Skill
 description: "Pattern e framework per scrivere prompt agentici efficaci."
 category: "AI"
 effort: "S"
@@ -8,7 +8,17 @@ tags: ["prompting", "llm", "framework", "rctf"]
 
 # AI Prompting Skill
 
-Questa skill definisce come scrivere **prompt efficaci** per agenti AI (Gemini, GPT, Claude) all'interno del workflow Antigravity. Applicala ogni volta che devi creare o ottimizzare un file in `agents/`, `docs/rules/` o `.agent/workflows/`.
+> [!TIP]
+> Un buon prompt non è solo un set di istruzioni, ma un framework di pensiero condiviso tra umano e AI.
+
+```mermaid
+graph TD
+    A[Richiesta Utente] --> B[RCTF Framework]
+    B --> C[Chain-of-Thought]
+    C --> D[Few-Shot Examples]
+    D --> E[Constraints & Guardrails]
+    E --> F[Output di Alta Qualità]
+```
 
 ## Il Contesto
 Un prompt mal scritto produce output generici, incoerenti o errati. Un prompt ben strutturato trasforma l'AI in un collaboratore preciso. Questa skill distilla le tecniche più efficaci testate in produzione.

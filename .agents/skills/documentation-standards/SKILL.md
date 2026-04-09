@@ -1,5 +1,5 @@
 ---
-name: "documentation-standards"
+title: Documentation Standards
 description: "Linee guida per documentazione tecnica chiara, scalabile e AI-friendly."
 category: "General"
 effort: "S"
@@ -7,6 +7,22 @@ tags: ["documentation", "standards", "markdown", "technical-writing"]
 ---
 
 # Documentation Standards
+
+> [!NOTE]
+> La documentazione non è polvere sul codice, è la mappa per navigarlo.
+
+### Esempio di Struttura README.md
+```markdown
+# Nome Componente
+Descrizione chiara del funzionamento.
+
+## Architettura
+Spiegazione dei layer coinvolti.
+
+## Comandi
+- `npm run dev`
+- `npm test`
+```
 
 Aderisci sempre agli standard di documentazione per assicurare che altri agenti, bot LLM o ingegneri umani possano mantenere il sistema.
 

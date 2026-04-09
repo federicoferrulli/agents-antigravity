@@ -1,5 +1,5 @@
 ---
-name: "context-management"
+title: Context Management Skill (Context Hygiene)
 description: "Guida alla Context Hygiene per mantenere l'AI precisa nelle lunghe sessioni."
 category: "AI"
 effort: "XS"
@@ -8,10 +8,23 @@ tags: ["context", "primer", "reset", "hygiene"]
 
 # Context Management Skill (Context Hygiene)
 
+> [!TIP]
+> Una gestione proattiva del contesto previene l'80% delle allucinazioni tipiche delle sessioni lunghe.
+
 Questa skill definisce come gestire e pulire il contesto della chat per mantenere l'AI (Antigravity) performante, precisa e libera da allucinazioni. Applicala ogni volta che senti che la conversazione sta diventando "pesante" o quando l'AI inizia a confondere i task.
 
 ## Il Contesto
-Le AI hanno una "finestra di contesto" limitata. Ogni messaggio aggiunto occupa spazio e, col tempo, le prime istruzioni o dettagli critici possono essere "compressi" o ignorati. Inoltre, task multipli o errori passati possono inquinare il ragionamento dell'AI, portandola a ripetere errori o a suggerire soluzioni non più valide.
+
+Le AI hanno una "finestra di contesto" limitata. Ogni messaggio aggiunto occupa spazio e, col tempo, le prime istruzioni o dettagli critici possono essere "compressi" o ignorati.
+
+```mermaid
+graph TD
+    A[Inizio Sessione: RAM Pulita] --> B[Accumulo Messaggi]
+    B --> C{Saturazione Contesto}
+    C -- No --> B
+    C -- Sì: Confusione/Errori --> D[Reset via /primer]
+    D --> A
+```
 
 ---
 
@@ -25,6 +38,17 @@ Identifica quando è il momento di un reset.
 | **Allucinazioni** | L'AI inventa file, variabili o skill che non esistono. | Reset sessione |
 | **Lentezza** | La risposta impiega molto tempo o si interrompe a metà. | Sfoltimento contesto |
 | **Confusione di Task** | Chiedi X e l'AI risponde citando pezzi di un task Y finito ore fa. | Clear chat + Primer |
+
+---
+
+## Pattern 3: Context Hygiene Best Practices
+
+### Esempio di Prompt per Primer Manuale:
+```markdown
+Svuota la tua RAM mentale. 
+Leggi README.md, GEMINI.md e .agents/rules/common.md. 
+Siamo pronti per un nuovo task: [DESCRIZIONE TASK].
+```
 
 ---
 
@@ -74,6 +98,16 @@ Se non vuoi resettare tutto, chiedi all'AI di ignorare parti specifiche:
 - [ ] Ho finito un macro-task e ne sto iniziando un altro?
 - [ ] La lunghezza del thread sta rendendo l'AI pigra o imprecisa?
 - [ ] **Azione finale**: Se hai risposto SÌ a 2+ punti, esegui il workflow `/primer` in una nuova chat.
+
+## Riassunto Operativo
+
+```json
+{
+  "skill": "Context Management",
+  "status": "Active",
+  "best_tool": "/primer"
+}
+```
 
 
 
