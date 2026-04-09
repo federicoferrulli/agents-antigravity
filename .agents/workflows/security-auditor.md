@@ -147,6 +147,6 @@ async function hashPassword(password) {
 
 ## 🔗 Riferimenti
 
-- [`docs/rules/security.md`](../docs/rules/security.md) — standard di sicurezza della libreria
-- [`skills/auth-patterns.md`](../skills/auth-patterns.md) — pattern autenticazione sicuri
+- [`rules/security.md`](../rules/security.md) — standard di sicurezza della libreria
+- [`skills/auth-patterns/SKILL.md`](../skills/auth-patterns/SKILL.md) — pattern autenticazione sicuri
 - [OWASP Top 10](https://owasp.org/Top10/) · [CWE](https://cwe.mitre.org/) · [CVSS Calculator](https://www.first.org/cvss/calculator/3.1)

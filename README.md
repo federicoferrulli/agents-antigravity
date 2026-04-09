@@ -102,6 +102,7 @@ Aggiungi nuove regole in `.agents/rules/` o nuove competenze in `.agents/skills/
 ### Decisioni Architetturali (docs/adr)
 - [**ADR-0001: Adopting Architecture Decision Records**](./docs/adr/0001-adopting-adr.md) - *Decisione di utilizzare gli ADR per documentare le scelte architetturali del repository Antigravity.*
 - [**ADR-0002: Standardizing Metadata with YAML Frontmatter**](./docs/adr/0002-standard-metadata.md) - *Adozione dello standard YAML Frontmatter per tutti gli asset Markdown del repository.*
+- [**ADR-0003: Quality-Enforced Documentation-as-Code Structure**](./docs/adr/0003-quality-enforced-documentation-as-code-structure.md) - *Decisione di imporre metriche di qualità automatizzate per tutti gli asset Markdown del repository.*
 
 ### Competenze e Flussi (.agents/skills)
 - [**AI Prompting Skill**](./.agents/skills/ai-prompting/SKILL.md) - *Pattern e framework per scrivere prompt agentici efficaci.*

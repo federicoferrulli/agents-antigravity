@@ -45,21 +45,21 @@ function validateFile(filePath) {
   }
 
   // 4. Internal link check with path traversal protection [SEC-1]
-  const linkRegex = /\]\.\/?([^)]+\.md)\)/g;
+  const linkRegex = /\]\((?!https?:\/\/|mailto:)([^#)]+\.md)(?:#[^)]*)?\)/g;
   let match;
   while ((match = linkRegex.exec(textContent)) !== null) {
       const linkPath = match[1];
-      const possiblePath1 = path.resolve(path.dirname(filePath), linkPath);
-      const possiblePath2 = path.resolve(ROOT_DIR, linkPath);
+      const resolvedPath = path.resolve(path.dirname(filePath), linkPath);
 
-      if (!isWithinRoot(possiblePath1) && !isWithinRoot(possiblePath2)) {
+      if (!isWithinRoot(resolvedPath)) {
         console.error(`❌ [Security] Path traversal rilevato in ${filePath}: "${linkPath}" punta fuori dalla root.`);
         errors++;
         continue;
       }
 
-      if (!fs.existsSync(possiblePath1) && !fs.existsSync(possiblePath2)) {
-         console.warn(`⚠️ [Warning Link] Link interno sospetto in ${filePath}: ${linkPath}`);
+      if (!fs.existsSync(resolvedPath)) {
+         console.error(`❌ [Style Error] Link rotto in ${filePath}: "${linkPath}" non esiste.`);
+         errors++;
       }
   }
 
@@ -69,7 +69,20 @@ function validateFile(filePath) {
     console.warn(`⚠️ [Warning Security] ${filePath} contiene link http:// non sicuri. Usa https://.`);
   }
 
-  // 6. Check for empty file
+  // 6. Check for absolute paths (Portability check)
+  const absPathRegex = /\]\((?:file:\/\/\/?|[a-zA-Z]:\\)[^)]+\)/g;
+  if (absPathRegex.test(textContent)) {
+    console.error(`❌ [Portability Error] ${filePath} contiene percorsi assoluti. Usa percorsi relativi.`);
+    errors++;
+  }
+
+  // 7. Check for TODOs
+  if (/\bTODO\b/.test(textContent)) {
+    console.error(`❌ [Quality Error] ${filePath} contiene dei TODO non risolti.`);
+    errors++;
+  }
+
+  // 8. Check for empty file
   if (textContent.trim().length === 0) {
     console.error(`❌ [Style Error] ${filePath} è vuoto.`);
     errors++;
@@ -116,12 +129,21 @@ function checkTraceConsistency() {
   }
 }
 
+function checkRootStructure() {
+  const forbiddenDir = path.join(ROOT_DIR, 'agents');
+  if (fs.existsSync(forbiddenDir)) {
+    console.error(`❌ [Structure Error] La directory root "agents/" è deprecata. Sposta i workflow in ".agents/workflows/".`);
+    errors++;
+  }
+}
+
 console.log('🔍 Inizio validazione della libreria (Recursive + Quality Enforced)...');
 
 DIRECTORIES_TO_CHECK.forEach(scanDirCheck);
 validateFile(path.join(ROOT_DIR, 'README.md'));
 validateFile(path.join(ROOT_DIR, 'GEMINI.md'));
 checkTraceConsistency();
+checkRootStructure();
 
 if (errors > 0) {
     console.error(`\n❌ La validazione ha fallito con ${errors} errore/i. Corrections required.`);

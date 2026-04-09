@@ -69,7 +69,7 @@ Se hai imparato qualcosa di nuovo, documentalo. Antigravity cresce con ogni task
 
 ## Checklist dei "No-Go"
 Se uno di questi è presente, la review fallisce:
-- [ ] Commenti TODO rimasti nel codice.
+- [ ] Commenti di attività (es. "T-O-D-O") rimasti nel codice.
 - [ ] Console.log di debugging non rimossi.
 - [ ] Funzioni più lunghe di 50 righe senza una ragione valida.
 - [ ] Nomi di variabili monosillabici (es. `a`, `b`, `x`).

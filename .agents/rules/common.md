@@ -249,7 +249,7 @@ L'AI **deve** mantenere una traccia storica e mnemonica di ogni singola interazi
 
 **Regole operative**:
 - **Atomic Log**: Ogni richiesta (ad eccezione delle semplici query informative) deve generare un log di tracciamento nella cartella `logTrace/`.
-- **Central Indexing**: Ogni nuovo log deve essere registrato in [INDEX.md](../logTrace/INDEX.md) per mantenere la cronologia navigabile.
+- **Central Indexing**: Ogni nuovo log deve essere registrato in [INDEX.md](../../logTrace/INDEX.md) per mantenere la cronologia navigabile.
 - **Naming del Log**: Il file deve seguire il pattern `trace-<DATA>-<DESCRIZIONE-SINTETICA>.md`.
 - **Contenuto Obbligatorio**:
     - **ID della Sessione**: Identificativo univoco (formato YYYYMMDD-NNN).
@@ -259,7 +259,7 @@ L'AI **deve** mantenere una traccia storica e mnemonica di ogni singola interazi
     - **Decisioni Architetturali**: Breve spiegazione del "perché" (ADR light).
 
 > [!TIP]
-> Per sincronizzare il contesto basandosi sulla cronologia dei log, usa il workflow `/sync-trace`. Questa "memoria" esterna permette all'AI di recuperare rapidamente il contesto senza sovraccaricare il prompt di sistema.
+> Per sincronizzare il contesto basandosi sulla cronologia dei log, usa il workflow `/sync-trace`. Questa "memoria" esterna permette all'AI di recuperare rapidamente il contesto senza sovraccaricare il prompt di sistema. Vedi [INDEX.md](../../logTrace/INDEX.md) per i dettagli.
 
 ---
 
