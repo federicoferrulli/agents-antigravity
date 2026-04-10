@@ -1,2 +1,18 @@
 node_modules
 logTrace/
+
+# Sensitive Information & Environments
+.env*
+*.log
+*.pem
+*.key
+*.pub
+*.pfx
+*.p12
+*.jks
+*.cer
+*.crt
+
+# OS Files
+.DS_Store
+Thumbs.db
