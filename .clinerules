@@ -3,8 +3,9 @@
 Instructions for Cline/Roo-Code agents:
 
 - **Source of Truth**: Always read and follow `AGENT.md` in the root directory.
-- **Mandatory Rules**: Apply `docs/rules/common.md` for every coding task.
-- **Skills**: Check `skills/` for specific "How-To" guides.
-- **Context Management**: Be proactive in updating the library and catalog.
+- **Mandatory Rules**: Apply `.agents/rules/common.md` for every coding task.
+- **Skills**: Check `.agents/skills/` for specific "How-To" guides.
+- **Knowledge Graph**: Use `npm run graph:query "<question>"` for structural analysis before refactoring.
+- **Context Management**: Be proactive in updating the library, catalog and trace logs.
 
-Refer to `AGENT.md` for the full operational framework.
+Refer to `AGENT.md` for the full operational framework and advanced agentic patterns.

@@ -11,8 +11,24 @@ Questo repository è progettato per centralizzare e standardizzare il comportame
 
 ---
 🌍 **Linguaggio / Language**: [Italiano (Principale)] | **[English (README_EN.md)](./README_EN.md)**  
-📜 **Governance**: **[LICENSE](./LICENSE)** | **[CONTRIBUTING.md](./CONTRIBUTING.md)**
+📜 **Governance**: **[LICENSE](./LICENSE)** | **[CONTRIBUTING.md](./CONTRIBUTING.md)** | **Version**: `v1.1.0`
 ---
+
+## 🛠️ Prerequisiti e Installazione
+
+Per utilizzare appieno tutte le funzionalità di Antigravity (inclusa l'analisi strutturale tramite Knowledge Graph), assicurati di avere installato:
+- **Node.js** (v16+)
+- **Python** (v3.10+)
+
+### Setup Rapido
+Per configurare automaticamente l'ambiente virtuale e le dipendenze Python:
+```bash
+# Sincronizza (se sei in un nuovo progetto) e iniettà gli script
+node sync-library.js
+
+# Esegui il setup automatico (venv, graphify, hooks)
+node scripts/setup-project.js
+```
 
 ## 🏗️ Architettura del Sistema
 
@@ -57,7 +73,13 @@ npm run validate
 npm run catalog
 
 # Crea un nuovo record di decisione architetturale (ADR)
-npm run adr
+npm run adr "Titolo"
+
+# Rigenera il Knowledge Graph
+npm run graph:build
+
+# Interroga le dipendenze strutturali
+npm run graph:query "Mostrami le dipendenze di X"
 
 # Esegui il ciclo completo di rilascio (validate + catalog + tag)
 npm run release
@@ -93,12 +115,13 @@ Aggiungi nuove regole in `.agents/rules/` o nuove competenze in `.agents/skills/
 <!-- CATALOG_START -->
 ## Catalogo 
 
-*Questo catalogo è generato automaticamente dallo script `scripts/generate-catalog.js`*
+*Questo catalogo è generato automaticamente dallo script `scripts/generate-catalog.cjs`*
 
 ### Regole e Standard (.agents/rules)
 - [**Clean Architecture Standards**](./.agents/rules/common/clean-architecture.md) - *Guida definitiva alla separazione delle responsabilità e all'integrità del dominio.*
 - [**Error Handling & Resilience**](./.agents/rules/common/error-handling.md) - *Standard per la gestione degli errori, la resilienza del codice e la stabilità del sistema.*
 - [**Immutability Standards**](./.agents/rules/common/immutability.md) - *Principi di immutabilità per la prevenzione di side effect e la sicurezza del thread.*
+- [**Knowledge & Structural Graph**](./.agents/rules/common/knowledge-graph.md) - *Obbligo di mantenere una mappatura strutturale del codice per garantire l'integrità architetturale.*
 - [**Logging & Observability Standards**](./.agents/rules/common/logging.md) - *Standard per il logging strutturato, la telemetria e la tracciabilità operativa delle applicazioni.*
 - [**Naming Conventions**](./.agents/rules/common/naming-conventions.md) - *Standard di naming per garantire chiarezza, intenzionalità e coerenza verbale nel codice.*
 - [**Security & OWASP Compliance**](./.agents/rules/common/security.md) - *Standard di sicurezza gestiti tramite approccio secure-by-default e conformità OWASP.*
@@ -130,6 +153,7 @@ Aggiungi nuove regole in `.agents/rules/` o nuove competenze in `.agents/skills/
 - [**DevOps Pipeline Skill**](./.agents/skills/devops-pipeline/SKILL.md) - *Standard per CI/CD, Docker e automazione del deployment.*
 - [**Documentation Standards**](./.agents/skills/documentation-standards/SKILL.md) - *Linee guida per documentazione tecnica chiara, scalabile e AI-friendly.*
 - [**Error Monitoring Skill**](./.agents/skills/error-monitoring/SKILL.md) - *Pattern per implementare observability completa: Sentry, OpenTelemetry e SLO.*
+- [**Knowledge Graph Skill (Graphify)**](./.agents/skills/knowledge-graph/SKILL.md) - *Skill per gestire e interrogare il Knowledge Graph del progetto utilizzando Graphify.*
 - [**Performance Optimization Skill**](./.agents/skills/performance-optimization/SKILL.md) - *Pattern sistematici per identificare e risolvere colli di bottiglia.*
 - [**Refactoring Best Practices & Technical Debt Management**](./.agents/skills/refactoring-guide/SKILL.md) - *Tecniche avanzate per migliorare la qualità, la leggibilità e la manutenibilità del codice senza alterarne il comportamento esterno.*
 - [**TDD Workflow & Testing Strategy**](./.agents/skills/tdd-workflow/SKILL.md) - *Guida completa al ciclo Red-Green-Refactor, design patterns per il testing e best practices di validazione.*
@@ -141,9 +165,11 @@ Aggiungi nuove regole in `.agents/rules/` o nuove competenze in `.agents/skills/
 - [**Base Agent Persona**](./.agents/workflows/base_agent.md) - *Persona base per lo sviluppo software senior con focus su Clean Architecture e DevSecOps.*
 - [**CodeReviewer Workflow**](./.agents/workflows/code-reviewer.md) - *Senior Code Reviewer focalizzato su qualità del codice, pattern e feedback costruttivo.*
 - [**Execution Workflow**](./.agents/workflows/execution.md) - *Protocollo operativo per l'implementazione del codice, basato su cicli iterativi di TDD come Design Architetturale.*
+- [**Graphify Intelligence Workflow**](./.agents/workflows/graphify.md) - *Protocollo operativo per l'analisi strutturale e la navigazione del repository tramite Knowledge Graph.*
 - [**ImproveMd Workflow**](./.agents/workflows/improve-md.md) - *Migliora la qualità della documentazione MD tramite Auto-Research e Git tagging.*
 - [**Main Workflow Orchestrator**](./.agents/workflows/main-workflow.md) - *Il punto di ingresso e l'orchestrazione principale per tutti i task di sviluppo nell'ecosistema Antigravity.*
 - [**MassRefactor Workflow**](./.agents/workflows/mass-refactor.md) - *Attiva la modalità Esecuzione Massiva (DevOps) per applicare standard su più file contemporaneamente.*
+- [**Onboarding & Business Discovery Workflow**](./.agents/workflows/onboarding.md) - *Protocollo per l'acquisizione rapida del contesto in progetti legacy o nuovi.*
 - [**PlanSkill Workflow**](./.agents/workflows/plan-skill.md) - *Protocollo per la progettazione e la creazione di nuove Skill agentiche in Antigravity.*
 - [**Planning Workflow**](./.agents/workflows/planning.md) - *Protocollo dettagliato per l'analisi dei requisiti, l'esplorazione tecnica e la strutturazione del piano d'azione.*
 - [**Primer Workflow**](./.agents/workflows/primer.md) - *Esegui un Primer (Metodo Cody) per ricaricare rapidamente il contesto critico in una chat pulita.*

@@ -75,7 +75,7 @@ function getFilesRecursively(dir, baseDir) {
 }
 
 function generateCatalogMarkdown() {
-  let catalogMd = `<!-- CATALOG_START -->\n## Catalogo \n\n*Questo catalogo è generato automaticamente dallo script \`scripts/generate-catalog.js\`*\n\n`;
+  let catalogMd = `<!-- CATALOG_START -->\n## Catalogo \n\n*Questo catalogo è generato automaticamente dallo script \`scripts/generate-catalog.cjs\`*\n\n`;
 
   CATALOG_SECTIONS.forEach(section => {
     const fullDirPath = path.join(ROOT_DIR, section.dir);
@@ -105,8 +105,9 @@ function generateCatalogMarkdown() {
 
 function updateReadme(newCatalogContent) {
   if (!fs.existsSync(README_PATH)) {
-    console.error('❌ Erorre: README.md non trovato nella root.');
-    process.exit(1);
+    console.log('ℹ️ README.md non trovato. Creazione di un nuovo file README.md...');
+    const defaultReadme = `# ${path.basename(TARGET_DIR)}\n\nBenvenuto nel progetto sincronizzato con Antigravity.\n\n<!-- CATALOG_START -->\n<!-- CATALOG_END -->\n`;
+    fs.writeFileSync(README_PATH, defaultReadme, 'utf-8');
   }
 
   const currentReadme = fs.readFileSync(README_PATH, 'utf-8');

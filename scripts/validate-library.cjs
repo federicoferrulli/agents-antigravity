@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { evaluate } = require('./evaluate-md-quality');
+const { evaluate } = require('./evaluate-md-quality.cjs');
 
 const ROOT_DIR = path.resolve(__dirname, '..');
 
@@ -10,6 +10,8 @@ const DIRECTORIES_TO_CHECK = [
   '.agents/workflows',
   'docs/adr'
 ];
+
+const MIN_SCORE = parseInt(process.env.ANTIGRAVITY_MIN_SCORE) || 100;
 
 // [SEC-1] Ensures that a resolved path does not escape the repository root
 function isWithinRoot(resolvedPath) {
@@ -40,8 +42,8 @@ function validateFile(filePath) {
   // 3. Quality Score check (ENFORCED 100/100)
   const isIndexFile = ['readme.md', 'gemini.md'].includes(path.basename(filePath).toLowerCase());
   const scoreValue = evaluate(filePath);
-  if (scoreValue < 100 && !isIndexFile) {
-    console.error(`❌ [Quality Error] ${filePath}: score di qualità insufficiente (${scoreValue}/100).`);
+  if (scoreValue < MIN_SCORE && !isIndexFile) {
+    console.error(`❌ [Quality Error] ${filePath}: score di qualità insufficiente (${scoreValue}/${MIN_SCORE}).`);
     errors++;
   }
 

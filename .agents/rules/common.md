@@ -35,6 +35,7 @@ Ogni regola è strutturata secondo il principio del **Contrasto Cognitivo**:
 9. **[TDD come Design Architetturale](./common/tdd.md)**: Test-first come catalizzatore di design disaccoppiato.
 10. **[Traceability & Memory Management](./common/traceability.md)**: Tracciamento granulare delle modifiche e della cronologia.
 11. **[Versioning & Semantic Tagging](./common/versioning.md)**: Gestione coerente del ciclo di vita del software.
+12. **[Knowledge & Structural Graph](./common/knowledge-graph.md)**: Mappatura obbligatoria delle relazioni tra componenti.
 
 ---
 
@@ -77,6 +78,7 @@ graph TD
 - [ ] Il naming comunica l'intento e non l'implementazione?
 - [ ] Il design è stato guidato dal TDD?
 - [ ] La tracciabilità è garantita da un Trace Log strutturato?
+- [ ] Il Knowledge Graph è aggiornato e privo di Surprise Edges critici?
 
 ## Riferimenti
 - [Antigravity Master Agent Protocol](../../AGENT.md)
@@ -84,4 +86,4 @@ graph TD
 - [OWASP Security Standards](./common/security.md)
 
 ---
-*v1.2.0 - Antigravity Core Protocol*
+*v1.3.0 - Antigravity Core Protocol (Graph-Enabled)*

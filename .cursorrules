@@ -3,8 +3,9 @@
 Queste regole sono ottimizzate per Cursor AI. Ogni volta che lavori in questo repository, devi:
 
 1. **Leggere `AGENT.md`**: Contiene le istruzioni master per il tuo comportamento.
-2. **Caricare le Regole**: `docs/rules/common.md` è obbligatorio.
-3. **Seguire le Skill**: Cerca in `skills/` flussi di lavoro per compiti complessi.
-4. **Clean Architecture**: Applica sempre i pattern di Clean Architecture definiti nella libreria.
+2. **Caricare le Regole**: `.agents/rules/common.md` è obbligatorio per ogni generazione.
+3. **Knowledge Graph Awareness**: Prima di modifiche che impattano più file, usa `npm run graph:query` per mappare le dipendenze strutturali.
+4. **Seguire le Skill**: Cerca in `.agents/skills/` flussi di lavoro per compiti complessi (es. TDD, Security Audit).
+5. **Clean Architecture**: Applica sempre i pattern di Clean Architecture definiti nella libreria.
 
-Utilizza il file `AGENT.md` nel root del repository come fonte di verità per tutti i workflow agentici.
+Utilizza il file `AGENT.md` nel root del repository come fonte di verità per tutti i workflow agentici e i Golden Mandates.

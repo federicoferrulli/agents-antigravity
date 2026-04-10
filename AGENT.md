@@ -15,9 +15,11 @@ graph LR
     A[AI Agent] --> B[Rules]
     A --> C[Skills]
     A --> D[Workflows]
+    A --> E[Graph]
     B --> B1[.agents/rules/]
     C --> C1[.agents/skills/]
     D --> D1[.agents/workflows/]
+    E --> E1[graphify-out/]
 ```
 
 ## Panoramica del Progetto
@@ -32,18 +34,24 @@ In ogni interazione all'interno di questo workspace, devi:
 ### 1. Rispetto delle Regole
 - Caricare e applicare **SEMPRE** le regole contenute in `.agents/rules/common.md` prima di qualsiasi azione di codifica.
 - Se il progetto su cui lavori usa un linguaggio specifico (es. Python, TS), verifica se esistono regole corrispondenti in `.agents/rules/` e applicale.
+- **Context Hygiene**: Se senti che la sessione sta diventando instabile o incoerente, usa il workflow `/primer`.
 
 ### 2. Utilizzo delle Skill
 - Quando ti viene chiesto di eseguire compiti complessi (es. TDD, Security Audit), verifica se esiste una skill corrispondente in `.agents/skills/` e seguine le istruzioni "How-To".
 
 ### 3. Identità dell'Agente
-- Comportati secondo le definizioni presenti in `.agents/workflows/`. Se non diversamente specificato, usa `base_agent.md` come riferimento per la tua persona.
+- Comportati secondo le definizioni presenti in `.agents/workflows/`. Se non diversamente specificato, usa `base_agent.md` as riferimento per la tua persona.
 
 ### 4. Gestione del Repository
 - Quando crei nuove regole o skill, assicurati che siano ben documentate in Markdown con YAML frontmatter (come da ADR-0002) e seguano la struttura gerarchica esistente.
 - Il file `README.md` è la fonte principale per il catalogo delle risorse.
 
-### 5. Continuous Learning (Knowledge Harvesting)
+### 5. Consapevolezza Strutturale (Knowledge Graph)
+- Prima di rispondere a domande architetturali o eseguire refactoring massivi, l'agente deve consultare il Knowledge Graph integrato.
+- Utilizza `graphify-out/GRAPH_REPORT.md` per identificare "God Nodes" e "Surprise Edges".
+- Esegui `npm run graph:query` per navigare le relazioni tra componenti che non sono visibili nel solo contesto del file aperto.
+
+### 6. Continuous Learning (Knowledge Harvesting)
 - Aderisci a `.agents/rules/continuous-learning.md`. Sii proattivo: quando risolvi un problema inedito o crei un workflow utile, chiedi all'utente di documentarlo immediatamente come regola o skill.
 
 ## 🛠️ Esempi di Attivazione Skill
@@ -57,7 +65,7 @@ In ogni interazione all'interno di questo workspace, devi:
 ```
 
 > [!IMPORTANT]
-> L'agente deve sempre generare un log di tracciamento in `logTrace/` per ogni modifica strutturale, garantendo la tracciabilità delle decisioni.
+> **Mandato di Persistenza**: Prima di ogni modifica strutturale, l'agente deve verificare internamente (Chain-of-Thought) se il piano è allineato con `.agents/rules/common.md`. Se la sessione supera i 10 turni, l'agente deve suggerire all'utente un `/primer`.
 
 ## Antigravity Workflow Triggers & Golden Rules
 1. **"Secure by Design" Implicito**: Ogni proposta tecnica deve includere nativamente una componente di sicurezza.
@@ -66,11 +74,13 @@ In ogni interazione all'interno di questo workspace, devi:
 
 ```mermaid
 sequenceDiagram
+    Agent->>Graph: Query structural context
     Agent->>Rules: Load common.md
     Agent->>Skills: Identify /tdd
     Agent->>File: Implement Code
     Agent->>Test: Validate
     Agent->>Log: Trace Session
+    Agent->>Graph: Refresh Graph
 ```
 
 ### 6. Tracciamento delle Sessioni

@@ -10,6 +10,25 @@ Welcome to the personal library of skills, rules, and agents for **Antigravity**
 This repository is designed to centralize and standardize AI agent behavior, ensuring consistency, security, and high quality in software development.
 
 ---
+🌍 **Language / Linguaggio**: English (Secondary) | **[Italiano (README.md)](./README.md)**  
+📜 **Governance**: **[LICENSE](./LICENSE)** | **[CONTRIBUTING.md](./CONTRIBUTING.md)** | **Version**: `v3.3.0`
+---
+
+## 🛠️ Prerequisites & Installation
+
+To fully leverage all Antigravity features (including structural awareness via Knowledge Graph), please ensure you have:
+- **Node.js** (v16+)
+- **Python** (v3.10+)
+
+### Quick Setup
+To automatically configure the virtual environment and Python dependencies:
+```bash
+# Sync (if in a new project) and inject scripts
+node sync-library.js
+
+# Run automatic setup (venv, graphify, hooks)
+node scripts/setup-project.js
+```
 
 ## 🏗️ System Architecture
 
@@ -58,7 +77,13 @@ npm run validate
 npm run catalog
 
 # Create a new Architectural Decision Record (ADR)
-npm run adr
+npm run adr "Title"
+
+# Regenerate Knowledge Graph
+npm run graph:build
+
+# Query structural dependencies
+npm run graph:query "Show dependencies for X"
 
 # Execute the full release cycle (validate + catalog + tag)
 npm run release

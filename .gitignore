@@ -15,4 +15,17 @@ logTrace/
 
 # OS Files
 .DS_Store
-Thumbs.db
+Thumbs.db
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+ENV/
+
+# Graphify
+graphify-out/
+.graphify-cache/
+

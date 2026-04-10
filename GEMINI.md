@@ -92,3 +92,22 @@ Gemini CLI has built-in guardrails to prevent common vulnerabilities:
 > Use `/primer` to quickly reload critical context if the conversation becomes too long or fragmented.
 
 Refer to **[AGENT.md](./AGENT.md)** for the full execution framework and advanced agentic patterns.
+
+## 🧠 Knowledge & Structural Graph
+
+Antigravity utilizza **Graphify** per mantenere una mappa aggiornata delle relazioni tra componenti del codice, superando i limiti del classico Vector RAG.
+
+### Regole Operative per il Grafo
+1. **Analisi Preventiva**: Prima di rispondere a domande architetturali, consulta `graphify-out/GRAPH_REPORT.md` per capire i cluster (comunità) e il peso dei nodi.
+2. **Navigazione**: Se `graphify-out/wiki/index.md` esiste, utilizzalo per esplorare il repository in modo strutturato.
+3. **Sincronizzazione**: Dopo aver modificato la struttura del codice o le interfacce, esegui il rebuild incrementale:
+   ```bash
+   npm run graph:build
+   ```
+
+> [!TIP]
+> Usa `npm run graph:query "Mostrami le dipendenze di [Path]"` per visualizzare un sotto-grafo locale prima di un refactoring.
+
+---
+*v1.3.1 - Antigravity Gemini CLI Protocol*
+
