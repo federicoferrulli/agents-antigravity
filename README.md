@@ -9,6 +9,11 @@ tags: [agents, automation, library, clean-architecture]
 Benvenuti nella libreria personale di skill, regole e agenti per **Antigravity**. 
 Questo repository è progettato per centralizzare e standardizzare il comportamento degli agenti AI, garantendo coerenza, sicurezza e alta qualità nello sviluppo software.
 
+---
+🌍 **Linguaggio / Language**: [Italiano (Principale)] | **[English (README_EN.md)](./README_EN.md)**  
+📜 **Governance**: **[LICENSE](./LICENSE)** | **[CONTRIBUTING.md](./CONTRIBUTING.md)**
+---
+
 ## 🏗️ Architettura del Sistema
 
 L'ecosistema Antigravity si basa su tre pilastri fondamentali che guidano l'agente durante tutto il ciclo di vita dello sviluppo:
